@@ -1,0 +1,140 @@
+                Welcome to Algorithms
+
+
+The word "algorithms" was designed to scare young CS students into eating their vegetables. After this course, you'll come to see there is nothing to fear.
+
+
+Goals of this course
+
+Learn to think algorithmically. Break problems down into easier to solve parts.
+Learn about performance optimization. Make your code run faster and more efficiently, even with more data.
+Practice solving hard problems. There's no way around it, if you want to be a great developer, you need to solve hard problems.
+
+A word of warning
+
+Don't worry about memorizing this stuff. In particular, don't worry about memorizing the algorithms themselves. My philosophy is that it's mostly a waste of time to memorize anything that's a Google search away.
+
+Instead, focus on understanding how the algorithms work in the moment. You should understand what your code is doing and why - but that doesn't mean you need to memorize the code itself.
+
+Good luck.
+
+
+
+                Find Minimum
+
+
+An "algorithm" is just a set of instructions that can be carried out to solve a problem.
+
+People use algorithms all the time without even realizing it. Practically every function you write in code is an algorithm (well, kinda), even if it's a simple one.
+
+Assignment
+In this course, we'll be building pieces of a pretend product: Socialytics - The tool you need to track your growth as an Instagram influencer. We need to show our users the accounts they follow with the lowest follower counts. This will help them know who they follow that isn't popular enough to be worth following anymore.
+
+Implement the "find minimum" algorithm in Python by completing the find_minimum() function:
+
+Set minimum to positive infinity: float("inf").
+For each number in the list nums, compare it to minimum. If num is smaller, set minimum to num.
+minimum is now set to the smallest number in the list.
+
+Tip
+Don't forget to account for edge cases in your function! Check the test code if you're not sure what to expect.
+
+
+                What is an Algorithm?
+
+
+In the context of computer science, an algorithm is a finite sequence of well-defined, computer-implementable instructions. In short, an algorithm is:
+
+Defined: there is a specific sequence of steps that performs a task
+Unambiguous: there is a "correct" and "incorrect" interpretation of the steps
+Implementable: it can be executed using software and hardware
+
+Algorithms are usually written in "pseudocode" (pronounced "sue-dough-code") because an algorithm is a higher-level description of a solution to a problem. An algorithm doesn't care if it's implemented in Python, Go, TypeScript, or (gasp) Java. Pseudocode is just plain English that describes the steps of the algorithm.
+
+Here's some pseudocode for a mystery algorithm:
+
+Start with an original string called S and a new empty string called R.
+Loop through S from its last character to its first character, and for each one, add it to the end of R.
+Once you’ve processed all the characters, return R.
+
+                Simple Algorithms
+
+
+If you've heard (usually exaggerated) stories about Leetcode and whiteboarding interviews, you might hear the word "algorithm" and think it's synonymous with "hard problem." That's really not the case, and believing it will only psych you out.
+
+We suffer more often in imagination than in reality
+
+-- Seneca
+
+Algorithms, like anything else, can be understood by breaking them down piece by piece. Take a look at the following algorithm for adding two numbers--it's dead simple:
+
+Start with input variables a and b
+Add a and b using the + operator, and assign the result to a new variable, sum
+Return the sum variable
+
+Assignment
+In Socialytics, we need to calculate the total reach of a group of influencers to estimate how many views a post will get if they all share it.
+
+Complete the sum function. It's a slightly modified version of the algorithm above. Instead of just two numbers, a and b, it accepts a list of numbers and returns the sum of all of them.
+
+Note: The sum of an empty list should be 0.
+
+
+                Average
+
+
+We now need a way to show our Instagram influencers the average follower count of the people they follow. This will help them know if they're following people who are more or less popular than them.
+
+Assignment
+Complete the average_followers function. It should return the average of the given list of numbers.
+
+
+                Median
+
+
+A median is often more useful than an average when the data set contains outliers. For example, if you want to know the typical salary of a software engineer, the median can be a better measure than the average, because the average can be skewed by a few people who make a lot of money.
+
+At Socialytics, we want to show our influencers the median follower count of the people they follow.
+
+Assignment
+Complete the median_followers() function to find the median follower count of the given list of numbers.
+
+Order matters - You'll probably want to use the sorted() function to help you out.
+
+
+
+                Exponents
+
+
+I promise we'll get to how this relates to coding, but first we need to review some math stuff.
+
+An exponent indicates how many times a number is to be multiplied by itself.
+
+For example:
+
+53 = 5 * 5 * 5 = 125
+
+Sometimes exponents are also written using the caret symbol (^):
+
+5^3 = 53
+
+Exponent syntax
+The ** operator calculates an exponent in Python. (Why not the ^ operator? Blame Fortran.)
+
+square = 2 ** 2
+# square = 4
+
+cube = 2 ** 3
+# cube = 8
+
+Assignment
+In the social media industry, there is a concept called "spread": how much a post spreads due to "reshares" after all of the original author's followers see it. As it turns out, social media posts spread at an exponential rate! We've found that the estimated spread of a post can be calculated with this formula:
+
+estimated_spread = average_audience_followers * ( num_followers ^ 1.2 )
+
+In the formula above, average_audience_followers is an average calculated from each number within the audiences_followers argument - which is a list containing the individual follower counts of the author's followers. For example, if audiences_followers = [2, 3, 2, 19], then:
+
+the author has 4 total followers
+each follower has their own 2, 3, 2, and 19 followers, respectively.
+
+Complete the get_estimated_spread function by implementing the formula above. The only input is audiences_followers, which is a list of the follower counts of all the followers the author has. Return the estimated spread. If the audiences_followers list is empty, return 0.

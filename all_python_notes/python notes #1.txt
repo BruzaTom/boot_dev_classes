@@ -1,0 +1,154 @@
+STRING TYPE
+name_with_single_quotes = 'boot.dev'
+name_with_double_quotes = "boot.dev"
+
+NUMERIC TYPES
+INTEGERS ARE NUMBERS WITHOUT A DECIMAL
+x = 5
+y = -5
+A "FLOAT" IS A NUMBER WITH A DECIMAL
+x = 5.2
+y = -5.2
+
+BOOLEAN TYPE
+is_tall = True
+is_short = False
+
+F-STRINGS IN PYTHON
+num_bananas = 10
+print(f"You have {num_bananas} bananas")
+# You have 10 bananas
+The opening quotes must be preceded by an f.
+Any variables within curly brackets have their values "interpolated" (injected) into the string.
+
+NONETYPE VARIABLES
+Not all variables have a value. We can declare an "empty" variable by setting it to None.
+my_none = None # this is a None-type
+my_none = "None" # this is a string
+
+MATH WITH STRINGS
+When working with strings the + operator performs a "concatenation".
+
+You should prefer string interpolation with f-strings over concatenation.
+
+MULTI-VARIABLE DECLARATION
+sword_name, sword_damage, sword_length = "Excalibur", 10, 200
+
+FUNCTIONS
+tactical reusable operations
+def area_of_circle(r):
+    pi = 3.14
+    result = pi * r * r
+    return result
+
+To "call" this function
+area = area_of_circle(5)
+print(area)
+# 78.5
+
+A default value is created by using the assignment (=) operator in the function signature.
+
+def get_greeting(email, name="there"):
+    print("Hello", name, "welcome! You've registered your email:", email)
+
+FLOOR DIVISION
+Floor division is like normal division except the result is floored afterward, which means the remainder is removed. As you would expect, this means the result is an integer instead of a float.
+
+FLOOR DIVISION
+6 // 4
+# 1 (an integer)
+
+EQUALS OPERATORS
+star_rating = 4
+star_rating -= 1
+# star_rating is now 3
+
+star_rating = 4
+star_rating *= 2
+# star_rating is now 8
+
+star_rating = 4
+star_rating /= 2
+# star_rating is now 2.0
+
+SCIENTIFIC NOTATION
+print(16e3)
+# Prints 16000.0
+
+print(7.1e-2)
+# Prints 0.071
+
+UNDERSCORES FOR READABILITY
+num = 16_000_000
+print(num)
+# Prints 16000000
+
+LOGICAL OPERATORS
+True and True == True
+True and False == False
+False and False == False
+
+True or True == True
+True or False == True
+False or False == False
+
+BINARY IN PYTHON
+print(0b0001)
+# Prints 1
+
+print(0b0101)
+# Prints 5
+
+BITWISE "&" OPERATOR
+0101 = 5
+&
+0111 = 7
+=
+0101 = 5
+
+BITWISE "|" OPERATOR
+0101
+|
+0111
+=
+0111
+
+NOT operator
+print(not True)
+# Prints: False
+
+print(not False)
+# Prints: True
+
+CONVERTING BINARY
+# this is a binary string
+binary_string = "100"
+
+# convert binary string to integer
+num = int(binary_string, 2)
+
+COMPARISON OPERATORS
+5 < 6 # evaluates to True
+5 > 6 # evaluates to False
+5 >= 6 # evaluates to False
+5 <= 6 # evaluates to True
+5 == 6 # evaluates to False
+5 != 6 # evaluates to True
+
+IF STATEMENTS
+def check_swords_for_army(number_of_swords, number_of_soldiers):
+    check = number_of_swords == number_of_soldiers
+    if check == True:
+        answer = "correct amount"
+    if check != True:
+        answer = "incorrect amount"
+    return answer
+
+IF-ELSE
+def player_status(health):
+    if health <= 0:
+        return "dead"
+    elif health <= 5:
+        return "injured"
+    else:
+        return "healthy"

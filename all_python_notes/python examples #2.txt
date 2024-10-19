@@ -1,0 +1,501 @@
+
+	returns the student's grade in English 1010. Chain the keys.
+	from nested dictionary
+
+
+
+
+def get_english_grade(student):
+    return student["type"]["student"]["courses"]["English_1010"]["current_grade"]
+                    
+
+
+
+
+
+merge dictionarys
+		my code
+
+
+def merge(dict1, dict2):
+    new = {0}
+    new = dict1
+    if dict1:
+        new = dict1
+    else:
+        dict1 = 0
+    
+    if dict2:
+        new["third_quarter"] = dict2["third_quarter"]
+        new["fourth_quarter"] = dict2["fourth_quarter"]
+    else:
+        dict2 = 0
+    
+    return new
+
+def total_score(score_dict):
+    
+    total = 0
+    for key in score_dict:
+        total += score_dict[key]
+    
+    
+    return total
+
+
+
+
+		there code 
+
+
+
+def merge(dict1, dict2):
+    merged_dict = {}
+    for k in dict1:
+        merged_dict[k] = dict1[k]
+    for k in dict2:
+        merged_dict[k] = dict2[k]
+    return merged_dict
+
+
+def total_score(score_dict):
+    total = 0
+    for k in score_dict:
+        total += score_dict[k]
+    return total
+
+
+
+
+
+		grocery shopping
+
+		my code
+
+
+
+def calculate_total(items_purchased, grocery_list):
+    item_prices = {
+        "milk": 2.50,
+        "eggs": 3.25,
+        "bread": 1.21,
+        "cheese": 3.50,
+        "apples": 7.44,
+        "bananas": 3.88,
+        "carrots": 3.89,
+        "lettuce": 1.12,
+        "potatoes": 32.21,
+        "cereal": 5.99,
+    }
+
+    # Don't touch above this line
+
+
+    receipt = {}
+    total = 0.0
+
+    for i in items_purchased:
+        if i in grocery_list:
+            grocery_list.remove(i)
+
+
+    for k in items_purchased:
+        if k in item_prices:
+            receipt[k] = item_prices[k]
+
+  
+    for t in receipt:
+        total += receipt[t]
+      
+
+    return grocery_list, receipt, total
+
+
+
+
+		there code
+
+
+
+def calculate_total(items_purchased, grocery_list):
+    item_prices = {
+        "milk": 2.50,
+        "eggs": 3.25,
+        "bread": 1.21,
+        "cheese": 3.50,
+        "apples": 7.44,
+        "bananas": 3.88,
+        "carrots": 3.89,
+        "lettuce": 1.12,
+        "potatoes": 32.21,
+        "cereal": 5.99,
+    }
+
+    # Don't touch above this line
+
+    unpurchased_items = []
+    receipt = {}
+    total = 0
+
+    for item in grocery_list:
+        if item not in items_purchased:
+            unpurchased_items.append(item)
+
+    for item in items_purchased:
+        price = item_prices[item]
+        receipt[item] = price
+        total += price
+
+    return unpurchased_items, receipt, total
+
+
+
+
+			try error index
+
+
+def handle_get_player_record(player_id):
+    try:
+        return get_player_record(player_id)
+    except IndexError:
+        return "index is too high"
+    except Exception as e:
+        return e
+
+
+# Don't edit below this line
+
+
+def get_player_record(player_id):
+    if player_id < 0:
+        raise Exception("negative ids not allowed")
+    players = [
+        {"name": "Slayer", "level": 128},
+        {"name": "Dorgoth", "level": 300},
+        {"name": "Saruman", "level": 4000},
+    ]
+    return players[player_id]
+
+			cost is >=
+
+if your using somthing that cost a value remember to use >= to ensure the exact cost is accepted
+
+ def cast_fireball(self, target):
+        if self.mana >= fireball_cost:
+            self.mana -= fireball_cost
+            Wizard.get_fireballed(target)
+        else:
+            raise Exception(f"{self.name} cannot cast fireball")
+        if self.mana < 0:
+            self.mana = 0
+
+				abstraction
+
+
+class Human:
+    def sprint_right(self):
+        self.__raise_if_cannot_sprint()
+        self.__use_sprint_stamina()
+        self.__pos_x += self.__speed * 2
+
+    def sprint_left(self):
+        self.__raise_if_cannot_sprint()
+        self.__use_sprint_stamina()
+        self.__pos_x -= self.__speed * 2
+
+    def sprint_up(self):
+        self.__raise_if_cannot_sprint()
+        self.__use_sprint_stamina()
+        self.__pos_y += self.__speed * 2
+
+    def sprint_down(self):
+        self.__raise_if_cannot_sprint()
+        self.__use_sprint_stamina()
+        self.__pos_y -= self.__speed * 2
+
+    def __raise_if_cannot_sprint(self):
+        if self.__stamina <= 0:
+            raise Exception("not enough stamina to sprint")
+
+    def __use_sprint_stamina(self):
+        self.__stamina -= 1
+
+    # don't touch below this line
+
+    def move_right(self):
+        self.__pos_x += self.__speed
+
+    def move_left(self):
+        self.__pos_x -= self.__speed
+
+    def move_up(self):
+        self.__pos_y += self.__speed
+
+    def move_down(self):
+        self.__pos_y -= self.__speed
+
+    def get_position(self):
+        return self.__pos_x, self.__pos_y
+
+    def __init__(self, pos_x, pos_y, speed, stamina):
+        self.__pos_x = pos_x
+        self.__pos_y = pos_y
+        self.__speed = speed
+        self.__stamina = stamina
+
+
+			power and square root(crazy)
+
+
+def power(self, a):
+        self.__result **= a
+
+    def square_root(self):
+        self.__result **= 0.5
+
+
+##what i put
+
+ def power(self, a):
+        init = self.__result
+        for _ in range(1, a):
+            self.__result *= init
+
+    def square_root(self):
+        init = self.__result
+        for i in range(2, 10):
+            searchNum = i
+            while searchNum < init:
+                searchNum *= searchNum
+            if searchNum == init:
+                self.__result = i
+                break
+
+
+			CARDS CLASS
+
+
+import random
+
+
+class DeckOfCards:
+    SUITS = ["Hearts", "Diamonds", "Clubs", "Spades"]
+    RANKS = [
+        "Ace",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "Jack",
+        "Queen",
+        "King",
+    ]
+
+    def __init__(self):
+        self.__cards = []
+        self.create_deck()
+
+    def create_deck(self):
+        for suit in DeckOfCards.SUITS:
+            for rank in DeckOfCards.RANKS:
+                self.__cards.append((rank, suit))
+
+    def shuffle_deck(self):
+        random.shuffle(self.__cards)
+
+    def deal_card(self):
+        if self.__cards == []:
+            return None
+        else:
+            return self.__cards.pop()
+
+    # don't touch below this line
+
+    def __str__(self):
+        return f"The deck has {len(self.__cards)} cards"
+
+
+		WAR game 
+
+
+import random
+
+
+class CardGame:
+    def __init__(self):
+        self.deck = DeckOfCards()
+        self.deck.shuffle_deck()
+    def play(self):
+        print("Nothing to play...")
+
+
+class War(CardGame):
+    def __init__(self):
+        super().__init__()
+        self.player1_hand = []
+        self.player2_hand = []
+
+    def play(self):
+        self.player1_hand = self.__deal_hand()
+        self.player2_hand = self.__deal_hand()
+        self.__battle()
+
+    def __deal_hand(self):
+        newLst = []
+        for _ in range(0, 5):
+            newLst.append(self.deck.deal_card())
+        return newLst
+
+
+    # don't touch below this line
+
+    def __battle(self):
+        player1_pile = []
+        player2_pile = []
+        player1_score = 0
+        player2_score = 0
+        ties = 0
+        while len(self.player1_hand) > 0 or len(self.player2_hand) > 0:
+            if len(self.player1_hand) == 0:
+                random.shuffle(player1_pile)
+                self.player1_hand = player1_pile.copy()
+                player1_pile.clear()
+            if len(self.player2_hand) == 0:
+                random.shuffle(player2_pile)
+                self.player2_hand = player2_pile.copy()
+                player2_pile.clear()
+            card1 = self.player1_hand.pop()
+            card2 = self.player2_hand.pop()
+            print(f"{card1} vs {card2}")
+            if card1 > card2:
+                player1_pile.append(card1)
+                player1_pile.append(card2)
+                player1_score += 1
+                print(f"Player 1 wins with {card1}")
+            elif card2 > card1:
+                player2_pile.append(card1)
+                player2_pile.append(card2)
+                player2_score += 1
+                print(f"Player 2 wins with {card2}")
+            else:
+                ties += 1
+                print("Tie! Both players draw a card and play again")
+        print("------------------------------------------")
+        print("Game over!")
+        print("------------------------------------------")
+        print(f"Player 1: {player1_score}")
+        print(f"Player 2: {player2_score}")
+        print(f"Ties: {ties}")
+        print("==========================================")
+
+
+SUITS = ["Clubs", "Diamonds", "Hearts", "Spades"]
+
+RANKS = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace"]
+
+
+def index_of(lst, item):
+    for i in range(len(lst)):
+        if lst[i] == item:
+            return i
+    return None
+
+
+class Card:
+    def __init__(self, rank, suit):
+        self.rank = rank
+        self.suit = suit
+
+    def __cmp(self, other):
+        self_suit_i = index_of(SUITS, self.suit)
+        other_suit_i = index_of(SUITS, other.suit)
+        self_rank_i = index_of(RANKS, self.rank)
+        other_rank_i = index_of(RANKS, other.rank)
+        if self_rank_i > other_rank_i:
+            return "gt"
+        if self_rank_i < other_rank_i:
+            return "lt"
+        if self_suit_i > other_suit_i:
+            return "gt"
+        if self_suit_i < other_suit_i:
+            return "lt"
+        return "eq"
+
+    def __eq__(self, other):
+        return self.__cmp(other) == "eq"
+
+    def __gt__(self, other):
+        return self.__cmp(other) == "gt"
+
+    def __lt__(self, other):
+        return self.__cmp(other) == "lt"
+
+    def __str__(self):
+        return f"{self.rank} of {self.suit}"
+
+
+class DeckOfCards:
+    def __init__(self):
+        self.__cards = []
+        self.create_deck()
+
+    def create_deck(self):
+        for suit in SUITS:
+            for rank in RANKS:
+                self.__cards.append(Card(rank, suit))
+
+    def shuffle_deck(self):
+        random.shuffle(self.__cards)
+
+    def deal_card(self):
+        if len(self.__cards) == 0:
+            return None
+        return self.__cards.pop(0)
+
+
+def test(seed):
+    random.seed(seed)
+    war = War()
+    war.play()
+
+
+def main():
+    test(1)
+    test(2)
+
+
+main()
+
+
+			Tkinter
+
+import tkinter as tk# first, import the library
+master = tk.Tk() # create a window
+master.geometry("200x100") # set the window size
+button = tk.Button(master, text="Submit", fg="red").pack() # create a button
+button = tk.Button(master, text="Sub", fg="red").pack()
+master.mainloop() # start the event loop
+
+
+			lambda
+
+makes dict from dict of list of tuples
+and uses a lambda function to return the .get() 
+
+def file_type_getter(file_extension_tuples):
+    dataDict = dict(file_extension_tuples)
+    newDict = {}
+    for data in dataDict:
+        for i in range(0, len(dataDict[data])):
+            newDict.update({dataDict[data][i]: data})
+    #print(f"debug: {newDict}")
+    return lambda dataType: newDict.get(dataType, "Unknown")
+
+
+
+

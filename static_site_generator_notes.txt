@@ -1,0 +1,1245 @@
+                
+                HTML
+
+
+The primary output of a static site generator is HTML (HyperText Markup Language), because HTML contains all the content of a web page.
+
+HTML is a simple language for structuring content. It's not a "programming" language in the sense that it doesn't have variables, loops, or conditionals.
+
+HTML is a way to format text, images, links, and other media so that a web browser can render it in a GUI. Here's a simple HTML file:
+
+<html>
+<head>
+    <title>Why Frontend Development Sucks</title>
+</head>
+<body>
+    <h1>Front-end Development is the Worst</h1>
+    <p>
+        Look, front-end development is for script kiddies and soydevs who can't handle the real programming. I mean,
+        it's just a bunch of divs and spans, right? And css??? It's like, "Oh, I want this to be red, but not thaaaaat
+        red." What a joke.
+    </p>
+    <p>
+        Real programmers code, not silly markup languages. They code on Arch Linux, not Mac OS, and certainly not
+        Windows. They use Vim, not VS Code. They use C, not HTML. Come to the
+        <a href="https://www.boot.dev">backend</a>, where the real programming
+        happens.
+    </p>
+</body>
+</html>
+
+HTML is a tree-like structure where each "tag" (e.g. <p>, the bits enclosed in angle brackets) can contain other tags, and the whole thing is enclosed in an outermost <html> tag. Let's break down the structure of this HTML file:
+
+<html> is the root element of the document.
+<head> contains metadata about the document. Anything in the <head> is not rendered visibly in the browser window.
+<title> is the title of the document, which is displayed in the browser tab.
+<body> contains the content of the document, which is what is rendered in the browser window.
+<h1> is a top-level heading.
+<p> is a paragraph of text.
+<a> is a hyperlink. The href attribute is the URL the link points to. Attributes are key-value pairs that provide additional information about an element, like href="https://www.boot.dev".
+
+Assignment
+Create a new directory in your project called public and save the HTML above into a file called index.html in the public directory.
+
+Next use Python's built-in HTTP server to serve the contents of the public directory:
+
+cd public
+python3 -m http.server 8888
+
+Open your browser and paste in the URL of your server, (http://localhost:8888 if you used port 8888 as suggested) into the address bar. You should see your file rendered as a web page! While the server is running, open a new terminal window. Run and submit the HTTP tests using the Boot.dev CLI tool.
+
+                CSS
+
+
+CSS (Cascading Style Sheets) is another "not-really-a-programming-language" that styles HTML elements. It's a way to dress up your HTML with colors, fonts, responsive layouts, animations, etc.
+
+/* Make all <h1> HTML elements red */
+h1 {
+  color: red;
+}
+
+Or maybe we want the max-width of our paragraphs to be 50% of the screen width:
+
+/* Make all <p> HTML elements 50% of the screen width */
+p {
+  max-width: 50%;
+}
+
+Assignment
+Copy and paste the following CSS into a file called styles.css in the public directory:
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #1f1f23;
+}
+body {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+h1 {
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+p {
+    color: #999999;
+    margin-bottom: 20px;
+}
+a {
+    color: #6568ff;
+}
+
+Then link the styles.css file in your index.html file by adding a <link> tag to the <head> section:
+
+<head>
+    <title>Why Frontend Development Sucks</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+You can kill your server with Ctrl+C and restart it:
+
+# from inside the public directory
+python3 -m http.server 8888
+
+With the server running, run and submit the HTTP tests using the CLI tool.
+
+Tip
+If you suspect that you're having caching issues, try clearing your browser cache and reloading this page.
+
+
+                Markdown
+
+
+Writing HTML by hand sucks. Even if you're a grubby front-end programmer, you probably don't want to write entire documents in raw HTML.
+
+Here's the other deal: writing Markdown is pure bliss. Markdown is a less-verbose markup language designed for ease of writing. The trouble is web browsers don't understand Markdown. They only understand HTML and CSS. The #1 job of a static site generator is to convert Markdown into HTML
+
+Instead of writing a verbose HTML list:
+
+<ul>
+    <li>I really</li>
+    <li>hate writing</li>
+    <li>in raw html</li>
+</ul>
+
+We can write this in Markdown:
+
+* I really
+* hate writing
+* in raw html
+
+Our static site generator will take a directory of Markdown files (one for each web page), and build a directory of HTML files. Because we're not savages, we'll also include a single CSS file to style the site.
+
+Fun fact: This lesson, and every lesson on Boot.dev, is written in Markdown!
+
+
+                Cheat Sheet
+
+
+This cheat sheet provides a quick reference for all the HTML and Markdown syntax you'll need to complete this project. Feel free to bookmark this page so you can come back to it as you work on this project.
+
+References
+MarkdownGuide.org
+HTML Element Reference
+
+Fun fact: Discord, GitHub, and ChatGPT all support Markdown messages. When you use Markdown on those platforms it will render beautifully.
+
+        HTML Headings
+
+<h1>Heading 1</h1>
+<h2>Heading 2</h2>
+<h3>Heading 3</h3>
+<h4>Heading 4</h4>
+<h5>Heading 5</h5>
+<h6>Heading 6</h6>
+
+        Markdown Headings
+
+# Heading 1
+
+## Heading 2
+
+### Heading 3
+
+#### Heading 4
+
+##### Heading 5
+
+###### Heading 6
+
+        HTML Paragraphs
+
+<p>This is a paragraph of text.</p>
+
+        Markdown Paragraphs
+
+This is a paragraph of text.
+
+        HTML Bold
+
+<p>This is a <b>bold</b> word.</p>
+
+        Markdown Bold
+
+This is a **bold** word.
+
+        HTML Italics
+
+<p>This is an <i>italic</i> word.</p>
+
+        Markdown Italics
+
+This is an *italic* word.
+
+Note: some linting tools may autocorrect *italic* to _italic_, which is also markdown syntax for italics, but may trip you up during testing.
+
+        HTML Links
+
+This is a paragraph with a <a href="https://www.google.com">link</a>.
+
+        Markdown Links
+
+This is a paragraph with a [link](https://www.google.com).
+
+        HTML Images
+
+<img src="url/of/image.jpg" alt="Description of image">
+
+        Markdown Images
+
+![alt text for image](url/of/image.jpg)
+
+        HTML Unordered Lists
+
+<ul>
+    <li>Item 1</li>
+    <li>Item 2</li>
+    <li>Item 3</li>
+</ul>
+
+        Markdown Unordered Lists
+
+* Item 1
+* Item 2
+* Item 3
+
+        HTML Ordered Lists
+
+<ol>
+    <li>Item 1</li>
+    <li>Item 2</li>
+    <li>Item 3</li>
+</ol>
+
+        Markdown Ordered Lists
+
+1. Item 1
+2. Item 2
+3. Item 3
+
+        HTML Quotes
+
+<blockquote>
+    This is a quote.
+</blockquote>
+
+        Markdown Quotes
+
+> This is a quote.
+
+        HTML Code
+
+<code>This is code</code>
+
+        Markdown Code
+
+```
+This is code
+```
+
+                Architecture
+
+    
+We'll dive into code in the next chapter, but first, I want to give you a high-level architecture for our static site generator.
+
+The flow of data through the full system is:
+
+Markdown files are in the /content directory. A template.html file is in the root of the project.
+The static site generator (the Python code in src/) reads the Markdown files and the template file.
+The generator converts the Markdown files to a final HTML file for each page and writes them to the /public directory.
+We start the built-in Python HTTP server (a separate program, unrelated to the generator) to serve the contents of the /public directory on http://localhost:8888 (our local machine).
+We open a browser and navigate to http://localhost:8888 to view the rendered site.
+
+
+                How the SSG works
+
+
+The vast majority of our coding will happen in the src/ directory because almost all of the work is done in steps 2 and 3 above. Here's a rough outline of what the final program will do when it runs:
+
+Delete everything in the /public directory.
+Copy any static assets (HTML template, images, CSS, etc.) to the /public directory.
+Generate an HTML file for each Markdown file in the /content directory. For each Markdown file
+
+Open the file and read its contents.
+Split the markdown into "blocks" (e.g. paragraphs, headings, lists, etc.).
+Convert each block into a tree of HTMLNode objects. For inline elements (like bold text, links, etc.) we will convert:
+Raw markdown -> TextNode -> HTMLNode
+
+Join all the HTMLNode blocks under one large parent HTMLNode for the pages.
+Use a recursive to_html() method to convert the HTMLNode and all its nested nodes to a giant HTML string and inject it in the HTML template.
+Write the full HTML string to a file for that page in the /public directory.
+
+
+                How we're gonna build it
+
+
+We're not going to build the program in the same order that it runs... that's often not the best way to build large projects. Instead, we'll tackle individual problems that we know we'll need to solve and use unit tests to make sure they work as expected. We'll put the pieces together into a working program as we get close to the end.
+
+You don't need to memorize the information on this page, but come back to review it if you ever feel lost in the details.
+
+
+                TextNode
+
+
+We're going to need a way to represent all the different types of inline text. We're going to be parsing Markdown text, and outputting it to HTML, so we need an intermediate representation of the text in our code.
+
+When I say "inline" I just mean text that is part of a larger block of text. For us, this includes:
+
+Normal text
+Bold text
+Italic text
+Code text
+Links
+Images
+
+Everything else we're considering block level, like headings, paragraphs, and bullet lists, and we'll handle those later.
+
+Assignment
+Create a simple main.sh shell script in the root of the project. This will be a convenient way to run our code. It should contain:
+
+python3 src/main.py
+
+Create a src directory with a main.py python file. This is where we'll write our Python code. Make it print "hello world", and make sure that running the main.sh script runs the main.py file and prints "hello world":
+
+./main.sh
+# hello world
+
+Create a .gitignore file in the root of the project. It should contain:
+
+__pycache__/
+
+This will prevent autogenerated __pycache__ directories from being committed to Git. Finally, create a src/textnode.py file, and read on to see what it should contain.
+
+In textnode.py create a class called TextNode. It should have 3 properties that can be set in the constructor:
+self.text - The text content of the node
+self.text_type - The type of text this node contains, which is just a string like "bold" or "italic"
+self.url - The URL of the link or image, if the text is a link. Default to None if nothing is passed in.
+Create an __eq__ method that returns True if all of the properties of two TextNode objects are equal.
+Create a __repr__ method that returns a string representation of the TextNode object. It should look like this:
+
+TextNode(TEXT, TEXT_TYPE, URL)
+
+Where TEXT, TEXT_TYPE, and URL are the values of the text, text_type, and url properties, respectively.
+
+Create a main() function in main.py and call it. The function should create a new TextNode object with some dummy values. Print the object, and make sure it looks like you'd expect. For example, my code printed:
+
+TextNode(This is a text node, bold, https://www.boot.dev)
+
+When you're happy that everything is working as intended, run and submit the tests from the root of the project.
+
+Tips
+You may need to make main.sh executable by running:
+
+chmod +x main.sh
+
+In Python, if you want to use code from one file in another file, you need to import it. For example, to use a SuperCar class from a cars.py file in a main.py file in the same directory, you would write:
+
+from cars import SuperCar
+
+
+
+                                TextNode Tests
+
+
+Unit tests are a way to verify that the code you write works as expected. In other Boot.dev courses, you write code that passes the unit tests we provide. As a developer, you'll be expected to write your own tests to ensure that individual pieces of your code, "units", work as expected.
+
+It can feel like a lot of extra work...
+
+...but it's often worth it, especially if the logic you're testing is particularly complex while simultaneously easy to test (e.g. it doesn't rely on external stuff like files or the network). Once you have some good tests, you can run them whenever you make changes to ensure you didn't break anything.
+
+Assignment
+Create a new script in the root of the project called test.sh. This will be a convenient way to run our tests. It should contain:
+
+python3 -m unittest discover -s src
+
+This command tells Python to use the standard library's unittest module to run all the tests (discover) it can find in the src directory.
+
+Create a test_textnode.py file in the src directory. This is where we'll write our tests for the TextNode class. Here's a file with a single test:
+
+import unittest
+
+from textnode import TextNode
+
+
+class TestTextNode(unittest.TestCase):
+    def test_eq(self):
+        node = TextNode("This is a text node", "bold")
+        node2 = TextNode("This is a text node", "bold")
+        self.assertEqual(node, node2)
+
+
+if __name__ == "__main__":
+    unittest.main()
+
+
+This test creates two TextNode objects with the same properties and asserts that they are equal. Notice the missing url argument which should have a default value of None. If you run your tests with ./test.sh, you should see that the test passes.
+
+Add some tests by adding methods to the TestTextNode class and using self.assertEqual to verify that the TextNode class works as expected.
+Add even more tests (at least 3 in total) to check various edge cases, like when the url property is None, or when the text_type property is different. You'll want to make sure that when properties are different, the TextNode objects are not equal.
+When you're satisfied that your class is behaving as expected, move on.
+
+
+                                HTMLNode
+
+
+Next, we need a way to represent HTML nodes. A "TextNode" is an intermediate representation between Markdown and HTML, and is specific to inline markup. The HTMLNode class will represent a "node" in an HTML document tree (like a <p> tag and its contents, or an <a> tag and its contents) and is purpose-built to render itself as HTML.
+
+Assignment
+Create a new file called htmlnode.py and define a class called HTMLNode in it.
+The HTMLNode class should have 4 data members set in the constructor:
+tag - A string representing the HTML tag name (e.g. "p", "a", "h1", etc.)
+value - A string representing the value of the HTML tag (e.g. the text inside a paragraph)
+children - A list of HTMLNode objects representing the children of this node
+props - A dictionary of key-value pairs representing the attributes of the HTML tag. For example, a link (<a> tag) might have {"href": "https://www.google.com"}
+Perhaps counterintuitively, every data member should be optional and default to None:
+An HTMLNode without a tag will just render as raw text
+An HTMLNode without a value will be assumed to have children
+An HTMLNode without children will be assumed to have a value
+An HTMLNode without props simply won't have any attributes
+Add a to_html(self) method. For now, it should just raise a NotImplementedError. Child classes will override this method to render themselves as HTML.
+Add aprops_to_html(self) method. It should return a string that represents the HTML attributes of the node. For example, if self.props is:
+
+{
+    "href": "https://www.google.com", 
+    "target": "_blank",
+}
+
+
+Then self.props_to_html() should return:
+
+ href="https://www.google.com" target="_blank"
+
+Notice the leading space character before href and before target. This is important. HTML attributes are always separated by spaces.
+
+Add a __repr__(self) method. Give yourself a way to print an HTMLNode object and see its tag, value, children, and props. This will be useful for your debugging.
+Create some tests for the HTMLNode class (at least 3). I used a new file called src/test_htmlnode.py. Create a few nodes and make sure the props_to_html method works as expected.
+When you're satisfied that your class is behaving as expected, run and submit the tests.
+
+
+
+                                LeafNode
+
+
+Time to render some HTML strings!
+
+A LeafNode is a type of HTMLNode that represents a single HTML tag with no children. For example, a simple <p> tag with some text inside of it:
+
+<p>This is a paragraph of text.</p>
+
+We call it a "leaf" node because it's a "leaf" in the tree of HTML nodes. It's a node with no children. In this next example, <p> is not a leaf node, but <b> is.
+
+<p>This is a paragraph. <b>This is bold text.</b> This is the last sentence</p>
+
+Assignment
+Create a child class of HTMLNode called LeafNode. Its constructor should differ slightly from the HTMLNode class because:
+It should not allow for any children
+The value data member should be required.
+Use the super() function to call the constructor of the HTMLNode class.
+
+Add a .to_html() method that renders a leaf node as an HTML string (by returning a string).
+If the leaf node has no value, it should raise a ValueError. All leaf nodes must have a value.
+If there is no tag (e.g. it's None), the value should be returned as raw text.
+Otherwise, it should render an HTML tag. For example, these leaf nodes:
+
+LeafNode("p", "This is a paragraph of text.")
+LeafNode("a", "Click me!", {"href": "https://www.google.com"})
+
+Should render as:
+
+<p>This is a paragraph of text.</p>
+<a href="https://www.google.com">Click me!</a>
+
+Add some tests.
+Once you're happy that everything is working as intended, run and submit the tests from the root of the project.
+
+
+
+                                        ParentNode
+
+
+I heard you like recursion.
+
+The new ParentNode class will handle the nesting of HTML nodes inside of one another. Any HTML node that's not "leaf" node (i.e. it has children) is a "parent" node.
+
+Assignment
+Create another child class of the HTMLNode called ParentNode. Its constructor should differ from the parent class in that:
+It doesn't take a value argument
+The children argument is not optional
+(the exact opposite of the LeafNode class)
+
+Add a .to_html method.
+If the object doesn't have a tag, raise a ValueError.
+If there are no children, raise a ValueError with a different message.
+Otherwise, return a string representing the HTML tag of the node and its children. This should be a recursive method (each recursion being called on a nested child node). I iterated over all the children and called to_html on each, concatenating the results and injecting them between the opening and closing tags of the parent.
+For example, this node and its children:
+
+For example, this node and its children:
+
+node = ParentNode(
+    "p",
+    [
+        LeafNode("b", "Bold text"),
+        LeafNode(None, "Normal text"),
+        LeafNode("i", "italic text"),
+        LeafNode(None, "Normal text"),
+    ],
+)
+
+node.to_html()
+
+
+Should convert to:
+
+<p><b>Bold text</b>Normal text<i>italic text</i>Normal text</p>
+
+Don't worry about indentation or pretty-printing. (When pretty-printed it would look like this):
+
+<p>
+    <b>Bold text</b>
+    Normal text
+    <i>italic text</i>
+    Normal text
+</p>
+
+Most editors can be configured to auto-format HTML on save, so we don't need to worry about implementing that in our code.
+
+I wrote many tests for this class. I recommend you do the same, there is a lot of room for error. Test all the edge cases you can think of, including nesting ParentNode objects inside of one another, multiple children, and no children.
+Once you're happy that everything is working as intended, run and submit the tests from the root of the project.
+
+
+
+                                TextNode to HTMLNode
+
+
+We need a way to convert a TextNode to an HTMLNode. Well, to be specific, we will convert them to a subclass of HTMLNode, namely a LeafNode.
+
+Assignment
+Write a function:
+
+def text_node_to_html_node(text_node):
+
+It should handle each type of TextNode:
+
+text_type_text = "text"
+text_type_bold = "bold"
+text_type_italic = "italic"
+text_type_code = "code"
+text_type_link = "link"
+text_type_image = "image"
+
+If it gets a TextNode that is none of those types, it should raise an exception.
+
+text_type_text: This should become a LeafNode with no tag, just a raw text value.
+text_type_bold: This should become a LeafNode with a "b" tag and the text
+text_type_italic: "i" tag, text
+text_type_code: "code" tag, text
+text_type_link: "a" tag, anchor text, and "href" prop
+text_type_image: "img" tag, empty string value, "src" and "alt" props ("src" is the image URL, "alt" is the alt text)
+
+Add some tests.
+Run and submit the tests from the root of the project.
+
+
+
+
+                                        inline
+
+
+                        Split Delimiter
+
+
+Now that we have a way to render HTMLNodes as HTML, we need to make our TextNode functionality a bit more powerful. That is, rather than just model a TextNode, we need to be able to convert a raw markdown string into a list of TextNode objects. For example, the string:
+
+This is text with a **bolded phrase** in the middle
+
+Should become:
+
+[
+    TextNode("This is text with a ", "text"),
+    TextNode("bolded phrase", "bold"),
+    TextNode(" in the middle", "text"),
+]
+
+                                Moving the goalposts
+
+Markdown parsers often support the nesting of inline elements. For example, you can have a bold word inside of italics:
+
+This is an *italic and **bold** word*.
+
+For simplicity's sake, we won't allow it! We will only support a single level of nesting when it comes to inline elements. If you want to extend the project to support multiple levels of nesting, you're welcome to do so! But we won't.
+
+Assignment
+Create a new function (I put this in a new code file, but you can organize your code as you please):
+
+def split_nodes_delimiter(old_nodes, delimiter, text_type):
+
+It takes a list of "old nodes", a delimiter, and a text type. It should return a new list of nodes, where any "text" type nodes in the input list are (potentially) split into multiple nodes based on the syntax. For example, given the following input:
+
+node = TextNode("This is text with a `code block` word", text_type_text)
+new_nodes = split_nodes_delimiter([node], "`", text_type_code)
+
+It returns:
+
+[
+    TextNode("This is text with a ", text_type_text),
+    TextNode("code block", text_type_code),
+    TextNode(" word", text_type_text),
+]
+
+The beauty of this function is that it will take care of inline code, bold, and italic text, all in one! The logic is identical, the delimiter and matching text_type are the only thing that changes, e.g. ** for bold, * for italic, and a backtick for code. Also, because it operates on an input list, we can call it multiple times to handle different types of delimiters.
+
+Write a bunch of tests. Be sure to test various types of delimiters.
+Run and submit the tests from the root of the project.
+
+Tips
+I don't want to give you full pseudocode, but here are some pointers:
+
+I created variables to represent the various valid TextNode types like this:
+text_type_text="text"
+text_type_code="code"
+...
+
+If an "old node" is not a "text" type, just add it to the new list as-is, we only attempt to split "text" type objects (not bold, italic, etc).
+If a matching closing delimiter is not found, just raise an exception with a helpful error message, that's invalid Markdown syntax.
+The .split() string method was useful
+The .extend() list method was useful
+
+
+
+                                Regex
+
+
+Before we build the next bit, we need to understand a bit about regexes, or "regular expressions". "Regex" for short, is a programming-language-agnostic way of searching for patterns in text.
+
+They're famous for being hard to read, but occasionally, they are the simplest way to solve a problem.
+
+To get really good at using regex, we'd need a full course on the topic. For now, let's just cover the basics. In Python, we can use the re module to work with regex. It has a findall function that will return a list of all the matches in a string. See examples below.
+
+        Regex for a single word
+
+import re
+
+text = "I'm a little teapot, short and stout. Here is my handle, here is my spout."
+matches = re.findall(r"teapot", text)
+print(matches) # ['teapot']
+
+r"teapot" is a regex pattern.
+The r tells Python to treat the string as a "raw" string, which means we don't have to escape backslashes
+The pattern teapot will match any exact occurrences of the word "teapot" in the input.
+
+        Regex for phone number
+
+text = "My phone number is 555-555-5555 and my friend's number is 555-555-5556"
+matches = re.findall(r"\d{3}-\d{3}-\d{4}", text)
+print(matches) # ['555-555-5555', '555-555-5556']
+
+\d matches any digit
+{3} means "exactly three of the preceding character"
+- is just a literal - that we want to match
+
+        Regex for text between parentheses
+
+text = "I have a (cat) and a (dog)"
+matches = re.findall(r"\((.*?)\)", text)
+print(matches) # ['cat', 'dog']
+
+\( and \) are escaped parentheses that we want to match
+.*? matches any number of characters (except for line terminators) between the parentheses
+
+        Regex for emails
+
+text = "My email is lane@example.com and my friend's email is hunter@example.com"
+matches = re.findall(r"\w+@\w+\.\w+", text)
+print(matches) # ['lane@example.com', 'hunter@example.com']
+
+\w matches any word character (alphanumeric characters and underscores)
++ means "one or more of the preceding character"
+@ is just a literal @ symbol that we want to match
+\. is a literal . that we want to match (The . is a special character in regex, so we escape it with a leading backslash)
+
+        Testing regexes
+I love regexr.com for interactive regex testing, it breaks down each part of the pattern and explains what it does.
+
+
+
+                        Extract Links
+
+
+
+Time to extract the links and images from our Markdown. This is where regex comes in handy!
+
+Assignment
+Create a function extract_markdown_images(text) that takes raw markdown text and returns a list of tuples. Each tuple should contain the alt text and the URL of any markdown images. For example:
+
+text = "This is text with a ![rick roll](https://i.imgur.com/aKaOqIh.gif) and ![obi wan](https://i.imgur.com/fJRm4Vk.jpeg)"
+print(extract_markdown_images(text))
+# [("rick roll", "https://i.imgur.com/aKaOqIh.gif"), ("obi wan", "https://i.imgur.com/fJRm4Vk.jpeg")]
+
+Create a similar function extract_markdown_links(text) that extracts markdown links instead of images. It should return tuples of anchor text and URLs. For example:
+
+text = "This is text with a link [to boot dev](https://www.boot.dev) and [to youtube](https://www.youtube.com/@bootdotdev)"
+print(extract_markdown_links(text))
+# [("to boot dev", "https://www.boot.dev"), ("to youtube", "https://www.youtube.com/@bootdotdev")]
+
+Write a bunch of tests.
+Run and submit the tests from the root of the project.
+
+Tips
+Below are spoilers!!! You don't need to be a regex master for this course, but if you want to challenge yourself, try to write the regexes without looking below. If you don't care, I've provided them for you.
+
+# images
+r"!\[(.*?)\]\((.*?)\)"
+
+# regular links
+r"(?<!!)\[(.*?)\]\((.*?)\)"
+
+
+
+                                Split Images and Links
+
+
+
+Now that we have the extraction functions, we need to write the logic that splits the TextNode objects.
+
+Assignment
+Create two new functions:
+def split_nodes_image(old_nodes):
+def split_nodes_link(old_nodes):
+
+They should behave very similarly to split_nodes_delimiter, but obviously don't need a delimeter or a text type as input, because they always operate on images or links respectively. Here's some example usage:
+
+node = TextNode(
+    "This is text with a link [to boot dev](https://www.boot.dev) and [to youtube](https://www.youtube.com/@bootdotdev)",
+    text_type_text,
+)
+new_nodes = split_nodes_link([node])
+# [
+#     TextNode("This is text with a link ", text_type_text),
+#     TextNode("to boot dev", text_type_link, "https://www.boot.dev"),
+#     TextNode(" and ", text_type_text),
+#     TextNode(
+#         "to youtube", text_type_link, "https://www.youtube.com/@bootdotdev"
+#     ),
+# ]
+
+Write lots of tests for each. If it makes you feel better, this is probably the most difficult step in this project. Take your time.
+Run and submit the tests from the root of the project.
+
+Tips
+Here are some spoilers that might help you out:
+
+Make use of the extraction functions we wrote
+If there are no images or links respectively, just return a list with the original TextNode in it
+Don't append any TextNodes that have empty text to the final list
+Your split_nodes_image and split_nodes_link functions will be very similar. You can try to share code between them if you want, but I was a copy/paste grug dev for this step.
+You can use the .split() method with large strings as the delimeter, and it has an optional second "maxsplits" parameter, which you can set to 1 if you only want to split the string once at most. For each image extracted from the text, I split the text before and after the image markdown. For example:
+
+
+
+                                Text to TextNodes
+
+
+
+Time to put all the "splitting" functions together into a function that can convert a raw string of markdown-flavored text into a list of TextNode objects.
+
+Assignment
+Create a text_to_textnodes(text) function. Here's some example input:
+
+This is **text** with an *italic* word and a `code block` and an ![obi wan image](https://i.imgur.com/fJRm4Vk.jpeg) and a [link](https://boot.dev)
+
+It should output this list of nodes:
+
+[
+    TextNode("This is ", text_type_text),
+    TextNode("text", text_type_bold),
+    TextNode(" with an ", text_type_text),
+    TextNode("italic", text_type_italic),
+    TextNode(" word and a ", text_type_text),
+    TextNode("code block", text_type_code),
+    TextNode(" and an ", text_type_text),
+    TextNode("obi wan image", text_type_image, "https://i.imgur.com/fJRm4Vk.jpeg"),
+    TextNode(" and a ", text_type_text),
+    TextNode("link", text_type_link, "https://boot.dev"),
+]
+
+This function should be simple now that you've done all the hard work, use all your splitting functions one after the other.
+
+Write a bunch of tests.
+Run and submit the tests from the root of the project.
+
+
+
+                                Split Blocks
+
+
+Our grug-brain static site generator only cares about two things:
+
+Inline markdown
+Block markdown
+
+Inline markdown is what we just took care of. It's the stuff that's inside of a block. For example, the bolded text in this sentence is inline markdown.
+
+Block-level markdown is just the separation of different sections of an entire document. In well-written markdown (which we'll just assume is the only thing going into our generator) blocks are separated by a single blank line. Here are 3 distinct blocks:
+
+# This is a heading
+
+This is a paragraph of text. It has some **bold** and *italic* words inside of it.
+
+* This is the first list item in a list block
+* This is a list item
+* This is another list item
+
+The heading, the paragraph, and the unordered list are all separate blocks. The blank line between them is what separates them.
+
+Assignment
+Create a new function called markdown_to_blocks(markdown). It takes a raw Markdown string (representing a full document) as input and returns a list of "block" strings. The example above would be split into these three strings:
+
+# This is a heading
+
+This is a paragraph of text. It has some **bold** and *italic* words inside of it.
+
+* This is the first list item in a list block
+* This is a list item
+* This is another list item
+
+Strip any leading or trailing whitespace from each block.
+Remove any "empty" blocks due to excessive newlines.
+
+Write tests for your function.
+Run and submit the tests from the root of the project.
+
+
+
+                                Block types
+
+
+
+We will support 6 types of markdown blocks:
+
+paragraph
+heading
+code
+quote
+unordered_list
+ordered_list
+
+We need a way to inspect a block of markdown text and determine what type of block it is.
+
+Assignment
+Create a block_to_block_type function that takes a single block of markdown text as input and returns a string representing the type of block it is. You can assume all leading and trailing whitespace was already stripped (we did that in a previous lesson).
+Headings start with 1-6 # characters, followed by a space and then the heading text.
+Code blocks must start with 3 backticks and end with 3 backticks.
+Every line in a quote block must start with a > character.
+Every line in an unordered list block must start with a * or - character, followed by a space.
+Every line in an ordered list block must start with a number followed by a . character and a space. The number must start at 1 and increment by 1 for each line.
+If none of the above conditions are met, the block is a normal paragraph.
+
+Write a bunch of unit tests for the function.
+Run and submit the CLI tests from the root of the project.
+
+
+                                
+                                Block To HTML
+
+
+I'm going to give you quite a few steps to do with a bit less guidance. I think you're a beautiful peacock and are ready for it.
+
+Assignment
+Create a new function called def markdown_to_html_node(markdown): that converts a full markdown document into a single HTMLNode. That single HTMLNode should of course contain many child HTMLNode objects representing the nested elements.
+
+I created an additional 8 helper functions to keep my code neat and easy to understand, because there's a lot of logic necessary for the markdown_to_html_node. I don't want to give you my exact functions because I want you to do this from scratch. However, I'll give you the basic order of operations:
+
+Split the markdown into blocks (you already have a function for this)
+Loop over each block:
+Determine the type of block (you already have a function for this)
+Based on the type of block, create a new HTMLNode with the proper data
+Assign the proper child HTMLNode objects to the block node. I created a shared text_to_children(text) function that works for all block types. It takes a string of text and returns a list of HTMLNodes that represent the inline markdown using previously created functions (think TextNode -> HTMLNode).
+
+Make all the block nodes children under a single parent HTML node (which should just be a div) and return it.
+Create unit tests.
+
+Run and submit the tests from the root of the project.
+
+Tips
+Quote blocks should be surrounded by a <blockquote> tag.
+Unordered list blocks should be surrounded by a <ul> tag, and each list item should be surrounded by a <li> tag.
+Ordered list blocks should be surrounded by a <ol> tag, and each list item should be surrounded by a <li> tag.
+Code blocks should be surrounded by a <code> tag nested inside a <pre> tag.
+Headings should be surrounded by a <h1> to <h6> tag, depending on the number of # characters.
+Paragraphs should be surrounded by a <p> tag.
+
+
+
+                                Copy Static
+
+
+
+We've written a lot of unit tests, it's time to start pulling all the pieces together into a working static site generator. Let's work on that main.py file that we've been neglecting.
+
+Assignment
+Add the following files to a static directory in the root of your project (the contents of the files are at the bottom of this page):
+static/images/rivendell.png
+static/index.css
+
+Write a recursive function that copies all the contents from a source directory to a destination directory (in our case, static to public)
+
+It should first delete all the contents of the destination directory to ensure that the copy is clean.
+
+It should copy all files and subdirectories, nested files, etc.
+
+I recommend logging the path of each file you copy, so you can see what's happening as you run and debug your code.
+
+Here are some of the standard library docs that might be helpful:
+
+os.path.exists
+
+os.listdir
+
+os.path.join
+
+os.path.isfile
+
+os.mkdir
+
+shutil.copy
+
+shutil.rmtree
+
+Hook the function up to your main function and test it out. I didn't use a unit test for this one because it interacts with the file system: I just tested it manually.
+Add the public/ directory to your .gitignore file. This is where the generated site will live. As a general rule, it's bad to commit generated stuff, especially if it can be regenerated easily.
+Ensure that running main.sh generates the public directory and all the copied content correctly.
+Run and submit the tests from the root of the project.
+
+
+                                The Static Content
+
+You can use the following two files to test your copying function:
+
+static/images/rivendell.png:
+
+/static/index.css:
+
+body {
+    background-color: #0d1117;
+    color: #c9d1d9;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+    line-height: 1.5;
+    margin: 0;
+    padding: 20px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+b {
+    font-weight: 900;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #58a6ff;
+    margin-top: 24px;
+    margin-bottom: 16px;
+}
+
+h1 {
+    font-size: 2em;
+}
+
+h2 {
+    font-size: 1.5em;
+}
+
+h3 {
+    font-size: 1.17em;
+}
+
+h4,
+h5,
+h6 {
+    font-size: 1em;
+}
+
+a {
+    color: #58a6ff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+ul,
+ol {
+    padding-left: 20px;
+}
+
+code {
+    background-color: #242424;
+    border-radius: 6px;
+    color: #d2a8ff;
+    padding: 0.2em 0.4em;
+    font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+}
+
+pre code {
+    padding: 0;
+}
+
+pre {
+    background-color: #242424;
+    border-radius: 6px;
+    padding: 0.2em 0.4em;
+}
+
+blockquote {
+    background-color: #242424;
+    border-left: 4px solid #30363d;
+    padding-left: 2em;
+    margin-left: 0;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    padding-right: 0.5em;
+    color: #8b949e;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 6px;
+}
+
+
+Note: Yes, I know there is a shutil.copytree function that would eliminate the need for recursion entirely, but like, do you want to just download Hugo and skip this project? No! We go to the moon, not because it is easy, but because it is hard!
+
+
+
+                                Generate Page
+
+
+Time to generate and serve a webpage!
+
+Assignment
+Create an extract_title(markdown) function.
+It should pull the h1 header from the markdown file (the line that starts with a single #) and return it.
+If there is no h1 header, raise an exception.
+extract_title("# Hello") should return "Hello" (strip the # and any leading or trailing whitespace)
+
+Write some unit tests for it.
+Create an HTML file called template.html in the root of your project. Use the content found at the bottom of this page.
+Create a content/index.md file. This is the main page of the site. Copy the contents from the bottom of this page.
+Create a generate_page(from_path, template_path, dest_path) function. It should:
+
+Print a message like "Generating page from from_path to dest_path using template_path".
+Read the markdown file at from_path and store the contents in a variable.
+Read the template file at template_path and store the contents in a variable.
+Use your markdown_to_html_node function and .to_html() method to convert the markdown file to an HTML string.
+Use the extract_title function to grab the title of the page.
+Replace the {{ Title }} and {{ Content }} placeholders in the template with the HTML and title you generated.
+Write the new full HTML page to a file at dest_path. Be sure to create any necessary directories if they don't exist.
+
+Update main.py to:
+Delete anything in the public directory.
+Copy all the static files from static to public.
+Generate a page from content/index.md using template.html and write it to public/index.html.
+
+Update your main.sh script to start a simple web server after generating the site. Use the same built-in Python server as before:
+
+python3 src/main.py
+cd public && python3 -m http.server 8888
+
+Run the main.sh script, if everything goes well, you should be able to see your webpage at http://localhost:8888 in your browser!
+Inspect the page in your browser, as well as the raw HTML output. If you wrote really good unit tests, its likely that everything worked as expected. If you see any errors, debug and fix them!
+With the server running, run and submit the HTTP tests using the CLI tool.
+
+Here are some standard library docs that might be helpful:
+
+open
+.read()
+.close()
+.replace()
+os.path.dirname
+os.makedirs
+.startswith()
+.split()
+
+template.html:
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> {{ Title }} </title>
+    <link href="/index.css" rel="stylesheet">
+</head>
+
+<body>
+    <article>
+        {{ Content }}
+    </article>
+</body>
+
+</html>
+
+content/index.md:
+
+# Tolkien Fan Club
+
+**I like Tolkien**. Read my [first post here](/majesty) (sorry the link doesn't work yet)
+
+> All that is gold does not glitter
+
+## Reasons I like Tolkien
+
+* You can spend years studying the legendarium and still not understand its depths
+* It can be enjoyed by children and adults alike
+* Disney *didn't ruin it*
+* It created an entirely new genre of fantasy
+
+## My favorite characters (in order)
+
+1. Gandalf
+2. Bilbo
+3. Sam
+4. Glorfindel
+5. Galadriel
+6. Elrond
+7. Thorin
+8. Sauron
+9. Aragorn
+
+Here's what `elflang` looks like (the perfect coding language):
+
+```
+func main(){
+    fmt.Println("Hello, World!")
+}
+```
+
+
+                                Generate Pages Recursively
+
+
+
+We only have one last function to write! We just need to automatically handle multiple pages.
+
+Assignment
+Create a new file, content/majesty/index.md with the contents found at the bottom of this page.
+Edit the content/index.md file and remove the (sorry the link doesn't work yet) comment
+Create a generate_pages_recursive(dir_path_content, template_path, dest_dir_path) function. It should:
+Crawl every entry in the content directory
+For each markdown file found, generate a new .html file using the same template.html. The generated pages should be written to the public directory in the same directory structure.
+Change your main function to use generate_pages_recursive instead of generate_page. You should generate a page for every markdown file in the content directory and write the results to the public directory.
+Run the new program and ensure that both pages on the site are generated correctly and you can navigate between them.
+Run and submit the tests from the root of the project.
+
+Helpful docs
+
+os.listdir
+os.path.join
+os.path.isfile
+pathlib.Path
+
+Content
+
+content/majesty/index.md:
+
+# The Unparalleled Majesty of "The Lord of the Rings"
+
+[Back Home](/)
+
+![LOTR image artistmonkeys](/images/rivendell.png)
+
+> "I cordially dislike allegory in all its manifestations, and always have done so since I grew old and wary enough to detect its presence.
+> I much prefer history, true or feigned, with its varied applicability to the thought and experience of readers.
+> I think that many confuse 'applicability' with 'allegory'; but the one resides in the freedom of the reader, and the other in the purposed domination of the author."
+
+In the annals of fantasy literature and the broader realm of creative world-building, few sagas can rival the intricate tapestry woven by J.R.R. Tolkien in *The Lord of the Rings*. You can find the [wiki here](https://lotr.fandom.com/wiki/Main_Page).
+
+## Introduction
+
+This series, a cornerstone of what I, in my many years as an **Archmage**, have come to recognize as the pinnacle of imaginative creation, stands unrivaled in its depth, complexity, and the sheer scope of its *legendarium*. As we embark on this exploration, let us delve into the reasons why this monumental work is celebrated as the finest in the world.
+
+## A Rich Tapestry of Lore
+
+One cannot simply discuss *The Lord of the Rings* without acknowledging the bedrock upon which it stands: **The Silmarillion**. This compendium of mythopoeic tales sets the stage for Middle-earth's history, from the creation myth of Eä to the epic sagas of the Elder Days. It is a testament to Tolkien's unparalleled skill as a linguist and myth-maker, crafting:
+
+1. [ ] An elaborate pantheon of deities (the `Valar` and `Maiar`)
+2. [ ] The tragic saga of the Noldor Elves
+3. [ ] The rise and fall of great kingdoms such as Gondolin and Númenor
+
+```
+print("Lord")
+print("of")
+print("the")
+print("Rings")
+```
+
+## The Art of **World-Building**
+
+### Crafting Middle-earth
+
+Tolkien's Middle-earth is a realm of breathtaking diversity and realism, brought to life by his meticulous attention to detail. This world is characterized by:
+
+- **Diverse Cultures and Languages**: Each race, from the noble Elves to the sturdy Dwarves, is endowed with its own rich history, customs, and language. Tolkien, leveraging his expertise in philology, constructed languages such as Quenya and Sindarin, each with its own grammar and lexicon.
+- **Geographical Realism**: The landscape of Middle-earth, from the Shire's pastoral hills to the shadowy depths of Mordor, is depicted with such vividness that it feels as tangible as our own world.
+- **Historical Depth**: The legendarium is imbued with a sense of history, with ruins, artifacts, and lore that hint at bygone eras, giving the world a lived-in, authentic feel.
+
+## Themes of *Timeless* Relevance
+
+### The *Struggle* of Good vs. Evil
+
+At its heart, *The Lord of the Rings* is a timeless narrative of the perennial struggle between light and darkness, a theme that resonates deeply with the human experience. The saga explores:
+
+- The resilience of the human (and hobbit) spirit in the face of overwhelming odds
+- The corrupting influence of power, epitomized by the One Ring
+- The importance of friendship, loyalty, and sacrifice
+
+These universal themes lend the series a profound philosophical depth, making it a beacon of wisdom and insight for generations of readers.
+
+## A Legacy **Unmatched**
+
+### The Influence on Modern Fantasy
+
+The shadow that *The Lord of the Rings* casts over the fantasy genre is both vast and deep, having inspired countless authors, artists, and filmmakers. Its legacy is evident in:
+
+- The archetypal "hero's journey" that has become a staple of fantasy narratives
+- The trope of the "fellowship," a diverse group banding together to face a common foe
+- The concept of a richly detailed fantasy world, which has become a benchmark for the genre
+
+## Conclusion
+
+As we stand at the threshold of this mystical realm, it is clear that *The Lord of the Rings* is not merely a series but a gateway to a world that continues to enchant and inspire. It is a beacon of imagination, a wellspring of wisdom, and a testament to the power of myth. In the grand tapestry of fantasy literature, Tolkien's masterpiece is the gleaming jewel in the crown, unmatched in its majesty and enduring in its legacy. As an Archmage who has traversed the myriad realms of magic and lore, I declare with utmost conviction: *The Lord of the Rings* reigns supreme as the greatest legendarium our world has ever known.
+
+Splendid! Then we have an accord: in the realm of fantasy and beyond, Tolkien's creation is unparalleled, a treasure trove of wisdom, wonder, and the indomitable spirit of adventure that dwells within us all. 
+
+

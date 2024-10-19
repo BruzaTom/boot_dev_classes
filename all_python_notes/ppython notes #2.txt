@@ -1,0 +1,160 @@
+			LOOPS
+
+
+for i in range(0, 10):
+    print(i)
+
+range defaults to incrementing by 1
+
+Start with i equals 0. (i in range(0))
+If i is not less than 10 (range(0, 10)), exit the loop.
+a. Print i to the console. (print(i))
+b. Add 1 to i. (range defaults to incrementing by 1)
+c. Go back to step 2.
+
+The "step" parameter determines how much to add to i in each iteration of the loop. You can even go backwards:
+for i in range(3, 0, -1):
+    print(i)
+# prints:
+# 3
+# 2
+# 1
+
+increment and decrement operators
+number_of_enemies = 10
+number_of_enemies -= 2
+# number_of_enemies is 8
+
+LISTS
+Some languages call them "arrays", but in Python we just call them lists.
+An X (formerly Twitter) feed is a list of posts
+An online store is a list of products
+The state of a chess game is a list of moves
+This list is a list of things that are lists
+
+inventory = ["Iron Breastplate", "Healing Potion", "Leather Scraps"]
+
+len() function
+ruits = ["apple", "banana", "pear"]
+length = len(fruits)
+# Prints: 3
+
+change the item
+inventory = ["Leather", "Healing Potion", "Iron Ore"]
+inventory[0] = "Leather Armor"
+# inventory: ['Leather Armor', 'Healing Potion', 'Iron Ore']
+
+APPENDING IN PYTHON
+We can add values to the end of a list
+
+.append() method
+cards = []
+cards.append("nvidia")
+cards.append("amd")
+# the cards list is now ['nvidia', 'amd']
+
+.pop()
+Pop removes the last element from a list and returns it for use.
+it can also be used to remove an item at a specific index. For example, vegetables.pop(1)
+
+NO-INDEX SYNTAX
+trees = ['oak', 'pine', 'maple']
+for tree in trees:
+    print(tree)
+# Prints:
+# oak
+# pine
+# maple
+
+FIND MAX
+The built-in float() function can create a numeric floating point value of negative infinity. Because every value will be greater than negative infinity
+
+negative_infinity = float('-inf')
+positive_infinity = float('inf')
+max_so_far = float("-inf")
+
+SLICING LISTS
+my_list[ start : stop : step ]
+
+numbers[3:]
+numbers[:3]
+
+NEGATIVE INDICES
+numbers[-1] gives the last item in the list
+numbers[-2] gives the second last item, and so on
+
+LIST OPERATIONS - CONCATENATE
+total = [1, 2, 3] + [4, 5, 6]
+print(total)
+# Prints: [1, 2, 3, 4, 5, 6]
+
+LIST OPERATIONS - CONTAINS
+fruits = ["apple", "orange", "banana"]
+print("banana" in fruits)
+# Prints: True
+
+	LIST DELETION
+
+# delete the fourth item
+del nums[3]
+print(nums)
+# Output: [1, 2, 3, 5, 6, 7, 8, 9]
+
+# delete the second item up to (but not including) the fourth item
+nums = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+del nums[1:3]
+print(nums)
+# Output: [1, 4, 5, 6, 7, 8, 9]
+
+# delete all elements
+nums = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+del nums[:]
+print(nums)
+# Output: []
+
+	TUPLES
+
+my_tuple = ("this is a tuple", 45, True)
+print(my_tuple[0])
+# this is a tuple
+print(my_tuple[1])
+# 45
+print(my_tuple[2])
+# True
+
+You must include a comma so Python knows it's a tuple and not regular parentheses.
+
+dog = ("Fido",)
+
+the first index relates to which tuple you want to access, the second relates to the values within that tuple.
+
+my_tuples = [("this is the first tuple in the list", 45, True),("this is the second tuple in the list", 21, False)]
+print(my_tuples[0][0]) # this is the first tuple in the list
+print(my_tuples[0][1]) # 45
+print(my_tuples[1][0]) # this is the second tuple in the list
+print(my_tuples[1][2]) # False
+
+	.split() string method
+
+temp_list = messages[i].split()      # hold array of words in element
+
+
+
+	DICTIONARIES
+
+
+# use curly braces
+# add key-value pairs
+car = {
+  "brand": "Tesla",
+  "model": "3",
+  "year": 2019
+}
+
+
+
+	SETTING DICTIONARY VALUES
+
+
+
+

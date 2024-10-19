@@ -1,0 +1,175 @@
+	.split() string method
+
+temp_list = messages[i].split()      # hold array of words in element
+
+
+
+	DICTIONARIES
+
+
+# use curly braces
+# add key-value pairs
+car = {
+  "brand": "Tesla",
+  "model": "3",
+  "year": 2019
+}
+
+
+
+			SETTING DICTIONARY VALUES
+
+
+The syntax is the same as getting data out of a key, just use the assignment operator (=) to give that key a value.
+
+names = ["jack bronson", "jill mcarty", "john denver"]
+
+names_dict = {}
+for name in names:
+    # .split() returns a list of strings
+    # where each string is a single word from the original
+    name_list = name.split()
+
+    # here we update the dictionary
+    names_dict[name_list[0]] = name_list[1]
+
+print(names_dict)
+# Prints: {'jack': 'bronson', 'jill': 'mcarty', 'john': 'denver'}
+
+			Using the update() Method:
+
+
+The update() method allows you to add multiple key-value pairs to a dictionary at once.
+Example:
+
+def countChars(chars, strText):
+    strLetters = list(strText)
+    charDict = {}
+    for i in range(0, len(chars)): # go through each letter found
+        count = 0
+        for j in range(0, len(strLetters)):# increment the count if you find the letter
+            if chars[i] == strLetters[j]:
+                count += 1
+        charDict.update({chars[i]: count}) 
+
+
+			DELETING DICTIONARY VALUES
+
+
+del names_dict['joe']
+
+print(names_dict)
+# Prints: {'jack': 'bronson', 'jill': 'mcarty'}
+
+
+	if you try to delete a key that doesn't exist, you'll get an error.
+
+
+del names_dict['unknown']
+# ERROR HERE, key doesn't exist
+
+
+
+
+			SETS
+
+
+like Lists, but they are unordered and they guarantee uniqueness. Only ONE of each value can be in a set.
+
+fruits = {'apple', 'banana', 'grape'}
+print(type(fruits))
+# Prints: <class 'set'>
+
+print(fruits)
+# Prints: {'banana', 'grape', 'apple'}
+
+			ADD VALUES
+
+
+fruits = {'apple', 'banana', 'grape'}
+fruits.add('pear')
+print(fruits)
+# Prints: {'banana', 'grape', 'pear', 'apple'}
+
+			EMPTY SET
+
+
+fruits = set()
+fruits.add('pear')
+
+			ITERATE OVER VALUES IN A SET (ORDER IS NOT GUARANTEED)
+
+fruits = {'apple', 'banana', 'grape'}
+for fruit in fruits:
+    print(fruit)
+    # Prints:
+    # banana
+    # grape
+    # apple
+	
+	
+			REMOVING VALUES
+
+fruits = {'apple', 'banana', 'grape'}
+fruits.remove('apple')
+
+
+			EXCEPTIONS
+
+Errors detected during execution are called "exceptions" and can be handled gracefully by your code. You can even raise your own exceptions when bad things happen in your code.
+
+try:
+  10 / 0
+except Exception as e:
+  print(e)
+
+# prints "division by zero"
+
+			raised Exception
+
+
+def get_player_record(player_id):
+        
+        if player_id == 1:
+            return {"name": "Slayer", "level": 128}
+        if player_id == 2:
+            return {"name": "Dorgoth", "level": 300}
+        if player_id == 3:
+            return {"name": "Saruman", "level": 4000}
+        raise Exception("player id not found")
+
+			DIFFERENT TYPES OF EXCEPTIONS
+	
+
+ZeroDivisionError
+IndexError
+
+
+
+try:
+    10/0
+except ZeroDivisionError:
+    print("0 division")
+except Exception as e:
+    print(e)
+
+try:
+    nums = [0, 1]
+    print(nums[2])
+except IndexError:
+    print("index error")
+except Exception as e:
+    print(e)
+
+			You can check the type of a variable using type() function.
+
+
+if type(variable) == int:
+
+			WHILE
+
+
+Python has another type of loop, the while loop. It's a loop that continues while a condition remains True. The syntax is simple:
+
+
+

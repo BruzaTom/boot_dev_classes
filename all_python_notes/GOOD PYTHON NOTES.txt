@@ -1,0 +1,572 @@
+				GOOD PYTHON NOTES
+
+
+
+
+
+		
+				dictionarys
+
+
+# use curly braces
+# add key-value pairs
+car = {
+  "brand": "Tesla",
+  "model": "3",
+  "year": 2019
+}
+
+
+
+			SETTING DICTIONARY VALUES
+
+
+The syntax is the same as getting data out of a key, just use the assignment operator (=) to give that key a value.
+
+names = ["jack bronson", "jill mcarty", "john denver"]
+
+names_dict = {}
+for name in names:
+    # .split() returns a list of strings
+    # where each string is a single word from the original
+    name_list = name.split()
+
+    # here we update the dictionary
+    names_dict[name_list[0]] = name_list[1]
+
+print(names_dict)
+# Prints: {'jack': 'bronson', 'jill': 'mcarty', 'john': 'denver'}
+
+			Using the update() Method:
+
+
+The update() method allows you to add multiple key-value pairs to a dictionary at once.
+Example:
+
+def countChars(chars, strText):
+    strLetters = list(strText)
+    charDict = {}
+    for i in range(0, len(chars)): # go through each letter found
+        count = 0
+        for j in range(0, len(strLetters)):# increment the count if you find the letter
+            if chars[i] == strLetters[j]:
+                count += 1
+        charDict.update({chars[i]: count}) 
+
+
+			DELETING DICTIONARY VALUES
+
+
+del names_dict['joe']
+
+print(names_dict)
+# Prints: {'jack': 'bronson', 'jill': 'mcarty'}
+
+
+	if you try to delete a key that doesn't exist, you'll get an error.
+
+
+del names_dict['unknown']
+# ERROR HERE, key doesn't exist
+
+			listing dictionarys from old dictionary
+
+
+# Example: Convert an existing dictionary to a list of dictionaries
+existing_dict = {
+    'key1': 'value1',
+    'key2': 'value2',
+    'key3': 'value3'
+}
+
+# Convert dictionary items to a list of dictionaries
+list_of_dicts = [{key: value} for key, value in existing_dict.items()]
+
+print(list_of_dicts)
+
+			EXAMPLE OF formating DICTIONARY VALUES
+			into List
+
+newDict = [{"name": key, "num": value} for key, value in oldDict.items()]
+
+##
+[{'name': 'p', 'num': 6121}, {'name': 'r', 'num': 20818}, {'name': 'o', 'num': 25225}...
+
+			access dictionary keys
+
+
+def alphaOnly(oldLst):
+    newLst = []
+    for diction in oldLst:#acces my dictionaries
+        if diction["name"].isalpha() == True:#check alpha
+            newLst.append(diction)
+    return newLst
+
+			acces dictionary keys in print
+
+
+print(f"The '{diction['name']}' character was found {diction['num']} times")
+
+
+			.sort()
+
+This method sorts the list in place, using only < comparisons between items. Exceptions are not suppressed - if any comparison operations fail, the entire sort operation will fail (and the list will likely be left in a partially modified state).
+
+good for sorting highest to lowest based on value in this example:
+
+EXAMPLE
+list.sort(revers=true, key=on_sort)
+
+##
+{'name': ' ', 'num': 74144}, {'name': 'e', 'num': 46043}, {'name': 't', 'num': 30365}
+
+			.lower()
+
+Return a copy of the string with all the cased characters [4] converted to lowercase.
+
+my_string = "FOR FRODO"
+lowered_string = my_string.lower()
+print(lowered_string)
+# for frodo
+
+			copyofLst = list.copy()
+
+#excludes current from rest of list
+
+for i in range(0, len(dragons)):
+        otherLst = dragons.copy()
+        del otherLst[i]
+        dragons[i].breathe_fire(3, 3, otherLst)
+
+
+			lists
+.pop()
+.append()
+del list[]
+.index()
+.split()
+
+Some languages call them "arrays", but in Python we just call them lists.
+An X (formerly Twitter) feed is a list of posts
+An online store is a list of products
+The state of a chess game is a list of moves
+This list is a list of things that are lists
+
+inventory = ["Iron Breastplate", "Healing Potion", "Leather Scraps"]
+
+len() function
+ruits = ["apple", "banana", "pear"]
+length = len(fruits)
+# Prints: 3
+
+change the item
+inventory = ["Leather", "Healing Potion", "Iron Ore"]
+inventory[0] = "Leather Armor"
+# inventory: ['Leather Armor', 'Healing Potion', 'Iron Ore']
+
+APPENDING IN PYTHON
+We can add values to the end of a list
+
+.append() method
+cards = []
+cards.append("nvidia")
+cards.append("amd")
+# the cards list is now ['nvidia', 'amd']
+
+.pop()
+Pop removes the last element from a list and returns it for use.
+it can also be used to remove an item at a specific index. For example, vegetables.pop(1)
+
+			NO-INDEX SYNTAX
+
+
+trees = ['oak', 'pine', 'maple']
+for tree in trees:
+    print(tree)
+# Prints:
+# oak
+# pine
+# maple
+
+			FIND MAX
+
+
+The built-in float() function can create a numeric floating point value of negative infinity. Because every value will be greater than negative infinity
+
+negative_infinity = float('-inf')
+positive_infinity = float('inf')
+max_so_far = float("-inf")
+
+			SLICING LISTS
+
+
+my_list[ start : stop : step ]
+
+numbers[3:]
+numbers[:3]
+
+NEGATIVE INDICES
+numbers[-1] gives the last item in the list
+numbers[-2] gives the second last item, and so on
+
+LIST OPERATIONS - CONCATENATE
+total = [1, 2, 3] + [4, 5, 6]
+print(total)
+# Prints: [1, 2, 3, 4, 5, 6]
+
+LIST OPERATIONS - CONTAINS
+fruits = ["apple", "orange", "banana"]
+print("banana" in fruits)
+# Prints: True
+
+			LIST DELETION
+
+
+keep in mind that this leaves your index with a hole
+
+# delete the fourth item
+del nums[3]
+print(nums)
+# Output: [1, 2, 3, 5, 6, 7, 8, 9]
+
+# delete the second item up to (but not including) the fourth item
+nums = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+del nums[1:3]
+print(nums)
+# Output: [1, 4, 5, 6, 7, 8, 9]
+
+# delete all elements
+nums = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+del nums[:]
+print(nums)
+# Output: []
+
+			tempLst = Lst.copy()
+
+
+#to exclude current item from list
+
+for i in range(0, len(dragons)):
+        describe(dragons[i])
+    for i in range(0, len(dragons)):
+        otherLst = dragons.copy()
+        del otherLst[i]
+        dragons[i].breathe_fire(3, 3, otherLst)
+
+
+			updateLst = []		#delete values from list
+
+
+a very good way to delete items from a list without messing up the index numbers
+is to creat a temparary list and after exicuton update your actual list with it.
+
+this example is a "deletion" by just leaving out "deleted" objects from updateLst
+
+def remove_book(self, book):
+        updateLst = []
+        for lBook in self.books:
+            if (lBook.title != book.title) & (lBook.author != book.author):
+                updateLst.append(lBook)
+        self.books = updateLst
+
+			list.index()
+
+SUITS = ["Clubs", "Diamonds", "Hearts", "Spades"]
+RANKS = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace"]
+
+class Card:
+    def __init__(self, rank, suit):
+        self.rank = rank
+        self.suit = suit
+        self.rank_index = RANKS.index(self.rank)
+        self.suit_index = SUITS.index(self.suit)
+
+    def __eq__(self, other):
+        if (self.rank_index == other.rank_index) & (self.suit_index == other.suit_index):
+            return True
+        return False
+
+
+			.split()
+
+
+.split() splits a string and returns a list of chars in string if default, or you can spescify a value to split on.
+
+example: 
+
+def change_bullet_style(document):
+    linesLst = document.split('\n')
+    linesLst = map(convert_line,linesLst) 
+    return '\n'.join(linesLst)
+
+
+
+
+			EXCEPTIONS
+
+
+Errors detected during execution are called "exceptions" and can be handled gracefully by your code. You can even raise your own exceptions when bad things happen in your code.
+
+try:
+  10 / 0
+except Exception as e:
+  print(e)
+
+# prints "division by zero"
+
+			raised Exception
+
+
+   def get_player_record(player_id):
+        if player_id == 1:
+            return {"name": "Slayer", "level": 128}
+        if player_id == 2:
+            return {"name": "Dorgoth", "level": 300}
+        if player_id == 3:
+            return {"name": "Saruman", "level": 4000}
+        raise Exception("player id not found")
+
+			DIFFERENT TYPES OF EXCEPTIONS
+	
+
+			ZeroDivisionError
+IndexError
+
+
+
+try:
+    10/0
+except ZeroDivisionError:
+    print("0 division")
+except Exception as e:
+    print(e)
+
+try:
+    nums = [0, 1]
+    print(nums[2])
+except IndexError:
+    print("index error")
+except Exception as e:
+    print(e)
+
+			ValueError
+
+
+def withdraw(self, amount):
+        if amount <= 0:
+            raise ValueError("Cannot withdraw zero or negative funds")
+        if amount <= self.__balance:
+            self.__balance -= amount
+        else:
+            raise ValueError("Insufficient funds")
+
+
+			IF STATEMENTS
+
+
+def check_swords_for_army(number_of_swords, number_of_soldiers):
+    check = number_of_swords == number_of_soldiers
+    if check == True:
+        answer = "correct amount"
+    if check != True:
+        answer = "incorrect amount"
+    return answer
+
+			IF-ELSE
+
+
+def player_status(health):
+    if health <= 0:
+        return "dead"
+    elif health <= 5:
+        return "injured"
+    else:
+        return "healthy"
+
+			multiple conditions
+
+
+# with if statements
+
+   def overlaps(self, rect):
+        if self.get_left_x() <= rect.get_right_x():
+            if self.get_right_x() >= rect.get_left_x():
+                if self.get_top_y() >= rect.get_bottom_y():
+                    if self.get_bottom_y() <= rect.get_top_y():
+                        return True
+        return False
+
+# as a comparison returning true or false result:
+
+   def overlaps(self, rect):
+        return (
+            self.get_left_x() <= rect.get_right_x()
+            and self.get_right_x() >= rect.get_left_x()
+            and self.get_top_y() >= rect.get_bottom_y()
+            and self.get_bottom_y() <= rect.get_top_y()
+        )
+
+			overloads
+
+
+Operation	Operator	Method
+Addition	+		__add__
+Subtraction	-		__sub__
+Multiplication	*		__mul__
+Power		**		__pow__
+Division	/		__truediv__
+Floor Division	//		__floordiv__
+Remainder (modulo)	%	__mod__
+Bitwise Left Shift	<<	__lshift__
+Bitwise Right Shift	>>	__rshift__
+Bitwise AND	&		__and__
+Bitwise OR	|		__or__
+Bitwise XOR	^		__xor__
+Bitwise NOT	~		__invert__
+
+
+			STRINGS
+
+
+Tips
+Be careful about whitespace! It's easy to miss in console output. I sometimes add a character, like a | to the beginning and end of a string to make whitespace more obvious when print debugging.
+
+.replace(old, new) can be used to replace all instances of a character in a string.
+.upper() capitalizes an entire string, .capitalize() capitalizes the first letter.
+.strip() removes whitespace from the beginning and end of a string, .lstrip() and .rstrip() remove whitespace from the left and right respectively.
+
+def toggle_case(line):
+    if line.istitle():
+        return f"{line.capitalize().upper()}!!!"
+    if line.isupper():
+        return f"{line.lower().capitalize().replace('!', '')}"
+    if len(line) == 0:
+        return ""
+    if len(line) > 0 and line[1:].islower():
+        return f"{line.title()}"
+    else:
+        return line
+
+			all function
+
+The all() function is a built-in Python function that checks whether all elements in an iterable (such as a list, tuple, or set) evaluate to True. Here’s how it works:
+
+def is_hexadecimal(hex_string):
+    if (all(c in '0123456789ABCDEF' for c in str(hex_string))) & (len(str(hex_string)) == 6):
+        return True
+    raise Exception("not a hex color string")
+
+
+						LOOPS
+
+			for loop
+
+
+for i in range(0, 10):
+    print(i)
+
+range defaults to incrementing by 1
+
+Start with i equals 0. (i in range(0))
+If i is not less than 10 (range(0, 10)), exit the loop.
+a. Print i to the console. (print(i))
+b. Add 1 to i. (range defaults to incrementing by 1)
+c. Go back to step 2.
+
+The "step" parameter determines how much to add to i in each iteration of the loop. You can even go backwards:
+for i in range(3, 0, -1):
+    print(i)
+# prints:
+# 3
+# 2
+# 1
+
+increment and decrement operators
+number_of_enemies = 10
+number_of_enemies -= 2
+# number_of_enemies is 8
+
+			one line for loops
+
+you can run a quick for loop by stating the action and then the declaration.
+example: action for _ in range(10)
+
+#1
+
+def is_hexadecimal(hex_string):
+    if (all(c in '0123456789ABCDEF' for c in str(hex_string))) & (len(str(hex_string)) == 6):
+        return True
+    raise Exception("not a hex color string")
+
+#2
+
+def randomStr(length):
+    letters = string.ascii_lowercase
+    return ''.join(random.choice(letters) for _ in range(length))
+
+
+			while loop
+
+loop will continue until the parameter is exited (carful, these often run forever while testing)
+
+ while userInput != "d":
+        initMessage(now, date, daysLeft)
+        updateData(removeOld(events(file), date, time), file)
+        dataLst = events(file)
+        inWeek(dataLst, date)
+        print("\n------------------------------------\nHere are your schedualled events..\n------------------------------------")
+        printData(dataLst)
+        userInput = getInput()
+        if userInput == "s":
+            updateData(newEvent(dataLst, now), file)
+        if userInput == "e":
+            updateData(editData(dataLst, now), file)
+        if userInput == "u":
+            try:
+                updateData(delEvent(dataLst, now), file)
+            except Exception as e:
+                print(e)
+
+
+			set function	set()
+
+
+The set() function is used to convert any iterable (such as a list, tuple, or dictionary) into a sequence of iterable elements with distinct elements, commonly referred to as a set.
+
+sets are comonly used to remove duplicates, the values are returned as:
+
+{data1, data2, data3}
+
+this can be remidied by combining the sorted() function..
+
+sorted(set(dataLst1 + dataLst2), reverse=True)
+
+returns a list with its values sorted low to high and no duplicates
+
+			.get()	
+
+get(key, default=None)
+
+Return the value for key if key is in the dictionary, else default. If default is not given, it defaults to None, so that this method never raises a KeyError.
+
+get_age = lambda name: {
+    'lane': 29,
+    'hunter': 69,
+    'allan': 17
+}.get(name, 'not found')
+print(get_age('lane'))
+# 29
+
+
+to use .get() to return the other value simply reverse the keys
+
+def file_type_getter(file_extension_tuples):
+    file_extensions_dict = {}
+    for tup in file_extension_tuples:
+        for ext in tup[1]:
+            file_extensions_dict[ext] = tup[0]
+    return lambda ext: file_extensions_dict.get(ext, "Unknown")
+
+
+
+

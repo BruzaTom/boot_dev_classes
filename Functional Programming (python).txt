@@ -1,0 +1,1576 @@
+				Functional Programming (python)
+
+
+			What is Functional Programming?
+
+
+Functional programming is a style (or "paradigm" if you're pretentious) of programming where we compose functions instead of mutating state (updating the value of variables).
+
+-Functional programming is more about declaring what you want to happen, rather than how you want it to happen.
+-Imperative (or procedural) programming declares both the what and the how.
+
+Example of imperative code:
+
+car = create_car()
+car.add_gas(10)
+car.clean_windows()
+
+Example of functional code:
+
+return clean_windows(add_gas(create_car()))
+
+The important distinction is that in the functional example, we never change the value of the car variable, we just compose functions that return new values, with the outermost function, clean_windows in this case, returning the final result.
+
+
+			Doc2Doc
+
+
+In this course, we're working on "Doc2Doc", a command line tool for converting documents from one format to another. If you're familiar with Pandoc, the idea is similar.
+
+Complete the stylize_title function. It should take a single string as input, and return a single string as output. The returned string should have both the title centered and a border added.
+
+-Use the provided functions center_title and add_border.
+-Center the title before adding the border.
+-Do not create any variables.
+-Use only 1 line of code in the function body.
+
+def stylize_title(document):
+    return add_border(center_title(document))
+
+# Don't touch below this line
+
+def center_title(document):
+    width = 40
+    title = document.split("\n")[0]
+    centered_title = title.center(width)
+    return document.replace(title, centered_title)
+
+def add_border(document):
+    title = document.split("\n")[0]
+    border = "*" * len(title)
+    return document.replace(title, title + "\n" + border)
+
+			Why Python?
+
+
+Frankly, Python is not the best language for functional programming. Reasons include:
+
+-No static typing.
+-Everything is mutable.
+-No tail call optimization.
+-Side effects are common.
+-Imperative and OOP styles abound in popular libraries.
+-Purity is not enforced (and sometimes not even encouraged).
+-Sum Types are hard to define.
+-Pattern matching is weak at best.
+
+So seriously, why are we using Python? One reason trumps all others: you already know Python. Python is a great choice for learning coding basics, OOP, Algorithms, and Data Structures, and the tradeoff of learning a new language at this point in the curriculum isn't worth it.
+
+We can still cover the most important concepts of functional programming in Python, even if we have to jump through a hoop or two to do it. Functional programming is a paradigm of useful techniques for writing better code, and they apply to all languages, not just purely functional ones.
+
+Note: We also plan to release a "Functional Programming 2" course in a more functional language. Likely one of these:
+
+Haskell
+OCaml
+Elixir
+
+			Immutability
+
+
+In FP, we strive to make data immutable. Once a value is created, it cannot be changed. Mutable data, on the other hand, can be changed after it's created.
+
+			Who cares?
+
+
+Immutable data is easier to think about and work with. When 10 different functions have access to the same variable, and you're debugging a problem with that variable, you have to consider the possibility that any of those functions could have changed the value.
+
+When a variable is immutable, you can be sure that it hasn't changed since it was created. It's a helluva lot easier to work with.
+
+Generally speaking, immutability means fewer bugs and more maintainable code.
+
+			Tuples vs Lists
+
+
+Tuples and lists are both ordered collections of values, but tuples are immutable and lists are mutable.
+
+You can append to a list, but you can not append to a tuple. You can create a new copy of a tuple using values from an existing tuple, but you can't change the existing tuple.
+
+Lists are mutable
+
+ages = [16, 21, 30]
+# 'ages' is being changed in place
+ages.append(80)
+# [16, 21, 30, 80]
+
+Tuples are immutable
+
+ages = (16, 21, 30)
+more_ages = (80,) # note the comma! It's required for a single-element tuple
+# 'all_ages' is a brand new tuple
+all_ages = ages + more_ages
+# (16, 21, 30, 80)
+
+			Declarative Programming
+
+
+Functional programming aims to be declarative. We prefer to declare what we want the computer to do, rather than muck around with the details of how to do it.
+
+Let's take an extreme example and pretend we wanted to style a webpage with CSS (Obviously a hypothetical because, well, why would anyone want to work on the frontend???)
+
+			Declarative styling
+
+
+The following CSS changes all button elements to have red text:
+
+button {
+    color: red;
+}
+
+It does not execute line-by-line like an imperative language. Instead, it simply declares the desired style, and it's up to a web browser to figure out how to apply and display it.
+
+			Imperative styling
+
+
+Unlike functional programming (and CSS), a lot of code is imperative. We write out the exact step-by-step implementation details. This Python script draws a red button on a screen using the Tkinter library:
+
+from tkinter import * # first, import the library
+master = Tk() # create a window
+master.geometry("200x100") # set the window size
+button = Button(master, text="Submit", fg="red").pack() # create a button
+master.mainloop() # start the event loop
+
+			It's Math
+
+
+Functional programming tends to be popular amongst developers with a strong mathematical background. After all, a math equation isn't procedural: it's declarative. Take the following math equation:
+
+avg = Σx/N
+
+To put this calculation in plain English:
+
+-Σ is just the Greek letter Sigma, and it represents "the sum of a collection".
+-x is the collection of numbers we're averaging.
+-N is the number of elements in the collection.
+-avg is equal to the sum of all the numbers in collection "x" divided by the number of elements in collection "x".
+
+So, the equation really just says that avg is the average of all the numbers in collection "x". This math equation is a declarative way of writing "calculate the average of a list of numbers". Here's some imperative Python code that does the same thing:
+
+def get_average(nums):
+    total = 0
+    for num in nums:
+        total += num
+    return total / len(nums)
+
+However, with functional programming, we would write code that's a bit more declarative:
+
+def get_average(nums):
+    return sum(nums) / len(nums)
+
+Here we're not keeping track of state (the total variable in the first example is "stateful"). We're simply composing functions together to get the result we want.
+
+			Assignment
+
+
+In the world of document conversion, we sometimes need to handle fonts and font sizes.
+
+Complete the get_median_font_size function. Given a list of numbers representing font sizes, return the median of the list.
+
+##what i put:
+
+def get_median_font_size(font_sizes):
+    newLst = font_sizes.copy()
+    newLst.sort(reverse=True)
+    index = len(newLst) // 2
+    if newLst == []:
+        return None
+    else:
+        return newLst[index]
+
+##what they put
+
+def get_median_font_size(font_sizes):
+    if len(font_sizes) == 0:
+        return None
+    return sorted(font_sizes)[(len(font_sizes) - 1) // 2]
+
+			Classes vs Functions
+
+
+I run into new developers who, after learning about classes, want to use them everywhere. They assume that because they learned about functions first, functions are somehow inferior.
+
+Nope. They're just different.
+
+			Should I use functions or classes?
+
+
+Here's my rule of thumb:
+
+If you're unsure, default to functions. I find myself reaching for classes when I need something long-lived and stateful that would be easier to model if I could share behavior and data structure via inheritance. This is often the case for:
+
+-Video games
+-Simulations
+-GUIs
+
+The difference is:
+
+Classes encourage you to think about the world as a hierarchical collection of objects. Objects bundle behavior, data, and state together in a way that draws boundaries between instances of things, like chess pieces on a board.
+
+Functions encourage you to think about the world as a series of data transformations. Functions take data as input and return a transformed output. For example, a function might take the entire state of a chess board and a move as inputs, and return the new state of the board as output.
+
+Use what feels right to you in your projects, and adjust and refactor as you improve your skills.
+
+			Debugging FP
+
+
+It's nearly impossible, even for tenured senior developers, to write perfect code the first time. That's why debugging is such an important skill. The trouble is, sometimes you have these "elegant" (sarcasm intended) one-liners that are tricky to debug:
+
+def get_player_position(position, velocity, friction, gravity):
+    return calc_gravity(calc_friction(calc_move(position, velocity), friction), gravity)
+
+If the output of get_player_position is incorrect, it's hard to know what's going on inside that black box. Break it up! Then you can inspect the moved, slowed, and final variables more easily:
+
+def get_player_position(position, velocity, friction, gravity):
+    moved = calc_move(position, velocity)
+    slowed = calc_friction(moved, friction)
+    final = calc_gravity(slowed, gravity)
+    print("Given:")
+    print(f"position: {position}, velocity: {velocity}, friction: {friction}, gravity: {gravity}")
+    print("Results:")
+    print(f"moved: {moved}, slowed: {slowed}, final: {final}")
+    return final
+
+Once you've run it, found the issue, and solved it, you can remove the print statements.
+
+
+			Functional vs OOP
+
+
+Functional programming and object-oriented programming are styles for writing code. One isn't inherently superior to the other, but to be a well-rounded developer you should understand both well and use ideas from each when appropriate.
+
+You'll encounter developers who love functional programming and others who love object-oriented programming. However, contrary to popular opinion, FP and OOP are not always at odds with one another. They aren't opposites. Of the four pillars of OOP, inheritance is the only one that doesn't fit with functional programming.
+
+Inheritance isn't seen in functional code due to the mutable classes that come along with it. Encapsulation, polymorphism and abstraction are still used all the time in functional programming.
+
+When working in a language that supports ideas from both FP and OOP (like Python, JavaScript, or Go) the best developers are the ones who can use the best ideas from both paradigms effectively and appropriately.
+
+
+			Hex to RGB
+
+
+##what i put
+
+def hex_to_rgb(hex_color):
+    if is_hexadecimal(hex_color):
+        return (int(hex_color[:2], 16), int(hex_color[2:4], 16), int(hex_color[4:], 16))
+
+def is_hexadecimal(hex_string):
+    if (all(c in '0123456789ABCDEF' for c in str(hex_string))) & (len(str(hex_string)) == 6):
+        return True
+    raise Exception("not a hex color string")
+
+##what they put 
+
+def hex_to_rgb(hex_color):
+    if not is_hexadecimal(hex_color) or len(hex_color) != 6:
+        raise Exception("not a hex color string")
+    r = int(hex_color[:2], 16)
+    g = int(hex_color[2:4], 16) #int returns 16 byte value
+    b = int(hex_color[4:], 16)
+    return r, g, b
+
+def is_hexadecimal(hex_string):
+    try:
+        int(hex_string, 16)
+        return True
+    except Exception:
+        return False
+
+
+			Functions as Values
+
+
+In Python, functions are just values, like strings, integers, or objects. For example, we can assign an existing function to a variable:
+
+def add(x, y):
+    return x + y
+
+# assign the function to a new variable
+# called "addition". It behaves the same
+# as the original "add" function
+addition = add
+print(addition(2, 5))
+# 7
+
+			Anonymous Functions
+
+lambdas can be implimented anwhere for an anonymous use, this is helpfl when trying to use .functions():
+
+def remove_invalid_lines(document):
+    return "\n".join(
+        filter(lambda line: not line.startswith("-"), document.split("\n"))
+    )
+
+
+Anonymous functions have no name, and in Python, they're called lambda functions after lambda calculus. Here's a lambda function that takes a single argument x and returns the result of x + 1:
+
+lambda x: x + 1
+
+Notice that the expression x + 1 is returned automatically, no need for a return statement. And because functions are just values, we can assign the function to a variable named add_one:
+
+add_one = lambda x: x + 1
+print(add_one(2))
+# 3
+
+Lambda functions might look scary, but they're still just functions. Because they simply return the result of an expression, they're often used for small, simple evaluations. Here's an example that uses a lambda to get a value from a dictionary:
+
+get_age = lambda name: {
+    'lane': 29,
+    'hunter': 69,
+    'allan': 17
+}.get(name, 'not found')
+print(get_age('lane'))
+# 29
+
+#what they put
+
+def file_type_getter(file_extension_tuples):
+    file_extensions_dict = {}
+    for tup in file_extension_tuples:
+        for ext in tup[1]:
+            file_extensions_dict[ext] = tup[0]
+    return lambda ext: file_extensions_dict.get(ext, "Unknown")
+
+#what i put
+
+def file_type_getter(file_extension_tuples):
+    dataDict = dict(file_extension_tuples)
+    newDict = {}
+    for data in dataDict:
+        for i in range(0, len(dataDict[data])):
+            newDict.update({dataDict[data][i]: data})
+    #print(f"debug: {newDict}")
+    return lambda dataType: newDict.get(dataType, "Unknown")
+
+
+			First Class and Higher Order Functions
+
+
+A programming language "supports first-class functions" when functions are treated like any other variable. That means functions can be passed as arguments to other functions, can be returned by other functions, and can be assigned to variables.
+
+*First-class function: A function that is treated like any other value
+*Higher-order function: A function that accepts another function as an argument or returns a function
+
+Python supports first-class and higher-order functions.
+
+First-class example:
+
+def square(x):
+    return x * x
+
+# Assign function to a variable
+f = square
+
+print(f(5))
+# 25
+
+Higher-order example:
+
+def square(x):
+    return x * x
+
+def my_map(func, arg_list):
+    result = []
+    for i in arg_list:
+        result.append(func(i))
+    return result
+
+squares = my_map(square, [1, 2, 3, 4, 5])
+print(squares)
+# [1, 4, 9, 16, 25]
+
+
+			Map	no for loop needed to apply functions to list!
+
+
+"Map", "filter", and "reduce" are three commonly used higher-order functions in functional programming.
+
+In Python, the built-in map function takes a function and an iterable (in this case a list) as inputs. It applies the function to each element in the iterable and returns a new iterable with all the results.
+
+With map, we can operate on lists without using loops and nasty stateful variables. For example:
+
+def square(x):
+    return x * x
+
+nums = [1, 2, 3, 4, 5]
+squared_nums = map(square, nums)
+print(list(squared_nums))
+# [1, 4, 9, 16, 25]
+
+The list type constructor, list() converts the map object back into a standard list.
+
+if using ''.join(filter(func,seq)) you dont need to use the list() type class
+
+#no for loop needed!
+
+def change_bullet_style(document):
+    linesLst = document.split('\n')
+    linesLst = map(convert_line,linesLst) 
+    return '\n'.join(linesLst)
+
+
+			Filter
+
+The built-in filter function takes a function and an iterable (in this case a list) and returns a new iterable that only contains elements from the original iterable where the result of the function on that item returned True.
+
+In Python:
+
+def is_even(x):
+    return x % 2 == 0
+
+numbers = [1, 2, 3, 4, 5, 6]
+evens = list(filter(is_even, numbers))
+print(evens)
+# [2, 4, 6]
+
+assighnment:
+
+def remove_invalid_lines(document):
+    return "\n".join(
+        filter(lambda line: not line.startswith("-"), document.split("\n"))
+    )
+
+#you can use lambdas as functions for functions that require functions,
+such as filter(func, itterable):
+
+def pair_document_with_format(doc_names, doc_formats):
+    zipped = list(zip(doc_names, doc_formats))
+    return list(filter(lambda x: x[1] in valid_formats, zipped))
+
+#another example of filter
+
+def find_keywords(document):
+    keywords = [
+        "functional",
+        "immutable",
+        "declarative",
+        "higher-order",
+        "lambda",
+        "deterministic",
+        "side-effects",
+        "memoization",
+        "referential transparency",
+    ]
+    return list(filter(lambda keyword: keyword in document, keywords))
+
+
+			Reduce
+
+
+The built-in functools.reduce() function takes a function and a list of values, and applies the function to each value in the list, accumulating a single result as it goes.
+
+# import functools from the standard library
+import functools
+
+def add(sum_so_far, x):
+    print(f"sum_so_far: {sum_so_far}, x: {x}")
+    return sum_so_far + x
+
+numbers = [1, 2, 3, 4]
+sum = functools.reduce(add, numbers)
+# sum_so_far: 1, x: 2
+# sum_so_far: 3, x: 3
+# sum_so_far: 6, x: 4
+# 10 doesn't print, it's just the final result
+print(sum)
+# 10
+
+#assighnment:
+
+import functools
+
+
+def join(doc_so_far, sentence):
+    return doc_so_far + '. ' + sentence
+
+
+def join_first_sentences(sentences, n):
+    if n == 0:
+        return ""
+    return functools.reduce(join, sentences[:n]) + '.'
+
+
+			Map, Filter, and Reduce Review
+
+
+Higher-order functions like map, filter, and reduce, allow us to avoid stateful iteration and mutations of variables.
+
+Take a look at this imperative code that calculates the factorial of a number:
+
+def factorial(n):
+    # a procedure that continuously multiplies
+    # the current result by the next number
+    result = 1
+    for i in range(1, n + 1):
+        result *= i
+    return result
+
+Here's the same factorial function using reduce:
+
+import functools
+
+def factorial(n):
+    return functools.reduce(lambda x, y: x * y, range(1, n + 1))
+
+In the functional example, we're just combining functions to get the result we want. There's no need to reassign variables or keep track of the program's state in a loop.
+
+A loop is inherently stateful. Depending on which iteration you're on, the i variable has a different value.
+
+			Intersect
+
+
+The .intersection() method calculates the intersection of two sets.
+
+The intersection of two sets is a new set that contains all of the elements that are in both original sets
+
+For example:
+
+a = {1, 2, 3, 4}
+b = {3, 4, 5, 6}
+c = a.intersection(b)
+print(c)
+# {3, 4}
+
+return a set of strings representing the file formats that are supported by both pieces of software.
+
+def get_common_formats(formats1, formats2):
+    return set(formats1).intersection(set(formats2))
+
+			Zip
+
+
+The zip function takes two iterables (in this case lists), and returns a new iterable where each element is a tuple containing one element from each of the original iterables.
+
+a = [1, 2, 3]
+b = [4, 5, 6]
+
+c = list(zip(a, b))
+print(c)
+# [(1, 4), (2, 5), (3, 6)]
+
+filter the list of tuples to only include tuples where the format is one of the given valid_formats.
+
+def pair_document_with_format(doc_names, doc_formats):
+    zipped = list(zip(doc_names, doc_formats))
+    return list(filter(lambda x: x[1] in valid_formats, zipped))
+
+
+			Restore
+
+
+Doc2Doc needs a way to restore documents from saved backups. However, not all original documents may have backups, and some backups might be corrupted.
+
+
+Convert all documents to the same case with .upper() for comparison.
+Filter out documents that are corrupted strings of random numbers with .isdigit().
+Return the combined originals and backups documents with any duplicates removed.
+
+#what i put:
+
+def restore_documents(originals, backups):
+    return set(filter( lambda x: not x.isdigit(), (data.upper() for data in originals + backups)))
+
+#what they put:
+
+def restore_documents(originals, backups):
+    return set(
+        filter(
+            lambda doc: not doc.isdigit(),
+            map(lambda doc: doc.upper(), originals + backups),
+        )
+    )
+
+
+			Pure Functions
+
+
+If you take nothing else away from this course, please take this: Pure functions are fantastic. They have two properties:
+
+*They always return the same value given the same arguments.
+*Running them causes no side effects
+
+In short: pure functions don't do anything with anything that exists outside of their scope.
+
+Example of a pure function:
+
+def findMax(nums):
+    max_val = float("-inf")
+    for num in nums:
+        if max_val < num:
+            max_val = num
+    return max_val
+
+Example of an impure function:
+
+# instead of returning a value
+# this function modifies a global variable
+global_max = float("-inf")
+
+def findMax(nums):
+    global global_max
+    for num in nums:
+        if global_max < num:
+            global_max = num
+
+Fix the bug by making convert_file_format a pure function. It should only depend on data that is scoped inside of the function.
+
+def convert_file_format(filename, target_format):
+    valid_ext = ["docx", "pdf", "txt", "pptx", "ppt", "md"]
+    valid_con = {
+    "docx": ["pdf", "txt", "md"],
+    "pdf": ["docx", "txt", "md"],
+    "txt": ["docx", "pdf", "md"],
+    "pptx": ["ppt", "pdf"],
+    "ppt": ["pptx", "pdf"],
+    "md": ["docx", "pdf", "txt"],
+    }
+    dupFile = filename.split('.')
+    current_format = dupFile[1]
+    if (current_format in valid_ext) and (target_format in valid_con[current_format]):
+        return filename.replace(current_format, target_format)
+    return None
+
+			Pure Function Review
+
+
+Pure functions have a lot of benefits. Whenever possible, good developers try to use pure functions instead of impure functions. Remember, pure functions:
+
+*Return the same result if given the same arguments. They are deterministic.
+*Do not change the external state of the program. For example, they do not change any variables outside of their scope.
+*Do not perform any I/O operations (like reading from disk, accessing the internet, or writing from the console).
+
+
+			Reference vs. Value
+
+
+When you pass a value into a function as an argument, one of two things can happen:
+
+*It's passed by reference: The function has access to the original value and can change it
+*It's passed by value: The function only has access to a copy. Changes to the copy within the function don't affect the original
+
+There is a bit more nuance, but this explanation mostly works.
+
+These types are passed by reference:
+
+Lists
+Dictionaries
+Sets
+
+These types are passed by value:
+
+Integers
+Floats
+Strings
+Booleans
+Tuples
+
+Most collection types are passed by reference (except for tuples) and most primitive types are passed by value.
+
+Example of Pass by Reference (mutable)
+
+def modify_list(inner_lst):
+    inner_lst.append(4)
+    # the original "outer_lst" is updated
+    # because inner_lst is a reference to the original
+
+outer_lst = [1, 2, 3]
+modify_list(outer_lst)
+# outer_lst = [1, 2, 3, 4]
+
+Example of Pass by Value (immutable)
+
+def attempt_to_modify(inner_num):
+    inner_num += 1
+    # the original "outer_num" is not updated
+    # because inner_num is a copy of the original
+
+outer_num = 1
+attempt_to_modify(outer_num)
+# outer_num = 1
+
+Fix the bug by making add_format and remove_format pure functions that don't mutate their inputs.
+
+			Pass by Reference Impurity
+
+
+Because certain types in Python are passed by reference, we can mutate values that we didn't intend to. This is a form of function impurity.
+
+Remember, a pure function should have no side effects. It shouldn't modify anything outside of its scope, including its inputs. It should return new copies of inputs instead of changing them.
+
+Pure function
+
+def remove_format(default_formats, old_format):
+    new_formats = default_formats.copy()
+    new_formats[old_format] = False
+    return new_formats
+
+Impure function
+
+def remove_format(default_formats, old_format):
+    default_formats[old_format] = False
+    return default_formats
+
+Why do we care?
+
+One of the biggest differences between good and great developers is how often they incorporate pure functions into their code. Pure functions are easier to read, easier to reason about, easier to test, and easier to combine. Even if you're working in an imperative language like Python, you can (and should) write pure functions whenever reasonable.
+
+There's nothing worse than trying to debug a program where the order functions are called needs to be juuuuust right because they all read and modify the same global variable.
+
+			Input and Output
+
+
+The term "i/o" stands for input/output. In the context of writing programs, i/o refers to anything in our code that interacts with the "outside world". "Outside world" just means anything that's not stored in our application's memory (like variables).
+
+Examples of i/o
+
+*Reading from or writing to a file on the hard drive
+*Accessing the internet
+*Reading from or writing to a database
+*Even simply printing to the console is considered i/o!
+
+All i/o is a form of "side effect".
+
+
+			Should I i/o?
+
+
+A program that doesn't do any i/o is pretty useless. What's the point of computing something if you can't see the results?
+
+In functional programming, i/o is viewed as dirty but necessary. We know we can't eliminate i/o from our code, so we just contain it as much as possible. There should be a clear place in your project that does nasty i/o stuff, and the rest of your code can be pure.
+
+For example, a Python program might:
+
+-Read a file from the hard drive as the program starts
+-Run a bunch of pure functions to analyze the data
+-Write the results of the analysis to a file on the hard drive at the end
+
+			No-Op
+
+
+A no-op is an operation that does... nothing.
+
+If a function doesn't return anything, it's probably impure. If it doesn't return anything, the only reason for it to exist is to perform a side effect.
+
+Example no-op
+
+This function performs a useless computation because it doesn't return anything or perform a side-effect. It's a no-op.
+
+def square(x):
+    x * x
+
+Example side-effect
+
+This function performs a side effect. It changes the value of the y variable that is outside of its scope. It's impure.
+
+y = 5
+def add_to_y(x):
+    global y
+    y += x
+
+add_to_y(3)
+# y = 8
+
+The global keyword just tells Python to allow access to the outer-scoped y variable.
+
+print()
+
+Even the print() function (technically) has an impure side effect! It doesn't return anything, but it does print text to the console, which is a form of i/o.
+
+
+			Memoization
+
+
+At its core, memoization is just caching (storing a copy of) the result of a computation so that we don't have to compute it again in the future.
+
+For example, take this simple function:
+
+def add(x, y):
+    return x + y
+
+A call to add(5, 7) will always evaluate to 12. So, if you think about it, once we know that add(5, 7) can be replaced with 12, we can just store the value 12 somewhere in memory so that we don't have to do the addition operation again in the future. Then, if we need to add(5, 7) again, we can just look up the value 12 instead of doing a (potentially expensive) CPU operation.
+
+memoization trades memory for speed
+
+The slower and more complex the function, the more memoization can help speed things up.
+
+Note: It's pronounced "memOization", not "memORization". This confused me for quite a while in college, I thought my professor just didn't speak goodly...
+
+			Referential transparency
+
+
+Pure functions are always referentially transparent.
+
+"Referential transparency" is a fancy way of saying that a function call can be replaced by its would-be return value because it's the same every time. Referentially transparent functions can be safely memoized. For example add(2, 3) can be smartly replaced by the value 5.
+
+The great thing about pure functions is that they can always be safely memoized. Impure functions can't be because they might do something in addition to returning a static value, or they might return different values given the same arguments.
+
+It's also a bunch of extra code to write, so you should only do it if you have a good reason to.
+
+
+			Zipmap
+
+
+Let's practice another simple recursive function.
+
+You may not understand recursion just yet, but by following the instructions, you will begin to grasp the fundamentals.
+
+It takes two lists as input and returns a dictionary where the first list provides the keys and the second list provides the values.
+
+Here's the pseudocode:
+
+If either the keys or values list is empty, return an empty dictionary (base case)
+Recursively call zipmap on all but the first elements from keys and values
+Add the first element of keys to the resulting dictionary, and set its value to the first element in values
+Return the updated dictionary
+
+def zipmap(keys, values):
+    if (keys == []) | (values == []):
+        return {}
+    resultDict = zipmap(keys[1:], values[1:])
+    resultDict[keys[0]] = values[0]
+    return resultDict
+
+
+			Nested Sum
+
+Recursion is hard for all new developers. If you're struggling, that's okay! Take your time. That's why we're doing a few extra practice problems.
+
+Due to the nested nature of directories, we represent a root directory as a list of lists. Each list represents a directory, and each number represents the size of a file in that directory. For example, here's a directory that contains 2 files at the root level, then a nested directory with its own two files:
+
+root = [
+    1,
+    2,
+    [3, 4]
+]
+print(sum_nested_list(root))
+# 10
+
+Here's a more complex example:
+
+root
+├── scripts.txt (5 bytes)
+├── characters (dir)
+│   ├── zuko.txt (6 bytes)
+│   └── aang.txt (7 bytes)
+└── seasons (dir)
+    ├── season1 (dir)
+    │   ├── the_avatar_returns.docx (8 bytes)
+    │   └── the_southern_air_temple.docx (9 bytes)
+    └── season2_notes.txt (10 bytes)
+
+Which would be represented as:
+
+root = [
+    5,
+    [6, 7],
+    [[8, 9], 10]
+]
+print(sum_nested_list(root))
+# 45
+
+Complete the sum_nested_list function. It takes a nested list of integers as input and should return the total size of all files in the list. It's a recursive function.
+
+Here's some pseudocode to help you get started:
+
+1. Create an integer variable to keep track of the total size.
+2. For each item in the list (use a loop here):
+	*If the item is an integer, add it to the total size.
+	*If the item is a list, use a recursive call to sum_nested_list to get the size of that list. Add that size to the total size.
+3. Return the total size when you're done iterating.
+
+#what i put
+
+def sum_nested_list(lst):
+    sum = 0
+    if lst == []:
+        return 0
+    for item in lst:
+        if isinstance(item, int):
+            sum += item
+        if isinstance(item, list):
+            size = sum_nested_list(item)
+            sum += size
+    return sum
+
+#what they put
+
+def sum_nested_list(lst):
+    total = 0
+    for element in lst:
+        if isinstance(element, list):
+            total += sum_nested_list(element)
+        else:
+            total += element
+    return total
+	
+
+			Recursion Review
+
+
+Recursion is so dang useful with tree-like structures because we don't always know how deep they're nested. Stop and think about how you would write nested loops to traverse a tree of arbitrary depth... it's not easy, is it?
+
+for item in tree:
+    for nested_item in item:
+        for nested_nested_item in nested_item:
+            for nested_nested_nested_item in nested_nested_item:
+                # ... WHEN DOES IT END???
+
+I most often use recursion on tree-like problems (file systems, nested dictionaries, etc). If I'm just iterating over a one-dimensional list then a loop (gasp...) is typically simpler, even if it's not as "pure" in the academic sense.
+
+Remember: The rules of functional programming are just philosophies to help you write better code, but it's not always the right tool for the job. The same goes for any programming paradigm.				
+
+What makes it hard to loop over a tree?
+
+you dont know the depth of the tree (number of nested levels)
+
+
+			Recursion on a tree
+
+
+Recursion on a tree
+Recursion is often used in "tree-like" structures. For example:
+
+Nested dictionaries
+File systems
+HTML documents
+JSON objects
+
+That's because trees can have unknown depth. It's hard to write a series of loops because you don't know how many levels deep the tree goes.
+
+for entry_i in directory:
+    if entry_i.is_dir:
+        for entry_j in entry_i:
+            if entry_j.is_dir
+                for entry_k in entry_j:
+                    ...
+
+Assignment:
+
+Return the list of file paths.
+
+def list_files(current_filetree, current_path=""):
+    file_list = []
+    for node in current_filetree:
+        nested_nodes = current_filetree[node]
+        if nested_nodes is None:
+            file_list.append(current_path + "/" + node)
+        else:
+            file_list.extend(list_files(nested_nodes, current_path + "/" + node))
+    return file_list
+
+
+			Count Nested Levels
+
+
+we want to find out how deeply nested a given document is.
+
+
+Assignment:
+
+recursively search for the target_document_id in the nested_documents dictionary and return the number of nested levels of that document.
+
+If the target document doesn't exist, the function should return -1. You may use loops with recursion.
+
+def count_nested_levels(nested_documents, target_document_id, level=1):
+    for node in nested_documents:
+        nested = nested_documents[node]
+        if node == target_document_id:
+            return level
+        else:
+            found = count_nested_levels(nested, target_document_id, level + 1) 
+        if found != -1:
+            return found
+    return -1
+
+
+			Function Transformations
+
+
+"Function transformation" is just a more concise way to describe a specific type of higher order function. It's when a function takes a function (or functions) as input and returns a new function. Let's look at an example:
+
+def multiply(x, y):
+    return x * y
+
+def add(x, y):
+    return x + y
+
+# self_math is a higher order function
+# input: a function that takes two arguments and returns a value
+# output: a new function that takes one argument and returns a value
+def self_math(math_func):
+    def inner_func(x):
+        return math_func(x, x)
+    return inner_func
+
+square_func = self_math(multiply)
+double_func = self_math(add)
+
+print(square_func(5))
+# prints 25
+
+print(double_func(5))
+# prints 10
+	
+The self_math function takes a function that operates on two different parameters (e.g. multiply or add) and returns a new function that operates on one parameter twice (e.g. square or double).
+
+
+			Why Transform?
+
+
+You might be wondering:
+
+"When would I use function transformations in the real world?"
+"Isn't it simpler to just define functions at the top level of the code, and call them as needed?"
+
+Good questions. To be clear, we don't just transform functions at runtime for the fun of it! We only use advanced techniques like function transformations when they make our code simpler than it would otherwise be.
+
+			Code Reusability
+
+
+Creating variations of the same function dynamically can make it a lot easier to share common functionality. Take a look at this formatter function. It accepts a "pattern" and returns a new function that formats text according to that pattern:
+
+def formatter(pattern):
+    def inner_func(text):
+        result = ""
+        i = 0
+        while i < len(pattern):
+            if pattern[i:i+2] == '{}':
+                result += text
+                i += 2
+            else:
+                result += pattern[i]
+                i += 1
+        return result
+    return inner_func
+
+Now we can create new formatters easily:
+
+bold_formatter = formatter("**{}**")
+italic_formatter = formatter("*{}*")
+bullet_point_formatter = formatter("* {}")
+
+And use them like this:
+
+print(bold_formatter("Hello"))
+# **Hello**
+print(italic_formatter("Hello"))
+# *Hello*
+print(bullet_point_formatter("Hello"))
+# * Hello
+
+90% of the time, when I use function transformations, it's because I want to create a closure. We'll talk about closures in the next chapter!
+
+
+Assignment:
+
+Complete the get_filter_cmd function. It should take a dictionary as input, filters, and return a function, filter_cmd.
+
+def get_filter_cmd(filtersDict):
+    def filter(string, optionsLst, wordTups):
+        if optionsLst == []:
+            raise Exception('missing options')
+        for option in optionsLst:
+            if option in filtersDict:
+                string = filtersDict[option](string, wordTups)
+            else:
+                raise Exception('invalid option')
+        return string
+    return filter
+
+
+			Closures
+
+
+A closure is a function that references variables from outside its own function body. The function definition and its environment are bundled together into a single entity.
+
+Put simply, a closure is just a function that keeps track of some values from the place where it was defined, no matter where it is executed later on.
+
+Example:
+
+The concatter() function returns a function called doc_builder (yay higher-order functions!) that has a reference to an enclosed doc value.
+
+def concatter():
+	doc = ""
+	def doc_builder(word):
+		# "nonlocal" tells Python to use the 'doc'
+		# variable from the enclosing scope
+		nonlocal doc
+		doc += word + " "
+		return doc
+	return doc_builder
+
+# save the returned 'doc_builder' function
+# to the new function 'harry_potter_aggregator'
+harry_potter_aggregator = concatter()
+harry_potter_aggregator("Mr.")
+harry_potter_aggregator("and")
+harry_potter_aggregator("Mrs.")
+harry_potter_aggregator("Dursley")
+harry_potter_aggregator("of")
+harry_potter_aggregator("number")
+harry_potter_aggregator("four,")
+harry_potter_aggregator("Privet")
+
+print(harry_potter_aggregator("Drive"))
+# Mr. and Mrs. Dursley of number four, Privet Drive
+
+nonlocal
+
+Python has a keyword called nonlocal that's required to access variables from an enclosing scope. Most programming languages don't require this keyword, but Python does.
+
+
+			Closure Review
+
+
+The whole point of a closure is that it's stateful. It's a function that "remembers" the values from the enclosing scope even after the enclosing scope has finished executing.
+
+It's as if you're saving the state of a function at a particular point in time, and then you can use and update that state later on.
+
+That means that in many cases, closures are not pure functions. They can mutate state outside of their scope and have side effects.
+
+
+            Currying Practice
+
+
+Remember, currying is when we take a function that accepts multiple arguments:
+
+final_volume = box_volume(3, 4, 5)
+print(final_volume)
+# 60
+			
+And convert it into a series of functions that each accept a single argument:
+
+final_volume = box_volume(3)(4)(5)
+print(final_volume)
+# 60
+
+-box_volume(3) returns a new function that accepts a single integer and returns a new function
+-box_volume(3)(4) returns another new function that accepts a single integer and returns a new function
+-box_volume(3)(4)(5) returns the final result
+
+Here's another way of calling it, where each function is stored in a variable before being called:
+
+with_length_3 = box_volume(3)
+with_len_3_width_4 = with_length_3(4)
+final_volume = with_len_3_width_4(5)
+print(final_volume)
+# 60
+
+Here are the function definitions:
+
+def box_volume(length):
+  def box_volume_with_len(width):
+    def box_volume_with_len_width(height):
+      return length * width * height
+    return box_volume_with_len_width
+  return box_volume_with_len
+
+
+            HTML Table
+
+
+Doc2Doc should have tools to create HTML boilerplate. One of the features should create a table. 
+An HTML table has a header row and data rows. A header row has headers for the columns. 
+Each normal row has data cells which contain the information in the table. It is essentially a 2-dimensional list.
+
+Example HTML Table:            
+
+<table>
+  <tr>
+    <th>Row 1, Header 1</th>
+    <th>Row 1, Header 2</th>
+  </tr>
+  <tr>
+    <td>Row 2, Cell 1</td>
+    <td>Row 2, Cell 2</td>
+  </tr>
+  <tr>
+    <td>Row 3, Cell 1</td>
+    <td>Row 3, Cell 2</td>
+  </tr>
+</table>
+
+"td": Each item in a table goes in its own data cell, which are arranged in rows.
+"tr": The table row tag goes around each row of cells.
+"th": The header cells hold the headers for each column and belong in the first row.
+"table": This is the parent tag of the entire table.
+
+Result:(with lines excluded since not a hypertxtfile)
+
+Row 1, Header 1	Row 1, Header 2
+Row 2, Cell 1	Row 2, Cell 2
+Row 3, Cell 1	Row 3, Cell 2
+
+            Decorators
+
+
+Decorators are just syntactic sugar for higher-order functions.
+
+Example:
+
+def vowel_counter(func_to_decorate):
+    vowel_count = 0
+    def wrapper(doc):
+        nonlocal vowel_count
+        vowels = "aeiou"
+        for char in doc:
+            if char in vowels:
+                vowel_count += 1
+        print(f"Vowel count: {vowel_count}")
+        return func_to_decorate(doc)
+    return wrapper
+
+@vowel_counter
+def process_doc(doc):
+    print(f"Document: {doc}")
+
+process_doc("What")
+# Vowel count: 1
+# Document: What
+
+process_doc("a wonderful")
+# Vowel count: 5
+# Document: a wonderful
+
+process_doc("world")
+# Vowel count: 6
+# Document: world
+
+The @vowel_counter line is "decorating" the process_doc function with the vowel_counter function. vowel_counter is called once when process_doc is defined with the @ syntax, but the wrapper function that it returns is called every time process_doc is called. That's why vowel_count is preserved and printed after each time.
+
+It's just syntactic sugar
+Decorators are just another (sometimes simpler) way of writing a higher-order function. These two pieces of code are identical:
+
+With decorator:
+
+@vowel_counter
+def process_doc(doc):
+    print(f"Document: {doc}")
+
+process_doc("Something wicked this way comes")
+
+Without decorator:
+
+def process(doc):
+    print(f"Document: {doc}")
+
+process_doc = vowel_counter(process)
+process_doc("Something wicked this way comes")
+
+
+            Args and kwargs
+
+
+In Python, *args and **kwargs allow a function to accept and deal with a variable number of arguments.
+
+*args collects positional arguments into a tuple
+**kwargs collects keyword (named) arguments into a dictionary
+
+def print_arguments(*args, **kwargs):
+    print(f"Positional arguments: {args}")
+    print(f"Keyword arguments: {kwargs}")
+
+print_arguments("hello", "world", a=1, b=2)
+# Positional arguments: ('hello', 'world')
+# Keyword arguments: {'a': 1, 'b': 2}
+
+            Positional arguments
+
+
+Positional arguments are the ones you're already familiar with, where the order of the arguments matters. Like this:
+
+def sub(a, b):
+    return a - b
+
+# a=3, b=2
+res = sub(3, 2)
+# res = 1
+
+            Keyword arguments
+
+
+Keyword arguments are passed in by name. Order does not matter. Like this:
+
+def sub(a, b):
+    return a - b
+
+res = sub(b=3, a=2)
+# res = -1
+res = sub(a=3, b=2)
+# res = 1
+
+A note on ordering
+
+Any positional arguments must come before keyword arguments. This will not work:
+
+sub(b=3, 2)
+
+
+
+                Decorators Review
+
+
+A decorator is just syntactic sugar for higher-order functions. "Syntactic sugar" just means "a more convenient syntax".
+
+Not all programming languages have decorators, but most do support higher-order functions and closures.
+
+Some of the famous functional languages like:
+
+Haskell
+Erlang
+Clojure
+Lisp
+
+do not have decorators, but they do have higher-order functions and closures. So, if you understand those concepts, they will serve you well in many different languages.
+
+
+                Escape HTML
+
+
+You can stack decorators, and you can use currying with decorators.
+
+def to_uppercase(func):
+    def wrapper(document):
+        return func(document.upper())
+
+    return wrapper
+
+def get_truncate(length):
+    def truncate(func):
+        def wrapper(document):
+            return func(document[:length])
+
+        return wrapper
+
+    return truncate
+
+@to_uppercase
+@get_truncate(9) # currying
+def print_input(input):
+    print(input)
+
+print_input("Keep Calm and Carry On")
+# prints: "KEEP CALM"
+
+
+Observe that to_uppercase wrapped get_truncate(9), and get_truncate(9) returned truncate which wrapped print_input, then print_input printed "KEEP CALM" from "Keep Calm and Carry On".
+
+You might not know anything about HTML. That's fine. This challenge isn't about HTML directly. Just understand that it's a markup language like markdown. Certain characters are interpreted as part of HTML tags. In order to show these characters without interpreting them, they must be encoded as escape sequences. tldr: replace "<" with "&lt;".
+
+Doc2Doc needs a feature that can take care of encoding such characters for you. This is particularly helpful if you want to show raw HTML on a vanilla HTML webpage. HTML even has a semantic <pre> tag for designating pre-formatted text.
+
+
+                lru_cache
+
+
+lru_cache from the functools module is an example of a decorator and an example of memoization.
+
+lru_cache memoizes the inputs and outputs of the decorated function in a size-restricted dictionary. It speeds up repeated calls to a slow function with the same inputs. For instance, if the function reads from disc, makes network requests, or requires a lot of computation AND it is used repeatedly with the same inputs.
+
+Here's an example from the Python documentation that perfectly illustrates how and why to use the lru_cache decorator:
+
+from functools import lru_cache
+
+@lru_cache()
+def factorial_r(x):
+    if x == 0:
+        return 1
+    else:
+        return x * factorial_r(x - 1)
+
+factorial_r(10) # no previously cached result, makes 11 recursive calls
+# 3628800
+factorial_r(5)  # just looks up cached value result
+# 120
+factorial_r(12) # makes two new recursive calls, the other 11 are cached
+# 479001600
+
+Since the factorial function is recursive and the inputs are sequential numbers, it's called repeatedly with the same inputs. Without the cache, the function would be called 30 times. With lru_cache, the function is only called 13 times. While you don't often need to compute factorials, this example ties together how to use a decorator and memoization and recursion.
+
+
+                Sum Types
+
+
+Remember when I said, "Pure functions are my favorite part of functional programming"? Well, sum types are a close second.
+
+A "sum" type is the opposite of a "product" type. This Python object is an example of a product type:
+
+man.studies_finance = True
+man.has_trust_fund = False
+
+The total number of combinations a man can have is 4, the product of 2 * 2:
+
+studies_finance	|  has_trust_fund
+True	|   True
+True	|   False
+False	|   True
+False	|   False
+
+If we add a third attribute, perhaps a has_blue_eyes boolean, the total number of possibilities multiplies again, to 8!
+
+studies_finance	has_trust_fund	has_blue_eyes
+True	True	True
+True	True	False
+True	False	True
+True	False	False
+False	True	True
+False	True	False
+False	False	True
+False	False	False
+
+But let's pretend that we live in a world where there are really only three types of people that our program cares about:
+
+Dateable
+Undateable
+Maybe dateable
+We can reduce the number of cases our code needs to handle by using a (admittedly fake Pythonic) sum type with only 3 possible types:
+
+But let's pretend that we live in a world where there are really only three types of people that our program cares about:
+
+Dateable
+Undateable
+Maybe dateable
+
+We can reduce the number of cases our code needs to handle by using a (admittedly fake Pythonic) sum type with only 3 possible types:
+
+class Person:
+    def __init__(self, name):
+        self.name = name
+
+class Dateable(Person):
+    pass
+
+class MaybeDateable(Person):
+    pass
+
+class Undateable(Person):
+    pass
+
+Then we can use the isinstance built-in function to check if a Person is an instance of one of the subclasses. It's a clunky way to represent sum types, but hey, it's Python.
+
+def respond_to_text(guy_at_bar):
+    if isinstance(guy_at_bar, Dateable):
+        return f"Hey {guy_at_bar.name}, I'd love to go out with you!"
+    elif isinstance(guy_at_bar, MaybeDateable):
+        return f"Hey {guy_at_bar.name}, I'm busy but let's hang out sometime later."
+    elif isinstance(guy_at_bar, Undateable):
+        return "Have you tried being rich?"
+    else:
+        raise ValueError("invalid Person type")
+
+                Sum Types
+
+
+As opposed to product types, which can have many (often infinite) combinations, sum types have a fixed number of possible values. To be clear: Python doesn't really support sum types. We have to use a workaround and invent our own little system and enforce it ourselves.
+
+
+
+                Enums
+
+
+Doing the admittedly weird class and isinstance() thing works, but it turns out, there's a better way in some cases. If you're trying to represent a fixed set of values (but not store additional data within them) enums are the way to go.
+
+Let's say we have a Color variable that we want to restrict to only three possible values:
+
+RED
+GREEN
+BLUE
+
+We could use a plain-old string to represent these values, but that's annoying because we have to remember all the "valid" values and defensively check for invalid ones all over our codebase. Instead, we can use an Enum:     
+
+from enum import Enum
+
+Color = Enum('Color', ['RED', 'GREEN', 'BLUE'])
+print(Color.RED)  # this works, prints 'Color.RED'
+print(Color.TEAL) # this raises an exception
+
+Now Color is a sum type! At least, as close as we can get in Python.
+
+There are a few benefits:
+
+A "Color" can only be RED, GREEN, or BLUE. If you try to use Color.TEAL, Python raises an exception.
+There is a central place to see the "valid" values for a Color.
+Each "Color" has a "name" (e.g. Color.RED) and a "value" (e.g. 1). The value is an integer and is used under the hood instead of the name. Integers take up less memory than strings, which helps with performance.
+
+
+                Sum Types
+
+
+Unfortunately, Python does not support sum types as well as some of the other statically typed languages.
+
+Python does not enforce your types before your code runs. That's why we need this line here to raise an Exception if a color is invalid:
+
+def color_to_hex(color):
+    if color == Color.GREEN:
+        return '#00FF00'
+    elif color == Color.BLUE:
+        return '#0000FF'
+    elif color == Color.RED:
+        return '#FF0000'
+    # handle the case where the color is invalid
+    raise Exception('Unknown color')
+
+    In a language like Rust we could write the same thing like this:
+
+fn color_to_hex(color: Color) -> String {
+    match color {
+        Color::Green => "#00FF00".to_string(),
+        Color::Blue => "#0000FF".to_string(),
+        Color::Red => "#FF0000".to_string(),
+    }
+}
+
+Notice how there isn't any case for an unknown value? That's because the Rust code will fail to compile (a step that happens before the code runs at all) if the Color is a different value. This static enforcement is a huge benefit of sum types, and it's a shame we can't get that in Python.
+
+
+                Working with enums
+
+
+Python has a match statement that tends to be a lot cleaner than a series of if/else/elif statements when we're working with a fixed set of possible values (like a sum type, or more specifically an enum):
+
+def get_hex(color):
+    match color:
+        case Color.RED:
+            return "#FF0000"
+        case Color.GREEN:
+            return "#00FF00"
+        case Color.BLUE:
+            return "#0000FF"
+
+        # default case
+        # (invalid Color)
+        case _:
+            return "#FFFFFF"
+
+If you have two values to match, you can use a tuple:
+
+def get_hex(color, shade):
+    match (color, shade):
+        case (Color.RED, Shade.LIGHT):
+            return "#FFAAAA"
+        case (Color.RED, Shade.DARK):
+            return "#AA0000"
+        case (Color.GREEN, Shade.LIGHT):
+            return "#AAFFAA"
+        case (Color.GREEN, Shade.DARK):
+            return "#00AA00"
+        case (Color.BLUE, Shade.LIGHT):
+            return "#AAAAFF"
+        case (Color.BLUE, Shade.DARK):
+            return "#0000AA"
+
+        # default case
+        # (invalid combination)
+        case _:
+            return "#FFFFFF"
+
+The value we want to compare is set after match keyword, which is then compared against different cases/patterns. If a match is found, the code in the block is executed.

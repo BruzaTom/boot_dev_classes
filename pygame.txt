@@ -1,0 +1,581 @@
+                Pygame
+
+
+Now that we have pygame installed, let's write just a bit of boilerplate code so that we have a runnable program to build on.
+
+Assignment
+Create a new file called main.py.
+On the first line, import pygame:
+
+# this allows us to use code from
+# the open-source pygame library
+# throughout this file
+import pygame
+
+Write a main function that simply prints "Starting asteroids!" (use this exact text).
+Add this if statement to the end of the file:
+
+if __name__ == "__main__":
+    main()
+
+This line ensures the main() function is only called when this file is run directly; it won't run if it's imported as a module. It's considered the "pythonic" way to structure an executable program in Python. Technically, the program will work fine by just calling main(), but you might get an angry letter from Guido van Rossum if you don't.
+
+Run the program with python3 main.py
+
+
+                Modules
+
+
+It would be a massive pain if we had to fit all of our code into a single file.
+
+                Importing
+
+
+In Python, each .py file is a module, and we can import functions, variables, and classes from one module into another with the import statement. The name of a module is the filename (without the .py extension).
+
+# import the function_hello function
+# and the variable_player variable
+# into the current file
+from module import function_hello, variable_player
+
+If you want to import everything from a module, you can use the * character:
+
+# import everything from a module
+# into the current file
+from module import *
+
+
+                Constants
+
+
+Games often have a lot of magic numbers to represent things like player speeds, item costs, and attack damage. We will use this file as a place to store those kind of constant values.
+
+Assignment
+Create a new file in your project called constants.py (in the same folder as main.py), and paste this in:
+
+SCREEN_WIDTH = 1280
+SCREEN_HEIGHT = 720
+
+ASTEROID_MIN_RADIUS = 20
+ASTEROID_KINDS = 3
+ASTEROID_SPAWN_RATE = 0.8  # seconds
+ASTEROID_MAX_RADIUS = ASTEROID_MIN_RADIUS * ASTEROID_KINDS
+
+Import everything from the constants.py file into main.py
+Print out the SCREEN_WIDTH and SCREEN_HEIGHT values when main.py is run. Use the following format:
+
+Expected Output:
+
+Starting asteroids!
+Screen width: 1280
+Screen height: 720
+
+
+                Game Loop
+
+
+Video games are generally built using a game loop. The simplest game loop has 3 steps:
+
+Check for player inputs
+Update the game world
+Draw the game to the screen
+
+To create a good user experience, these 3 steps need to happen many times per second.             
+
+Assignment
+import pygame at the top of your main.py file. The pygame documentation will be super useful throughout this project.
+Initialize pygame at the beginning of your main() function (take a look at the docs for the syntax).
+
+# init pygame
+pygame.init()
+initialize all imported pygame modules
+init() -> (numpass, numfail)
+Initialize all imported pygame modules. No exceptions will be raised if a module fails, but the total number if successful and failed inits will be returned as a tuple. You can always initialize individual modules manually, but pygame.init()initialize all imported pygame modules is a convenient way to get everything started. The init() functions for individual modules will raise exceptions when they fail.
+
+You may want to initialize the different modules separately to speed up your program or to not use modules your game does not require.
+
+It is safe to call this init() more than once as repeated calls will have no effect. This is true even if you have pygame.quit() all the modules.
+Ensure our predefined constants (constants.py) SCREEN_WIDTH and SCREEN_HEIGHT are imported at the top of your file:
+# init pygame
+
+Ensure our predefined constants (constants.py) SCREEN_WIDTH and SCREEN_HEIGHT are imported at the top of your file:
+
+from constants import *
+
+Use pygame's display.set_mode() to get a new GUI window:
+# screen
+screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+
+Create the game loop. For now, we'll only worry about step 3: drawing the game onto the screen.
+
+Use an infinite while loop for the game loop. At each iteration, it should:
+Use the screen's fill method to fill the screen with a solid "black" color.
+# fill
+screen.fill('Black')
+fill Surface with a solid color
+fill(color, rect=None, special_flags=0) -> Rect
+Fill the Surface with a solid color. If no rect argument is given the entire Surface will be filled. The rect argument will limit the fill to a specific area. The fill will also be contained by the Surface clip area.
+
+The color argument can be either a RGB sequence, a RGBA sequence or a mapped color index. If using RGBA, the Alpha (A part of RGBA) is ignored unless the surface uses per pixel alpha (Surface has the SRCALPHA flag).
+
+New in pygame 1.8: Optional special_flags: BLEND_ADD, BLEND_SUB, BLEND_MULT, BLEND_MIN, BLEND_MAX.
+
+New in pygame 1.8.1: Optional special_flags: BLEND_RGBA_ADD, BLEND_RGBA_SUB, BLEND_RGBA_MULT, BLEND_RGBA_MIN, BLEND_RGBA_MAX BLEND_RGB_ADD, BLEND_RGB_SUB, BLEND_RGB_MULT, BLEND_RGB_MIN, BLEND_RGB_MAX.
+
+This will return the affected Surface area.
+# fill
+
+Use pygame's display.flip() method to refresh the screen.
+
+It's a good idea to run and test your game frequently as you write code , to make sure it's working as expected:
+
+If you're on a mac, wait until step 8 before doing this.
+
+python3 main.py
+
+You should see a black window open and stay open.
+
+Close the game and kill the program with Ctrl+C in the terminal.
+Add the following code to the beginning of each iteration of the game loop:
+
+for event in pygame.event.get():
+    if event.type == pygame.QUIT:
+        return
+
+This will check if the user has closed the window and exit the game loop if they do. It will make the window's close button work.
+
+Make a git commit! It's a good idea to commit your progress whenever you get something new working.
+
+
+                FPS
+
+
+Right now, our game is re-drawing the screen as fast as it possibly can. This causes it to use a lot more CPU than it actually needs!
+
+
+                Delta Time
+
+
+In math, the Greek letter delta (Δ) is often used to represent a change in a value. In game development, we use "delta time" to represent the amount of time that has passed since the last frame was drawn. This value is useful to decouple the game's speed from the speed it's being drawn to the screen.
+
+If your computer speeds up, the asteroids shouldn't also speed up. Conversely, if your computer slows down, the asteroids shouldn't also slow down: they would just move less smoothly.
+
+Assignment
+FPS stands for frames per second. We're going to restrict our game to draw a maximum of 60 times per second, or 60 FPS.
+
+After initializing pygame, but before the gameloop starts, create:
+A new pygame.time.Clock object.
+# clock = pygame.time.Clock()
+A dt variable set to 0.
+# dt = 0
+
+At the end of each iteration of the game loop, call the .tick() method, and pass it 60. It will pause the game loop until 1/60th of a second has passed.
+
+The .tick() method also returns the amount of time that has passed since the last time it was called: the delta time. Divide the return value by 1000 (to convert from milliseconds to seconds) and save it into the dt variable we created earlier. We're not using dt yet, but we will later.
+# dt = clock.tick(60) / 1000
+
+
+
+                Sprites
+
+
+Note: Throughout this project, we will provide some of the code for you, like the class below. We want you to focus on specific parts and have prewritten the stuff that isn't related to the concepts we're trying to teach.            
+
+In pygame, there is a base class called Sprite, to represent visual objects.
+
+Assignment
+In our game, asteroids are visually represented as circles, and the player is a triangle. However, detecting collisions between circles and triangles is hard. To avoid this problem, we can cheat a little bit: the player will secretly be a circle.
+
+The red circle won't be visible in the game; only we need to know it exists.
+
+Let's create a CircleShape class that inherits from Sprite to represent objects in our game that are treated as circles (even if they aren't).
+
+Create a new circleshape.py file and paste in the following code:
+
+import pygame
+
+# Base class for game objects
+class CircleShape(pygame.sprite.Sprite):
+    def __init__(self, x, y, radius):
+        # we will be using this later
+        if hasattr(self, "containers"):
+            super().__init__(self.containers)
+        else:
+            super().__init__()
+
+        self.position = pygame.Vector2(x, y)
+        self.velocity = pygame.Vector2(0, 0)
+        self.radius = radius
+
+    def draw(self, screen):
+        # sub-classes must override
+        pass
+
+    def update(self, dt):
+        # sub-classes must override
+        pass
+
+CircleShape extends the Sprite class to also store a position, velocity, and radius.
+
+Later you'll write subclasses of CircleShape and override the draw and update methods with the logic for that particular game object.
+
+
+                    Draw Player
+
+
+Let's draw a spaceship for the player!
+
+Assignment
+PLAYER_RADIUS = 20
+
+Create a new file called player.py with a Player class that inherits from CircleShape.
+
+The Player constructor should take x and y integers as input, then:
+
+Call the parent class's constructor
+Create a field called rotation, initialized to 0
+
+Paste this triangle method into your Player class:
+
+# in the player class
+def triangle(self):
+    forward = pygame.Vector2(0, 1).rotate(self.rotation)
+    right = pygame.Vector2(0, 1).rotate(self.rotation + 90) * self.radius / 1.5
+    a = self.position + forward * self.radius
+    b = self.position - forward * self.radius - right
+    c = self.position - forward * self.radius + right
+    return [a, b, c]
+
+A player will look like a triangle, even though we'll use a circle to represent its hitbox. The math of drawing a triangle can be a bit fiddly, so we've written the method for you.
+
+To draw the player, override the draw method of CircleShape. It should take the screen object as a parameter, and call pygame.draw.polygon. It takes:
+
+The screen object
+A color (use "white")
+A list of points (use self.triangle() that we provided for you)
+A line width (use 2)
+
+In your main function, instantiate a Player object. You can pass these values to the constructor to spawn it in the middle of the screen:
+
+x = SCREEN_WIDTH / 2
+y = SCREEN_HEIGHT / 2
+
+Lastly, we need to re-render the player on the screen each frame, meaning inside our game loop. Use the player.draw(screen) method we just added to do so.
+
+
+                Moving Around
+
+
+  We want the spaceship to be able to move; but what does that mean specifically? Let's break it down:
+
+If we press the left key, the ship should rotate to the left.
+If we press the right key, the ship should rotate to the right.
+If we press the forward key, the ship should move forward.
+If we press the backward key, the ship should move backward.
+
+Left and right seem pretty similar. Let's try to write a small function to tackle those first!   
+
+Create a new constant in constants.py to represent the player's turn speed. I named mine PLAYER_TURN_SPEED, and gave it a value of 300.
+Add a new method to the Player class called rotate. It's going to take one argument: dt (I told you we'd use it!). When it's called, it should add PLAYER_TURN_SPEED * dt to the player's current rotation.
+
+Paste in the following update method to the Player class:
+
+    def update(self, dt):
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_a]:
+            self.rotate(-dt)
+        if keys[pygame.K_d]:
+            self.rotate(dt)
+
+Update the missing lines to call the rotate method with the dt argument. To go left instead of right when a is pressed, you'll need to invert dt... how can you do that...?
+Hook the update method into the game loop by calling it on the player object each frame before rendering.
+
+
+                Moving
+
+
+Now instead of rotating, we need the ship to move back and forth with the W and S keys.
+
+Create a new constant in constants.py to represent the player speed. I named mine PLAYER_SPEED, and gave it a value of 200.
+Add a new method to the Player class called .move(). It takes one argument: dt. We want to modify the player's position; but first, we need to do a little bit of math.
+We start with a unit vector pointing straight up from (0, 0) to (0, 1).
+We rotate that vector by the player's rotation, so it's pointing in the direction the player is facing.
+We multiply by PLAYER_SPEED * dt. A larger vector means faster movement.
+Add the vector to our position to move the player.
+
+This is a course on programming, not vector math, so we've done the math for you. All those words boil down to these two lines of code:
+
+forward = pygame.Vector2(0, 1).rotate(self.rotation)
+self.position += forward * PLAYER_SPEED * dt
+
+Modify the update method in the Player class to call the move method when the W or S keys are pressed.
+Run the game. You should now be able to fly around the screen with the W, A, S, and D keys!
+
+
+                Groups
+
+
+Currently, we manually call .update() and .draw() on the player object, which means our game loop is going to get more and more cluttered as we add additional objects to the game. Fortunately, pygame has a solution!
+
+The Group class is a container that holds and manages multiple game objects. We can organize our objects into various groups to track them more easily.
+
+You can think of them as a sort of Venn diagram. An object can be in multiple groups at the same time! Eventually, our game's groups will look something like this:
+
+
+                Creating and using groups
+
+
+You can create a new empty group like this:
+
+my_group = pygame.sprite.Group()
+
+To add all instances of a Player to two groups, group_a and group_b in this example, we add a static field called containers to the class:
+
+#player class
+class Player(CircleShape):
+    containers = ()  # static field called containers
+    def __init__(self, x, y):
+        super().__init__(x, y, PLAYER_RADIUS)
+        self.rotation = 0
+
+# main
+updatableGroup = pygame.sprite.Group()
+drawableGroup = pygame.sprite.Group()
+Player.containers = (updatableGroup, drawableGroup)
+ship = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2) # make sure to create all Player objects after the change.
+
+
+You can iterate over objects in a group just like any other collection in Python:
+
+while(True):
+        screen.fill('Black')        
+        for item in updatableGroup:
+            item.update(dt)
+        for item in drawableGroup:
+            item.draw(screen)
+
+Assignment
+Before the game loop starts:
+
+Create two groups in main.py:
+updatable - all the objects that can be updated
+drawable - all the objects that can be drawn
+Add the player to both groups.
+Change the game loop to use the new groups instead of the Player object directly. In other words, iterate over all "updatables" and .update() them, then iterate over all "drawables" and .draw() them.
+
+
+                Asteroids
+
+It's arguable that a critical part of Asteroids is the... well, asteroids. Let's create another class to represent an asteroid.
+
+Assignment
+Create a new class called Asteroid in a new file called asteroid.py. The class should inherit from CircleShape
+Add a constructor with this signature:
+
+def __init__(self, x, y, radius):
+
+Override the draw() method to draw the asteroid as a pygame.draw.circle. Use its position, radius, and a width of 2
+Override the update() method so that it moves in a straight line at constant speed. On each frame, it should add (velocity * dt) to its position.
+In the initialization code in main (before the game loop starts), create a new pygame.sprite.Group which will contain all of the asteroids.
+Like we did with the Player class, set the static containers field of the Asteroid class to the new asteroids group, as well as the updatable and drawable groups.
+
+Asteroid.containers = (asteroids, updatable, drawable)
+
+This ensures that every instance of the Asteroid class is automatically added to these groups upon creation.
+
+We've written an AsteroidField class for you: it contains logic for spawning new asteroids. Create a new file called asteroidfield.py, and import it in your main.py file. Paste in this code:
+
+import pygame
+import random
+from asteroid import Asteroid
+from constants import *
+
+
+class AsteroidField(pygame.sprite.Sprite):
+    edges = [
+        [
+            pygame.Vector2(1, 0),
+            lambda y: pygame.Vector2(-ASTEROID_MAX_RADIUS, y * SCREEN_HEIGHT),
+        ],
+        [
+            pygame.Vector2(-1, 0),
+            lambda y: pygame.Vector2(
+                SCREEN_WIDTH + ASTEROID_MAX_RADIUS, y * SCREEN_HEIGHT
+            ),
+        ],
+        [
+            pygame.Vector2(0, 1),
+            lambda x: pygame.Vector2(x * SCREEN_WIDTH, -ASTEROID_MAX_RADIUS),
+        ],
+        [
+            pygame.Vector2(0, -1),
+            lambda x: pygame.Vector2(
+                x * SCREEN_WIDTH, SCREEN_HEIGHT + ASTEROID_MAX_RADIUS
+            ),
+        ],
+    ]
+
+    def __init__(self):
+        pygame.sprite.Sprite.__init__(self, self.containers)
+        self.spawn_timer = 0.0
+
+    def spawn(self, radius, position, velocity):
+        asteroid = Asteroid(position.x, position.y, radius)
+        asteroid.velocity = velocity
+
+    def update(self, dt):
+        self.spawn_timer += dt
+        if self.spawn_timer > ASTEROID_SPAWN_RATE:
+            self.spawn_timer = 0
+
+            # spawn a new asteroid at a random edge
+            edge = random.choice(self.edges)
+            speed = random.randint(40, 100)
+            velocity = edge[0] * speed
+            velocity = velocity.rotate(random.randint(-30, 30))
+            position = edge[1](random.uniform(0, 1))
+            kind = random.randint(1, ASTEROID_KINDS)
+            self.spawn(ASTEROID_MIN_RADIUS * kind, position, velocity)
+
+In the main.py file, set the static containers field of the AsteroidField class to only the updatable group (it's not drawable, and it's not an asteroid itself).
+Create a new AsteroidField object in the initialization code.
+
+Run the game and make sure asteroids are spawning and moving across the screen, and that you didn't break your ship in the process.
+
+
+                    Collisions
+
+
+You may have noticed that you can fly through asteroids without any consequences.
+
+We need collision detection. Now, this is a fairly deep topic, but we're going to keep things simple: we'll treat everything (including our triangular ship) as a circle when it comes to collisions.
+
+Detecting a collision between two circles is simple:
+
+We calculate the distance between the center of the two circles, let's call it distance
+Let's call the radius of one circle r1, and the radius of the other circle r2
+If distance is less than or equal to r1 + r2, the circles are colliding. If not, they aren't.
+
+Assignment
+Everything that collides inherits from CircleShape, so that seems like a good place to put collision logic.
+
+Add another method to that class to check for collisions. It should take 1 argument (another CircleShape object) and return True or False.
+Each CircleShape's position property is a pygame.Vector2. Use its distance_to method to calculate the distance between the two shapes.
+After the update step in your game loop, iterate over all of the objects in your asteroids group. Check if any of them collide with the player. If a collision is detected, the program should print Game over! and immediately exit the program.
+
+It's okay for asteroids to simply pass through each other.
+
+                Shooting
+
+
+Let's take things further by giving the player the ability to shoot at the asteroids.
+
+Bullets:
+
+Are small circles
+Move at a constant speed in a straight line
+Split up asteroids when they collide with them
+Are spawned by player input (spacebar) and move in the direction the player is facing
+
+Assignment
+Create a new Shot class to represent a bullet. It should also inherit from CircleShape so that it can use our collision detection code. If you need inspiration, it should look very similar to our Asteroid class. Use a new SHOT_RADIUS constant and set it to 5.
+Set up a new group in your initialization code that contains all of your shots.
+Add PLAYER_SHOOT_SPEED to your constants file, with a value of 500.
+
+In your Player class, add a new method called shoot. This method should:
+
+Create a new shot at the position of the player
+Set the shot's velocity:
+    Start with a pygame.Vector2 of (0, 1)
+    .rotate() it in the direction the player is facing
+    Scale it up (multiply by PLAYER_SHOOT_SPEED) to make it move faster
+
+Inside your Player class, handle the spacebar (pygame.K_SPACE) and call the shoot method when it is pressed.
+
+It's expected that holding the spacebar will create a constant stream of bullets. We'll fix that soon.
+It's expected that bullets pass through asteroids without any consequences. We'll fix that soon.
+
+
+                Rate Limit
+
+
+You probably noticed that the weapon on the ship is currently as overpowered as the original Zerg rush. Let's fix that.
+
+Assignment
+Create a new variable on the Player object to act as a timer. It should start with a value of 0
+When the player shoots, set the timer equal to a new constant. I called mine PLAYER_SHOOT_COOLDOWN and used 0.3
+Prevent the player from shooting if the timer is greater than 0
+Decrease the timer by dt every time update is called on the player
+
+Rerun your game. You should now only be able to shoot every 0.3 seconds.
+
+                Destruction
+
+
+Okay so bullets are flying, but they don't do anything. Let's kill some asteroids!
+
+There are three types of asteroids:
+
+Large
+Medium
+Small
+
+When a large asteroid is destroyed, it should split into two medium asteroids. When a medium asteroid is destroyed, it should split into two small asteroids. When a small asteroid is destroyed, it should disappear.
+
+For now, we'll just always make the asteroids disappear when they're destroyed. We will handle splitting later.
+
+
+                Splitting
+
+
+n the original game, part of the challenge comes from the fact that larger asteroids split into smaller, faster asteroids when you shoot them. Let's support it!
+
+Instead of calling asteroid.kill() in our game loop, let's call asteroid.split(). This is a new method we'll be writing on the Asteroid class. To start, let's just have the split method call self.kill() like before. This should keep the behavior the same as before, but give us the room to add our splitting logic.
+
+Instead of calling asteroid.kill() in our game loop, let's call asteroid.split(). This is a new method we'll be writing on the Asteroid class. To start, let's just have the split method call self.kill() like before. This should keep the behavior the same as before, but give us the room to add our splitting logic.
+
+Assignment
+Add a new .split() method to the Asteroid class. It should:
+
+Immediately .kill() itself (think about it: this asteroid is always destroyed, and maybe we'll spawn new ones)
+If the radius of the asteroid is less than or equal to ASTEROID_MIN_RADIUS, just return, this was a small asteroid and we're done
+Otherwise, we need to spawn 2 new asteroids... instructions below
+
+
+                    Spawning New Asteroids
+
+
+We want new asteroids to move in new random directions.
+
+Import the random module.
+Use random.uniform to generate a random angle between 20 and 50 degrees. This will be the blue angle on the diagram above.
+Use the rotate method on the asteroid's velocity vector to create 2 new vectors, that are rotated by random_angle and -random_angle respectively (they should split in opposite directions).
+Compute the new radius of the smaller asteroids using the formula old_radius - ASTEROID_MIN_RADIUS
+Create two new Asteroid objects at the current asteroid position with the new radius.
+Set the first's velocity to the first new vector, but make it move faster by scaling it up (multiplying) by 1.2
+Do the same for the second asteroid, but with the second new vector.
+
+Run the game, and make sure that the following logic works when a bullet hits an asteroid:
+
+Large asteroids split into two medium asteroids
+Medium asteroids split into two small asteroids
+Small asteroids disappear when destroyed
+
+
+                Extending the project
+
+
+You've done all the required steps, but if you'd like to make the project your own, here are some ideas:
+
+Add a scoring system
+Implement multiple lives and respawning
+Add an explosion effect for the asteroids
+Add acceleration to the player movement
+Make the objects wrap around the screen instead of disappearing
+Add a background image
+Create different weapon types
+Make the asteroids lumpy instead of perfectly round
+Make the ship have a triangular hit box instead of a circular one
+Add a shield power-up
+Add a speed power-up
+Add bombs that can be dropped

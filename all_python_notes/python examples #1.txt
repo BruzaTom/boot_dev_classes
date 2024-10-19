@@ -1,0 +1,224 @@
+def is_prime(number):
+    check = None
+    check2 = None
+    check3 = None
+    if number == 0:
+        check = False
+    elif (number % number) == 0:
+         check2 = True
+        
+    for i in range(2, number):
+            if (number % i) == 0:
+                check3 = False
+    
+    if (number > 1) & (check2 == True) & (check3 != False) & (check != False):
+        return True            
+    else:
+        return False
+
+
+
+
+
+
+def sum_of_odd_numbers(end):
+    total = 0
+    for i in range(1, end, +2):
+        total += i
+        print(total)
+    return total
+
+
+
+
+
+for i in range(0, len(inventory)):
+        item = inventory.pop()
+
+
+
+
+def find_max(nums):
+    max_so_far = float("-inf")
+    for i in range(0, len(nums)):
+        if (nums[i] > nums[i-1]) & (nums[i] > max_so_far):
+            max_so_far = nums[i]
+
+    return max_so_far
+
+
+
+
+def get_first_item(items):
+    if len(items) == 0:
+        return "ERROR"
+    return items[0]
+
+
+
+
+def get_first_item(items):
+    check = None
+
+    if not items:
+        check = "ERROR"
+    else:
+        check = items[0]
+
+    return check
+
+    
+	my code
+
+
+def filter_messages(messages):
+    filtered = []
+    temp_list = []
+    word = ""
+    result = []
+#go through messages
+    for i in range(0, len(messages)):   # go through message elements
+        temp_list = messages[i].split()      # hold array of words in element
+        count = 0                       # set count to 0
+        sent = []                       # define empty sentance
+#filter sentance
+        for i in range(0, len(temp_list)):  ## go through array of words in message
+            message = ""                    # define empty message
+            word = temp_list[i]             
+            if word != "dang":        # if word is not dang 
+                sent.append(word)  # add word to sentence
+            elif word == "dang":     # if word is "dang"
+                count += 1               ## add 1 to count
+            message = " ".join(sent)      #make message from sentance that was filtered
+#add data from filtered sentance
+        filtered.append(message)   #add filtered message to filtered list
+        result.append(count)         #insert count to result
+        
+#return data
+    return filtered, result
+
+
+	there code
+
+def filter_messages(messages):
+    filtered_messages = []
+    words_removed = []
+    for message in messages:
+        words = message.split()
+        new_words = []
+        removed = 0
+        for word in words:
+            if word == "dang":
+                removed += 1
+            else:
+                new_words.append(word)
+        filtered_messages.append(" ".join(new_words))
+        words_removed.append(removed)
+
+    return filtered_messages, words_removed
+
+
+
+	Even teams
+
+def split_players_into_teams(players):
+    even = []
+    odd = []
+    
+    even = players[0::2]
+    odd = players[1::2]
+
+    return even, odd
+
+
+
+
+
+	DOUBLE THE STRING!
+
+
+    def double_string(string):
+# iterate over a string as if it were a list of individual characters.
+    temp_doubled = []
+    doubled = ""
+
+    for i in range(0, len(string)):
+        temp_doubled.append(string[i])
+        temp_doubled.append(string[i])
+
+    doubled = "".join(temp_doubled)
+
+    return doubled
+
+
+
+	return dictionary
+
+
+def get_character_record(name, server, level, rank):
+    return {
+        "name": name,
+        "server": server,
+        "level": level,
+        "rank": rank,
+        "id": f"{name}#{server}",
+    }
+
+        
+        COUNTING PRACTICE
+
+	my code
+
+
+def count_enemies(enemy_names):
+    enemy_dict = {}
+    find_names = []
+    count_names = []
+   
+    
+    
+    
+    
+    
+    # go through list of names
+   
+    for i in range(0, len(enemy_names)):  
+    # remove duplicates
+        name = enemy_names[i]
+        count = 0
+    
+        
+        
+    # run name through list of names and return count of duplicates    
+        for t in range(0, len(enemy_names)):
+            
+            if  name == enemy_names[t]:
+                count += 1
+
+    # reuturn count             
+        count_names.append(count)
+    # add information if not there already
+        if name not in find_names:
+            find_names.append(name)
+            enemy_dict[name] = count_names[i]
+    return enemy_dict
+
+
+	there code
+
+
+def count_enemies(enemy_names):
+    enemies_dict = {}
+    for enemy_name in enemy_names:
+        if enemy_name in enemies_dict:
+            enemies_dict[enemy_name] += 1
+        else:
+            enemies_dict[enemy_name] = 1
+    return enemies_dict
+
+        
+
+	
+
+
+
