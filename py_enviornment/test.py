@@ -1,61 +1,35 @@
 from main import *
 
 run_cases = [
-    ([7, 4, 3, 100, 765, 2344, 1, 2, 32], 5056),
-    ([12, 12, 12], 45),
-    ([10, 200, 3000, 5000, 4], 11333),
+    (10, "fitness", 1, 40),
+    (10, "fitness", 2, 160),
+    (12, "cosmetic", 4, 972),
 ]
 
 submit_cases = run_cases + [
-    ([], 0),
-    ([1, 1, 1], 4),
-    ([100], 100),
-    ([50, 60, 70, 80, 90], 483),
-    ([10, 20, 30, 40, 50, 60, 70, 80, 90, 100], 872),
-    (
-        [
-            5,
-            10,
-            15,
-            20,
-            25,
-            30,
-            35,
-            40,
-            45,
-            50,
-            55,
-            60,
-            65,
-            70,
-            75,
-            80,
-            85,
-            90,
-            95,
-            100,
-        ],
-        1912,
-    ),
+    (15, "business", 4, 240),
+    (10, "fitness", 5, 10240),
+    (10, "fitness", 6, 40960),
+    (10, "fitness", 7, 163840),
+    (10, "fitness", 8, 655360),
+    (10, "tech", 9, 5120),
 ]
 
 
-def test(input1, expected_output):
-    try:
-        print("---------------------------------")
-        print(f"Inputs: {input1}")
-        print(f"Expecting: {expected_output}")
-        result = round(get_estimated_spread(input1))
-        print(f"Actual: {result}")
-        if result == expected_output:
-            print("Pass")
-            return True
-        print("Fail")
-        return False
-    except Exception as e:
-        print("Fail")
-        print(e)
-        return False
+def test(input1, input2, input3, expected_output):
+    print("---------------------------------")
+    print(f"Inputs:")
+    print(f" * Follower count: {input1}")
+    print(f" * Influencer type: {input2}")
+    print(f" * Number of months: {input3}")
+    print(f"Expecting: {expected_output}")
+    result = get_follower_prediction(input1, input2, input3)
+    print(f"Actual: {result}")
+    if result == expected_output:
+        print("Pass")
+        return True
+    print("Fail")
+    return False
 
 
 def main():

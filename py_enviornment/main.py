@@ -1,10 +1,7 @@
-def get_estimated_spread(audiences_followers):
-    if audiences_followers == []:
-        return 0
-    num_followers = 0
-    for num in audiences_followers:
-        num_followers += num
-    average = num_followers / len(audiences_followers)
-    return average * (len(audiences_followers) ** 1.2)
+def get_follower_prediction(follower_count, influencer_type, num_months):
+    if influencer_type == 'fitness':
+        return follower_count * (4**num_months)
+    if influencer_type == 'cosmetic':
+        return follower_count * (3**num_months)
+    return follower_count * (2**num_months)
 
-print(10**3)
