@@ -1,34 +1,29 @@
 from main import *
 
-run_cases = [(40000, 0.3, 5), (43000, 0.1, 2), (100000, 0.6, 10)]
+run_cases = [(2, 2), (3, 6), (5, 120)]
 
 submit_cases = run_cases + [
-    (1, 1, 0),
-    (200, 0.8, 6),
-    (300000, 0.5, 9),
-    (500000, 0.2, 4),
-    (750000, 0.7, 14),
+    (1, 1),
+    (6, 720),
+    (7, 5040),
+    (8, 40320),
+    (9, 362880),
+    (11, 39916800),
 ]
 
 
-def test(input1, input2, expected_output):
-    try:
-        print("---------------------------------")
-        print(f"Inputs:")
-        print(f" * num_followers: {input1}")
-        print(f" * average_engagement_percentage: {input2}")
-        print(f"Expecting: {expected_output}")
-        result = round(get_influencer_score(input1, input2))
-        print(f"Actual: {result}")
-        if result == expected_output:
-            print("Pass")
-            return True
-        print("Fail")
-        return False
-    except Exception as e:
-        print("Fail")
-        print(e)
-        return False
+def test(input1, expected_output):
+    print("---------------------------------")
+    print(f"Inputs:")
+    print(f" * num_posts: {input1}")
+    print(f"Expecting: {expected_output}")
+    result = num_possible_orders(input1)
+    print(f"Actual: {result}")
+    if result == expected_output:
+        print("Pass")
+        return True
+    print("Fail")
+    return False
 
 
 def main():
