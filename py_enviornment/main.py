@@ -1,7 +1,5 @@
-def get_follower_prediction(follower_count, influencer_type, num_months):
-    if influencer_type == 'fitness':
-        return follower_count * (4**num_months)
-    if influencer_type == 'cosmetic':
-        return follower_count * (3**num_months)
-    return follower_count * (2**num_months)
+import math
 
+
+def get_influencer_score(num_followers, average_engagement_percentage):
+    return average_engagement_percentage * math.log(num_followers, 2)

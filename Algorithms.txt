@@ -157,3 +157,74 @@ All other influencers: follower count doubles each month
 For example, if a fitness influencer starts with 10 followers, then after 1 month they should have 40 followers. After 2 months, they would have 160 followers; etc.
 
 Use a geometric sequence formula that's slightly modified for this problem: total = a1 * r^n
+
+
+                Non-Linear Growth
+
+
+Exponents are important to understand when it comes to the execution speed of an algorithm. If the number of operations grows quickly as the amount of input data increases, the algorithm will become slower and slower.
+
+Linear	        Quadratic
+2 * 2 = 4	    2 ** 2 = 4
+3 * 2 = 6	    3 ** 2 = 9
+4 * 2 = 8	    4 ** 2 = 16
+5 * 2 = 10	    5 ** 2 = 25
+6 * 2 = 12	    6 ** 2 = 36
+7 * 2 = 14	    7 ** 2 = 49
+8 * 2 = 16	    8 ** 2 = 64
+9 * 2 = 18	    9 ** 2 = 81
+
+The doubling formula, 2*x, results in linear or straight growth.
+The quadratic formula, x^2, keeps growing faster and faster.
+
+What does this have to do with code?
+Generally we try to avoid writing code that causes the usage of a resource to grow quadratically (with an exponent).
+
+Sometimes that's a lot of computations (CPU utilization / slowness).
+Sometimes that's a lot of memory usage (RAM utilization)
+Sometimes that's a large storage requirement (disk space)
+
+A notable exception is in cryptography and security: we want to force attackers to waste resources trying to get at our information.
+
+Notable:
+How much larger is 2^64 than 2^32?
+2^64 is 2^32 times larger than 2^32
+
+
+                    Logarithms
+
+
+A logarithm is the inverse of an exponent.
+
+24 = 16
+
+log216 = 4
+
+"log216" can be read as "log base 2 of 16", and means "the number of times 2 must be multiplied by itself to equal 16".
+
+"log216" might also be written as log2(16)
+
+Some more examples:
+
+Logarithm	Result
+log22	        1
+log24	        2
+log28	        3
+log216	        4
+log1010	        1
+log10100	    2
+log101000	    3
+log1010000	    4
+
+Python Syntax
+There isn't a language-level operator to calculate a logarithm, but we can import the math library and use the math.log() function.
+
+import math
+
+print(f"Logarithm base 2 of 16 is: {math.log(16, 2)}")
+# Logarithm base 2 of 16 is: 4.0
+
+Assignment
+Let's create an "influencer score". It will be a small number (like less than 100) that will give influencers a metric for comparing their social media success against their peers.
+
+Complete the get_influencer_score function. An influencer score is their engagement percentage multiplied by log base 2 of their follower count.

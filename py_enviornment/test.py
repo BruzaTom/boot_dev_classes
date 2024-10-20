@@ -1,35 +1,34 @@
 from main import *
 
-run_cases = [
-    (10, "fitness", 1, 40),
-    (10, "fitness", 2, 160),
-    (12, "cosmetic", 4, 972),
-]
+run_cases = [(40000, 0.3, 5), (43000, 0.1, 2), (100000, 0.6, 10)]
 
 submit_cases = run_cases + [
-    (15, "business", 4, 240),
-    (10, "fitness", 5, 10240),
-    (10, "fitness", 6, 40960),
-    (10, "fitness", 7, 163840),
-    (10, "fitness", 8, 655360),
-    (10, "tech", 9, 5120),
+    (1, 1, 0),
+    (200, 0.8, 6),
+    (300000, 0.5, 9),
+    (500000, 0.2, 4),
+    (750000, 0.7, 14),
 ]
 
 
-def test(input1, input2, input3, expected_output):
-    print("---------------------------------")
-    print(f"Inputs:")
-    print(f" * Follower count: {input1}")
-    print(f" * Influencer type: {input2}")
-    print(f" * Number of months: {input3}")
-    print(f"Expecting: {expected_output}")
-    result = get_follower_prediction(input1, input2, input3)
-    print(f"Actual: {result}")
-    if result == expected_output:
-        print("Pass")
-        return True
-    print("Fail")
-    return False
+def test(input1, input2, expected_output):
+    try:
+        print("---------------------------------")
+        print(f"Inputs:")
+        print(f" * num_followers: {input1}")
+        print(f" * average_engagement_percentage: {input2}")
+        print(f"Expecting: {expected_output}")
+        result = round(get_influencer_score(input1, input2))
+        print(f"Actual: {result}")
+        if result == expected_output:
+            print("Pass")
+            return True
+        print("Fail")
+        return False
+    except Exception as e:
+        print("Fail")
+        print(e)
+        return False
 
 
 def main():
