@@ -289,3 +289,63 @@ That means the total number of possibilities is the 52 options multiplied by 51 
 52 * 51 * 50 ... * 2 * 1
 
 Or in other words, the number of possible combinations for a deck of cards is 52!, or 80,658,175,170,943,878,571,660,636,856,403,766,975,289,505,440,883,277,824,000,000,000,000 (I didn't count the zeros but I think this is correct).
+
+Factorial Quiz
+Again, the factorial of a positive integer n, written n!, is the product of all positive integers less than and equal to n.
+
+5! = 5 * 4 * 3 * 2 * 1
+
+Let's visualize how big these things get:
+
+n	n!
+2	2
+3	6
+4	24
+5	120
+6	720
+7	5,040
+8	4,0320
+9	362,880
+10	3,628,800
+11	39,916,800
+12	479,001,600
+13	6,227,020,800
+14	87,178,291,200
+15	1,307,674,368,000
+16	20,922,789,888,000
+17	355,687,428,096,000
+18	6,402,373,705,728,000
+19	121,645,100,408,832,000
+20	2,432,902,008,176,640,000
+
+
+                Exponential Decay
+
+
+In physics, exponential decay is a process where a quantity decreases over time at a rate proportional to its current value.
+
+We've found that Instagram influencers tend to lose followers similarly. This means that the more followers you have, the faster you lose them.
+
+Assignment
+Complete the decayed_followers function.
+
+It calculates the final value of a quantity after a certain time has passed, given its initial value and a rate of decay. Return the remaining followers.
+
+remaining_total = quantity * ( retention_rate ^ time )
+
+The retention_rate is the opposite of fraction_lost_daily. If an influencer lost 0.2 (or 20%) of their followers each day, then the retention rate would be 0.8 (or 80%).
+
+Example
+intl_followers = 100
+
+fraction_lost_daily = 0.5
+
+After 0 days: 100 followers
+
+After 1 day: 50 followers
+
+After 2 days: 25 followers
+
+After 3 days: 12.5 followers (rounded down)
+
+Note: This isn't the exact formula shown on Wikipedia, but it's the same idea.

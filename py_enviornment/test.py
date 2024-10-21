@@ -1,23 +1,29 @@
 from main import *
 
-run_cases = [(2, 2), (3, 6), (5, 120)]
+run_cases = [
+    (200, 0.5, 1, 100),
+    (200, 0.5, 2, 50),
+    (200, 0.05, 3, 171),
+]
 
 submit_cases = run_cases + [
-    (1, 1),
-    (6, 720),
-    (7, 5040),
-    (8, 40320),
-    (9, 362880),
-    (11, 39916800),
+    (1000, 0.005, 2, 990),
+    (1000, 0.05, 3, 857),
+    (1200, 0.55, 8, 2),
+    (1200, 0.09, 16, 265),
+    (0, 0.5, 1, 0),
+    (100, 0, 5, 100),
 ]
 
 
-def test(input1, expected_output):
+def test(input1, input2, input3, expected_output):
     print("---------------------------------")
     print(f"Inputs:")
-    print(f" * num_posts: {input1}")
+    print(f" * intl_followers: {input1}")
+    print(f" * fraction_lost_daily: {input2}")
+    print(f" * days: {input3}")
     print(f"Expecting: {expected_output}")
-    result = num_possible_orders(input1)
+    result = round(decayed_followers(input1, input2, input3))
     print(f"Actual: {result}")
     if result == expected_output:
         print("Pass")
