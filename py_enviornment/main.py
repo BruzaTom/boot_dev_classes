@@ -1,5 +1,7 @@
-def decayed_followers(intl_followers, fraction_lost_daily, days):
-    ret = 1.00 - fraction_lost_daily
-    if fraction_lost_daily == 0:
-        return intl_followers
-    return intl_followers * (ret ** days)
+import math
+
+def log_scale(data, base):
+    lst = []
+    for num in data:
+        lst.append(math.log(num, base))
+    return lst

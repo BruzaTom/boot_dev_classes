@@ -1,35 +1,39 @@
 from main import *
 
 run_cases = [
-    (200, 0.5, 1, 100),
-    (200, 0.5, 2, 50),
-    (200, 0.05, 3, 171),
+    ([1, 10, 100, 1000], 10, [0.0, 1.0, 2.0, 3.0]),
+    ([1, 2, 4, 8], 2, [0.0, 1.0, 2.0, 3.0]),
 ]
 
 submit_cases = run_cases + [
-    (1000, 0.005, 2, 990),
-    (1000, 0.05, 3, 857),
-    (1200, 0.55, 8, 2),
-    (1200, 0.09, 16, 265),
-    (0, 0.5, 1, 0),
-    (100, 0, 5, 100),
+    ([2, 4, 8, 16], 2, [1.0, 2.0, 3.0, 4.0]),
+    ([3, 9, 27, 81], 3, [1.0, 2.0, 3.0, 4.0]),
+    ([5, 25, 125, 625], 5, [1.0, 2.0, 3.0, 4.0]),
+    ([10, 100, 1000, 10000], 10, [1.0, 2.0, 3.0, 4.0]),
+    ([20, 400, 8000, 160000], 20, [1.0, 2.0, 3.0, 4.0]),
 ]
 
 
-def test(input1, input2, input3, expected_output):
-    print("---------------------------------")
-    print(f"Inputs:")
-    print(f" * intl_followers: {input1}")
-    print(f" * fraction_lost_daily: {input2}")
-    print(f" * days: {input3}")
-    print(f"Expecting: {expected_output}")
-    result = round(decayed_followers(input1, input2, input3))
-    print(f"Actual: {result}")
-    if result == expected_output:
-        print("Pass")
-        return True
-    print("Fail")
-    return False
+def test(data, base, expected_output):
+    try:
+        print("---------------------------------")
+        print(f"Inputs:")
+        print(f" * data: {data}")
+        print(f" * base: {base}")
+        print(f"Expecting: {expected_output}")
+        scaled_data = log_scale(data, base)
+        for i in range(0, len(scaled_data)):
+            scaled_data[i] = round(scaled_data[i], 2)
+        print(f"Actual: {scaled_data}")
+        if scaled_data == expected_output:
+            print("Pass")
+            return True
+        print("Fail")
+        return False
+    except Exception as e:
+        print("Fail")
+        print(e)
+        return False
 
 
 def main():
