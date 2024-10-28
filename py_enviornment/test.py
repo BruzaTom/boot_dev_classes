@@ -1,39 +1,28 @@
 from main import *
 
-run_cases = [
-    ([1, 10, 100, 1000], 10, [0.0, 1.0, 2.0, 3.0]),
-    ([1, 2, 4, 8], 2, [0.0, 1.0, 2.0, 3.0]),
-]
+run_cases = [([7, 4, 3, 100, 2343243, 343434, 1, 2, 32], 2343243), ([12, 12, 12], 12)]
 
 submit_cases = run_cases + [
-    ([2, 4, 8, 16], 2, [1.0, 2.0, 3.0, 4.0]),
-    ([3, 9, 27, 81], 3, [1.0, 2.0, 3.0, 4.0]),
-    ([5, 25, 125, 625], 5, [1.0, 2.0, 3.0, 4.0]),
-    ([10, 100, 1000, 10000], 10, [1.0, 2.0, 3.0, 4.0]),
-    ([20, 400, 8000, 160000], 20, [1.0, 2.0, 3.0, 4.0]),
+    ([10, 200, 3000, 5000, 4], 5000),
+    ([0], 0),
+    ([-1, -2, -3], -1),
+    ([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 10),
+    ([10, 9, 8, 7, 6, 5, 4, 3, 2, 1], 10),
 ]
 
 
-def test(data, base, expected_output):
-    try:
-        print("---------------------------------")
-        print(f"Inputs:")
-        print(f" * data: {data}")
-        print(f" * base: {base}")
-        print(f"Expecting: {expected_output}")
-        scaled_data = log_scale(data, base)
-        for i in range(0, len(scaled_data)):
-            scaled_data[i] = round(scaled_data[i], 2)
-        print(f"Actual: {scaled_data}")
-        if scaled_data == expected_output:
-            print("Pass")
-            return True
-        print("Fail")
-        return False
-    except Exception as e:
-        print("Fail")
-        print(e)
-        return False
+def test(input1, expected_output):
+    print("---------------------------------")
+    print(f"Inputs:")
+    print(f" * nums: {input1}")
+    print(f"Expecting: {expected_output}")
+    result = find_max(input1)
+    print(f"Actual: {result}")
+    if result == expected_output:
+        print("Pass")
+        return True
+    print("Fail")
+    return False
 
 
 def main():
