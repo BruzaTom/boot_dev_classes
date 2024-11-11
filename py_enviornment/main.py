@@ -1,9 +1,11 @@
-def does_name_exist(first_names, last_names, full_name):
-    split = full_name.split()
-    for first in first_names:
-        for last in last_names:
-            if first == split[0] and last == split[1]:
-                return True
-    return False
-
+def get_avg_brand_followers(all_handles, brand_name):
+    sum = 0
+    for list in all_handles:    
+        count = 0
+        for tag in list:
+            if brand_name in tag:
+                count += 1 
+        sum += count
+    return sum / len(all_handles)
+    
 
