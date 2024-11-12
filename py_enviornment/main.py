@@ -1,12 +1,7 @@
-def binary_search(target, arr):
-    low = 0
-    high = len(arr) - 1
-    while low <= high:
-        med = (low + high) // 2
-        if arr[med] == target:
-            return True
-        elif arr[med] < target:
-            low = med + 1
-        else:
-            high = med - 1
-    return False
+def count_names(list_of_lists, target_name):
+    count = 0
+    for list in list_of_lists:
+        for name in list:
+            if name == target_name:
+                count += 1
+    return count

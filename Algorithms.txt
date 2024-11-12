@@ -619,3 +619,17 @@ Assignment
 We have a popular Instagrammer using our Socialytics app, and she needs to be able to quickly search for posts from a particular day. This function will be the backbone of her search screen.
 
 Complete the binary_search function. It should follow the algorithm as described above.
+
+
+            Name Count
+
+
+In Socialytics, we process tons of user's names. They are often structured as lists of lists. For example, a separate list of users for each influencer's followers.
+
+Assignment
+Complete the count_names function.
+
+It should iterate over all the names in the nested list_of_lists and count all the instances of target_name, then return the count.
+
+Observe
+What's the time complexity of your solution? It should be O(n) on the total number of names, but O(mn) if you consider m to be the number of lists and n to be the average length of a list.

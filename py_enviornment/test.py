@@ -1,47 +1,66 @@
 from main import *
-import time
 
 run_cases = [
-    (10, [i for i in range(200)], True),
-    (-1, [i for i in range(20000)], False),
+    ([["George", "Eva", "George"], ["Diane", "George", "Eva", "Frank"]], "George", 3),
+    (
+        [
+            ["Amy", "Bob", "Candy"],
+            ["Diane", "George", "Eva", "Frank"],
+            ["Diane", "George"],
+            ["George", "name", "George"],
+        ],
+        "George",
+        4,
+    ),
 ]
 
 submit_cases = run_cases + [
-    (15, [], False),
-    (0, [0], True),
-    (-1, [-2, -1], True),
-    (105028, [i for i in range(2000000)], True),
-    (2000001, [i for i in range(2000000)], False),
+    (
+        [
+            ["Alex", "name", "Chloe"],
+            ["Eric", "name", "Fred"],
+            ["Hector", "name"],
+            ["Hector", "name"],
+            ["Hector", "name"],
+            ["George"],
+        ],
+        "Hector",
+        3,
+    ),
+    (
+        [
+            ["Alex", "name", "Chloe"],
+            ["Eric", "name", "Fred"],
+            ["Hector", "name"],
+            ["Hector", "name"],
+            ["Hector", "name"],
+            ["George"],
+        ],
+        "George",
+        1,
+    ),
+    (
+        [["Alex", "name", "Chloe"], ["Eric", "name", "Fred"], ["Hector", "name"]],
+        "Alex",
+        1,
+    ),
+    ([], "George", 0),
 ]
 
 
-def test(target, arr, expected_output):
+def test(input1, input2, expected_output):
     print("---------------------------------")
     print(f"Inputs:")
-    print(f" * target: {target}")
-    print(f" * arr length: {len(arr)} items")
-    print(f"Expecting: {expected_output} & completed in less than 50 milliseconds")
-    start = time.time()
-    result = binary_search(target, arr)
-    end = time.time()
-    timeout = 0.05
-    if (end - start) < timeout:
-        print(f"binary_search completed in less than {timeout * 1000} milliseconds!")
-        if result == expected_output:
-            print(f"Actual: {result}")
-            print("Pass")
-            return True
-        else:
-            print(f"Actual: {result}")
-            print("Fail")
-            return False
-    else:
-        print(
-            f"binary_search took too long ({(end - start) * 1000} milliseconds). Speed it up!"
-        )
-        print(f"Actual: {result}")
-        print("Fail")
-        return False
+    print(f" * list of lists: {input1}")
+    print(f" * target name: {input2}")
+    print(f"Expecting: {expected_output}")
+    result = count_names(input1, input2)
+    print(f"Actual: {result}")
+    if result == expected_output:
+        print("Pass")
+        return True
+    print("Fail")
+    return False
 
 
 def main():
