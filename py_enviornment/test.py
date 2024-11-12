@@ -2,33 +2,31 @@ from main import *
 import time
 
 run_cases = [
-    (1000000, "John", "Doe", "Doe999999"),
-    (1500000, "Lane", "Wagner", "Wagner1499999"),
+    (10, [i for i in range(200)], True),
+    (-1, [i for i in range(20000)], False),
 ]
 
 submit_cases = run_cases + [
-    (2000000, "Key", "Error", None),
-    (2500000, "Chad", "Energy", "Energy2499999"),
-    (3000000, "Tiffany", "Johnson", "Johnson2999999"),
+    (15, [], False),
+    (0, [0], True),
+    (-1, [-2, -1], True),
+    (105028, [i for i in range(2000000)], True),
+    (2000001, [i for i in range(2000000)], False),
 ]
 
 
-def test(complexity, first_name, last_name, expected_output):
-    names_dict = get_name_dict(first_name, last_name, complexity)
+def test(target, arr, expected_output):
     print("---------------------------------")
     print(f"Inputs:")
-    print(f" * first_name: {first_name}")
+    print(f" * target: {target}")
+    print(f" * arr length: {len(arr)} items")
     print(f"Expecting: {expected_output} & completed in less than 50 milliseconds")
-    if last_name == "Error":
-        first_name_key = first_name
-    else:
-        first_name_key = f"{first_name}{complexity - 1}"
     start = time.time()
-    result = find_last_name(names_dict, first_name_key)
+    result = binary_search(target, arr)
     end = time.time()
     timeout = 0.05
     if (end - start) < timeout:
-        print(f"find_last_name completed in less than {timeout * 1000} milliseconds!")
+        print(f"binary_search completed in less than {timeout * 1000} milliseconds!")
         if result == expected_output:
             print(f"Actual: {result}")
             print("Pass")
@@ -39,7 +37,7 @@ def test(complexity, first_name, last_name, expected_output):
             return False
     else:
         print(
-            f"find_last_name took too long ({(end - start) * 1000} milliseconds). Speed it up!"
+            f"binary_search took too long ({(end - start) * 1000} milliseconds). Speed it up!"
         )
         print(f"Actual: {result}")
         print("Fail")
@@ -60,13 +58,6 @@ def main():
     else:
         print("============= FAIL ==============")
     print(f"{passed} passed, {failed} failed")
-
-
-def get_name_dict(first_name, last_name, num):
-    names = {}
-    for i in range(num):
-        names[f"{first_name}{i}"] = f"{last_name}{i}"
-    return names
 
 
 test_cases = submit_cases
