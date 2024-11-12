@@ -302,3 +302,17 @@ def median_followers(nums):
     else:
         median = len(nums) / 2
         return sortedLst[int(median)]
+
+
+# O(1)
+# 2 different methods of dict look up, perhaps the second is more professional
+
+def find_last_name(names_dict, first_name):
+    if first_name in names_dict:
+        return names_dict[first_name]
+    
+def find_last_name2(names_dict, first_name):
+    try:
+        return names_dict[first_name]
+    except KeyError:
+        return None

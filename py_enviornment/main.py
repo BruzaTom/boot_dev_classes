@@ -1,11 +1,9 @@
-def get_avg_brand_followers(all_handles, brand_name):
-    sum = 0
-    for list in all_handles:    
-        count = 0
-        for tag in list:
-            if brand_name in tag:
-                count += 1 
-        sum += count
-    return sum / len(all_handles)
-    
+def find_last_name(names_dict, first_name):
+    if first_name in names_dict:
+        return names_dict[first_name]
 
+def find_last_name2(names_dict, first_name):
+    try:
+        return names_dict[first_name]
+    except KeyError:
+        return None

@@ -511,3 +511,58 @@ Expected output: 1.33 (handles per influencer, because 4 handles contained "cosm
 
 Observe
 Regarding Big O, the number of influencers (the number of lists) matters. That's our n. However, the average number of followers of each influencer (the average length of the lists) is just as important. That's our m.
+
+
+                Constants Don't Matter
+
+
+Big-O notation only describes the theoretical growth rate of algorithms. It doesn't deal with the actual time an algorithm takes to run on a given machine. As such, when doing Big O analysis, we don't let ourselves get bogged down in details.
+
+For example, take a look at the following functions:
+
+def print_names_once(names):
+    for name in names:
+        print(name)
+
+def print_names_twice(names):
+    for name in names:
+        print(name)
+    for name in names:
+        print(name)
+
+As you would expect, print_names_once will take half the time to run as print_names_twice. And in the real world of software engineering, cutting speed in half is awesome. The funny thing about Big O analysis is that we don't care. We're academics™.
+
+Both of the functions above have the same rate of growth, O(n). You might be tempted to say, "print_names_twice should be O(2 * n)" but you would be missing the whole point of Big O.
+
+In Big O analysis we drop all constants because while they affect the runtime, they don't affect the change in the runtime.
+
+O(2 * n) -> O(n)
+O(10 * n^2) -> O(n^2)
+
+see
+https://www.youtube.com/watch?v=T0Egtqli4rg
+
+
+                Order 1
+
+
+O(1) means that no matter the size of the input, there is no growth in the runtime of the algorithm. This is also referred to as a "constant time" algorithm.
+
+In Python, a dictionary offers the ability to look items up by key, which is an operation that is independent of the size of the dictionary:
+
+# this is a constant time lookup
+org = organizations[org_id]
+
+Dictionary lookups are O(1). Which is one of the reasons dictionaries and dictionary-equivalents in other languages are used all over the place.
+
+Assignment
+We need to be able to search our Socialytics user base more quickly! Our users are complaining that the search bar is painfully slow. You'll notice that if you run the code in its current state, it will take a very long time.
+
+The find_last_name function takes
+
+-names_dict: a dictionary of first_name -> last_name.
+-first_name: a string.
+
+If first_name is a key in the dictionary, find_last_name returns the associated last name. If the key is not found, it returns None.
+
+Write the function so that it runs quickly! It should be O(1).
