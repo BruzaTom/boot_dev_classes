@@ -596,8 +596,7 @@ images/binary search.png
 
 A binary search algorithm is a common example of an O(log(n)) algorithm. Binary searches work on a pre-sorted list of elements.
 
-        Pseudocode
-
+Pseudocode
 Given two inputs:
 
 -An array of n elements sorted from least to greatest
@@ -633,3 +632,14 @@ It should iterate over all the names in the nested list_of_lists and count all t
 
 Observe
 What's the time complexity of your solution? It should be O(n) on the total number of names, but O(mn) if you consider m to be the number of lists and n to be the average length of a list.
+
+
+            Remove Duplicate Elements
+
+
+We're interested in showing the unique follower counts of all of an influencer's followers.
+
+Assignment
+Complete the remove_duplicates function. It takes a list of integers nums and returns a new list of integers. The returned list of integers should consist of all the unique follower counts in nums without any duplicates.
+
+We want to preserve the order of the list so be careful when using a set!

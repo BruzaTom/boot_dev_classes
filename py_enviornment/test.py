@@ -1,60 +1,28 @@
 from main import *
 
 run_cases = [
-    ([["George", "Eva", "George"], ["Diane", "George", "Eva", "Frank"]], "George", 3),
-    (
-        [
-            ["Amy", "Bob", "Candy"],
-            ["Diane", "George", "Eva", "Frank"],
-            ["Diane", "George"],
-            ["George", "name", "George"],
-        ],
-        "George",
-        4,
-    ),
+    ([1, 2, 3, 4, 4, 5, 6, 7, 7, 7], [1, 2, 3, 4, 5, 6, 7]),
+    ([10, 10, 20, 30, 30, 30, 40, 50, 50], [10, 20, 30, 40, 50]),
 ]
 
 submit_cases = run_cases + [
     (
-        [
-            ["Alex", "name", "Chloe"],
-            ["Eric", "name", "Fred"],
-            ["Hector", "name"],
-            ["Hector", "name"],
-            ["Hector", "name"],
-            ["George"],
-        ],
-        "Hector",
-        3,
+        [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1],
+        [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
     ),
-    (
-        [
-            ["Alex", "name", "Chloe"],
-            ["Eric", "name", "Fred"],
-            ["Hector", "name"],
-            ["Hector", "name"],
-            ["Hector", "name"],
-            ["George"],
-        ],
-        "George",
-        1,
-    ),
-    (
-        [["Alex", "name", "Chloe"], ["Eric", "name", "Fred"], ["Hector", "name"]],
-        "Alex",
-        1,
-    ),
-    ([], "George", 0),
+    ([], []),
+    ([1, 1, 1, 1, 1, 1, 1, 1, 1, 1], [1]),
+    ([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]),
+    ([10, 20, 30, 40, 50, 50, 40, 30, 20, 10], [10, 20, 30, 40, 50]),
 ]
 
 
-def test(input1, input2, expected_output):
+def test(input1, expected_output):
     print("---------------------------------")
     print(f"Inputs:")
-    print(f" * list of lists: {input1}")
-    print(f" * target name: {input2}")
+    print(f" * nums: {input1}")
     print(f"Expecting: {expected_output}")
-    result = count_names(input1, input2)
+    result = remove_duplicates(input1)
     print(f"Actual: {result}")
     if result == expected_output:
         print("Pass")
