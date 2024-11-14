@@ -643,3 +643,32 @@ Assignment
 Complete the remove_duplicates function. It takes a list of integers nums and returns a new list of integers. The returned list of integers should consist of all the unique follower counts in nums without any duplicates.
 
 We want to preserve the order of the list so be careful when using a set!
+
+
+                Sorting Algorithms
+                
+
+Almost every action you take in a web app relies on sorted data. Just looking up a user's profile in a database likely relies on a sorted index (which we'll talk about in another course).
+
+Fortunately, most programming languages provide their own standard sorting implementation. In Python, for example, we can use the sorted function:
+
+items = [1, 5, 3]
+print(sorted(items)) # [1, 3, 5]
+
+Assignment
+We need to sort influencers by vanity. Complete the vanity and vanity_sort functions.
+
+The vanity function accepts an instance of an Influencer and returns their vanity score. The vanity score should be the number of links in their bio multiplied by 5, plus their number of selfies. (Links in bio are weighted more heavily)
+
+The vanity_sort function should return a list of influencers, ordered by their vanity from least to greatest. You can pass a function as a named parameter called key to sorted to control the metric the sorting algorithm will use for comparisons.
+
+[personal note]
+
+sorted(iterable, /, *, key=None, reverse=False)
+Return a new sorted list from the items in iterable.
+
+Has two optional arguments which must be specified as keyword arguments.
+
+key specifies a function of one argument that is used to extract a comparison key from each element in iterable (for example, key=str.lower). The default value is None (compare the elements directly).
+
+reverse is a boolean value. If set to True, then the list elements are sorted as if each comparison were reversed.
