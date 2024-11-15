@@ -687,6 +687,9 @@ In all seriousness, in this chapter we'll be building some of the most famous so
 
 Bubble sort is a very basic sorting algorithm named for the way elements "bubble up" to the top of the list.
 
+see
+https://youtu.be/_t-yshdh_ow
+
 Bubble sort repeatedly steps through a slice and compares adjacent elements, swapping them if they are out of order. It continues to loop over the slice until the whole list is completely sorted. Here's the pseudocode:
 
 Set swapping to True
@@ -704,3 +707,50 @@ Assignment
 While our avocado toast influencers were happy with our search functionality, now they want to be able to sort all their followers by follower count. Bubble sort is a straightforward sorting algorithm that we can implement quickly, so let's do that!
 
 Complete the bubble_sort function according to the described algorithm above.
+
+
+                Bubble Sort Big O
+
+
+Implementation reference:
+
+def bubble_sort(nums):
+    swapping = True
+    end = len(nums)
+    while swapping:
+        swapping = False
+        for i in range(1, end):
+            if nums[i - 1] > nums[i]:
+                temp = nums[i - 1]
+                nums[i - 1] = nums[i]
+                nums[i] = temp
+                swapping = True
+        end -= 1
+    return nums
+
+            Best and Worst Case
+
+Sometimes it's useful to know how the algorithm will perform based on what the input data is instead of just how much data there is. In the case of bubble sort (and many other algorithms), the best and worst case scenarios can actually change the time complexity.
+
+-Best case: If the data is pre-sorted, bubble sort becomes really fast. Can you see why?
+-Worst case: If the data is in reverse order, bubble sort becomes really slow (but still in the same complexity class as random data). Can you see why?
+
+[questions]
+
+What is bubble sort's Big O complexity?
+O(n^2)
+
+What are its best and worst case run times?
+At best n, at worst n^2
+
+
+                Why Bubble Sort?
+
+
+Bubble sort is famous for how easy it is to write and understand.
+
+However, it's one of the slowest sorting algorithms, and as a result is almost never used in practice. That said, we covered it because it's a useful thought exercise so that you can appreciate why the more complex and performant algorithms are better. Let's cover those next.
+
+[question]
+What is a good reason to use bubble sort?
+Because im studying algorithms
