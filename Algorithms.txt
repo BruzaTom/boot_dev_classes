@@ -931,3 +931,51 @@ yes but only on very small inputs
 
 Which algorithm uses the least memory, and which is generally faster respectively?
 insertion sort, merge sort
+
+
+            Quick Sort
+
+Quick sort is an efficient sorting algorithm that's widely used in production sorting implementations. Like merge sort, quick sort is a recursive divide and conquer algorithm.
+
+Divide:
+
+Select a pivot element that will preferably end up close to the center of the sorted pack
+Move everything onto the "greater than" or "less than" side of the pivot
+The pivot is now in its final position
+Recursively repeat the operation on both sides of the pivot
+
+Conquer:
+
+The array is sorted after all elements have been through the pivot operation
+
+see https://storage.googleapis.com/qvault-webapp-dynamic-assets/lesson_videos/quick-sort.mp4
+
+    Pseudocode
+
+Select a "pivot" element - We'll arbitrarily choose the last element in the list
+Move through all the elements in the list and swap them around until all the numbers less than the pivot are on the left, and the numbers greater than the pivot are on the right
+Move the pivot between the two sections where it belongs
+recursively repeat for both sections
+
+Assignment:
+We now have two sorting algorithms on our Socialytics backend! It is a bit annoying to maintain both in the codebase. Quicksort is fast on large datasets just like merge sort, but is also lighter on memory usage. Let's use quick sort for both follower count and influencer revenue sorting!
+
+Complete the quick_sort and partition functions according to the given algorithms.
+
+Note: The process is started with quick_sort(A, 0, len(A)-1).
+
+quick_sort(nums, low, high):
+    If low is less than high:
+        Partition the input list using the partition function
+        Recursively call quick_sort on the left side of the partition
+        Recursively call quick_sort on the right side of the partition
+        
+partition(nums, low, high):
+    Set pivot to the element at index high
+    Set i to low
+    For each index (j) from low to high
+        If the element at index j is less than the pivot:
+            Swap the element at index i with the element at index j
+            Increment i by 1
+        Swap the element at index i with the element at index high
+    Return the index i
