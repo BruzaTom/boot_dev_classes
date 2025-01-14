@@ -1,21 +1,10 @@
-def quick_sort(nums, low, high):
-    if low < high:
-        i = partition(nums, low, high)
-        quick_sort(nums, 0, i-1) #left
-        quick_sort(nums, i+1, high) #right
-        #do not assighn a left and right variable
-        
+def selection_sort(nums):
+    for t in range(0, len(nums)):
+        small = t
+        for i in range(small+1, len(nums)):
+            if nums[i] < nums[small]:
+            
+                small = i
+        nums[t], nums[small] = nums[small], nums[t]
+    return nums
 
-def partition(nums, low, high):
-    pivit = nums[high]
-    i = low
-    for j in range(low, high):
-        if nums[j] < pivit:
-            temp = nums[i]
-            nums[i] = nums[j]
-            nums[j] = temp
-            i += 1
-    temp = nums[i]
-    nums[i] = nums[high]
-    nums[high] = temp
-    return i
