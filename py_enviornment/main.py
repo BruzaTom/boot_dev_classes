@@ -1,10 +1,11 @@
-def selection_sort(nums):
-    for t in range(0, len(nums)):
-        small = t
-        for i in range(small+1, len(nums)):
-            if nums[i] < nums[small]:
-            
-                small = i
-        nums[t], nums[small] = nums[small], nums[t]
-    return nums
-
+def fib(n):
+    if n <= 1:
+        return n
+    current = 0
+    parent = 1
+    gp = 0
+    for i in range(0, n-1):
+        current = parent + gp
+        gp = parent
+        parent = current
+    return current
