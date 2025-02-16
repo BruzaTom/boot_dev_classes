@@ -418,3 +418,31 @@ def fib(n):
         gp = parent
         parent = current
     return current
+
+#Order 2^N - Exponential
+def power_set(input_set):
+    if len(input_set) == 0:
+        return [[]]
+    subsets = []
+    first = input_set[0]
+    remaining = input_set[1:]
+    remaining_subsets = power_set(remaining)
+    for subset in remaining_subsets:
+        subsets.append([first] + subset)
+        subsets.append(subset)
+    return subsets
+# what i put
+def power_set(input_set):
+    if input_set == []:
+        return [[]]
+    lst = []
+    first = input_set[0]
+    cut = power_set(input_set[1:])
+    for set in cut:
+        combo = [first]
+        combo.extend(set)
+        lst.append(combo)
+        lst.append(set)
+    return lst
+
+
