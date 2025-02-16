@@ -1,11 +1,12 @@
-def fib(n):
-    if n <= 1:
-        return n
-    current = 0
-    parent = 1
-    gp = 0
-    for i in range(0, n-1):
-        current = parent + gp
-        gp = parent
-        parent = current
-    return current
+def power_set(input_set):
+    if input_set == []:
+        return [[]]
+    lst = []
+    first = input_set[0]
+    cut = power_set(input_set[1:])
+    for set in cut:
+        combo = [first]
+        combo.extend(set)
+        lst.append(combo)
+        lst.append(set)
+    return lst
