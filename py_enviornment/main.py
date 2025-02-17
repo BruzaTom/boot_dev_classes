@@ -1,12 +1,7 @@
-def power_set(input_set):
-    if input_set == []:
-        return [[]]
+def exponential_growth(n, factor, days):
     lst = []
-    first = input_set[0]
-    cut = power_set(input_set[1:])
-    for set in cut:
-        combo = [first]
-        combo.extend(set)
-        lst.append(combo)
-        lst.append(set)
+    lst.append(n)
+    for i in range(days):
+        n = n * factor
+        lst.append(n)
     return lst

@@ -1,48 +1,43 @@
 from main import *
 
 run_cases = [
-    ([1, 2], [[1, 2], [2], [1], []]),
-    ([1, 2, 3], [[1, 2, 3], [2, 3], [1, 3], [3], [1, 2], [2], [1], []]),
+    (10, 2, 4, [10, 20, 40, 80, 160]),
+    (20, 2, 6, [20, 40, 80, 160, 320, 640, 1280]),
 ]
 
 submit_cases = run_cases + [
-    ([], [[]]),
-    ([1], [[1], []]),
+    (30, 3, 3, [30, 90, 270, 810]),
     (
-        [1, 2, 3, 4],
+        40,
+        10,
+        10,
         [
-            [1, 2, 3, 4],
-            [2, 3, 4],
-            [1, 3, 4],
-            [3, 4],
-            [1, 2, 4],
-            [2, 4],
-            [1, 4],
-            [4],
-            [1, 2, 3],
-            [2, 3],
-            [1, 3],
-            [3],
-            [1, 2],
-            [2],
-            [1],
-            [],
+            40,
+            400,
+            4000,
+            40000,
+            400000,
+            4000000,
+            40000000,
+            400000000,
+            4000000000,
+            40000000000,
+            400000000000,
         ],
     ),
+    (10, 5, 0, [10]),
+    (0, 2, 2, [0, 0, 0]),
+    (1, 1, 5, [1, 1, 1, 1, 1, 1]),
 ]
 
 
-def test(input1, expected_output):
-    print("---------------------------------")
-    print(f"Inputs:")
-    for i in input1:
-        print(f" * {i}")
-    print(f"Expecting: {expected_output}")
-    result = power_set(input1)
+def test(n, factor, days, expected):
+    print("-" * 40)
+    print(f"Inputs: \nn: {n}, factor: {factor}, days: {days}")
+    print(f"Expecting: {expected}")
+    result = exponential_growth(n, factor, days)
     print(f"Actual: {result}")
-    sorted_result = sorted([sorted(inner) for inner in result])
-    sorted_expected_output = sorted([sorted(inner) for inner in expected_output])
-    if sorted_result == sorted_expected_output:
+    if result == expected:
         print("Pass")
         return True
     print("Fail")
@@ -59,9 +54,9 @@ def main():
         else:
             failed += 1
     if failed == 0:
-        print("============= PASS ==============")
+        print("=========== PASS ============")
     else:
-        print("============= FAIL ==============")
+        print("=========== FAIL ============")
     print(f"{passed} passed, {failed} failed")
 
 
