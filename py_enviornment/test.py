@@ -1,43 +1,29 @@
 from main import *
 
 run_cases = [
-    (10, 2, 4, [10, 20, 40, 80, 160]),
-    (20, 2, 6, [20, 40, 80, 160, 320, 640, 1280]),
+    (2, 1.2, 1),
+    (3, 1.2, 2),
 ]
 
 submit_cases = run_cases + [
-    (30, 3, 3, [30, 90, 270, 810]),
-    (
-        40,
-        10,
-        10,
-        [
-            40,
-            400,
-            4000,
-            40000,
-            400000,
-            4000000,
-            40000000,
-            400000000,
-            4000000000,
-            40000000000,
-            400000000000,
-        ],
-    ),
-    (10, 5, 0, [10]),
-    (0, 2, 2, [0, 0, 0]),
-    (1, 1, 5, [1, 1, 1, 1, 1, 1]),
+    (10, 1.2, 6),
+    (100, 1.2, 16),
+    (200, 1.2, 20),
+    (1000, 1.3, 21),
+    (0, 1.5, 0),
+    (1, 0.5, 1),
 ]
 
 
-def test(n, factor, days, expected):
-    print("-" * 40)
-    print(f"Inputs: \nn: {n}, factor: {factor}, days: {days}")
-    print(f"Expecting: {expected}")
-    result = exponential_growth(n, factor, days)
+def test(input1, input2, expected_output):
+    print("---------------------------------")
+    print(f"Inputs:")
+    print(f" * Max days: {input1}")
+    print(f" * Time factor: {input2}")
+    print(f"Expecting: {expected_output}")
+    result = num_countries_in_days(input1, input2)
     print(f"Actual: {result}")
-    if result == expected:
+    if result == expected_output:
         print("Pass")
         return True
     print("Fail")
@@ -54,9 +40,9 @@ def main():
         else:
             failed += 1
     if failed == 0:
-        print("=========== PASS ============")
+        print("============= PASS ==============")
     else:
-        print("=========== FAIL ============")
+        print("============= FAIL ==============")
     print(f"{passed} passed, {failed} failed")
 
 
