@@ -1,12 +1,6 @@
-def num_countries_in_days(max_days, factor):
-    time_left = max_days
+def count_marketers(job_titles):
     count = 0
-    time_in_country = 1
-    while int(time_left) > 0:
-        time_in_country *= factor
-        time_left -= time_in_country
-        count += 1
+    for title in job_titles:
+        if title == "marketer":
+            count += 1
     return count
-
-
-# ?

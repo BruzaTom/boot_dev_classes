@@ -1,27 +1,23 @@
 from main import *
 
 run_cases = [
-    (2, 1.2, 1),
-    (3, 1.2, 2),
+    (["developer", "marketer", "designer"], 1),
+    (["marketer", "marketer", "developer", "marketer"], 3),
 ]
 
 submit_cases = run_cases + [
-    (10, 1.2, 6),
-    (100, 1.2, 16),
-    (200, 1.2, 20),
-    (1000, 1.3, 21),
-    (0, 1.5, 0),
-    (1, 0.5, 1),
+    ([], 0),
+    (["developer", "designer", "product manager"], 0),
+    (["marketer"], 1),
+    (["MARKETER", "Marketer", "marketer"], 1),
 ]
 
 
-def test(input1, input2, expected_output):
+def test(input1, expected_output):
     print("---------------------------------")
-    print(f"Inputs:")
-    print(f" * Max days: {input1}")
-    print(f" * Time factor: {input2}")
+    print(f"Input job titles: {input1}")
     print(f"Expecting: {expected_output}")
-    result = num_countries_in_days(input1, input2)
+    result = count_marketers(input1)
     print(f"Actual: {result}")
     if result == expected_output:
         print("Pass")
