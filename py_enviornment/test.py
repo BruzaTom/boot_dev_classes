@@ -1,24 +1,23 @@
 from main import *
 
 run_cases = [
-    (["developer", "marketer", "designer"], 1),
-    (["marketer", "marketer", "developer", "marketer"], 3),
+    (["Software Engineer", "Data Analyst", "Project Manager"], "Project Manager"),
+    (["Intern", "Junior Developer"], "Junior Developer"),
 ]
 
 submit_cases = run_cases + [
-    ([], 0),
-    (["developer", "designer", "product manager"], 0),
-    (["marketer"], 1),
-    (["MARKETER", "Marketer", "marketer"], 1),
+    ([], None),
+    (["CEO"], "CEO"),
+    (["Cashier", "Supervisor", "Manager", "Director"], "Director"),
 ]
 
 
 def test(input1, expected_output):
     print("---------------------------------")
-    print(f"Input job titles: {input1}")
-    print(f"Expecting: {expected_output}")
-    result = count_marketers(input1)
-    print(f"Actual: {result}")
+    print(f"Input work experiences: {input1}")
+    print(f"Expected output: {expected_output}")
+    result = last_work_experience(input1)
+    print(f"Actual output: {result}")
     if result == expected_output:
         print("Pass")
         return True
