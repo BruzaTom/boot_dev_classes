@@ -73,3 +73,62 @@ We need to display the last place a user worked on their profile.
 Implement the last_work_experience function. It should take a list of our player's work history (strings) and return the last place they worked.
 
 If the list is empty, return None.
+
+
+                Lists Quiz
+
+
+Answer the questions based on this code from the last assignment:
+
+def last_work_experience(work_experiences):
+    if len(work_experiences) > 0:
+        return work_experiences[len(work_experiences) - 1]
+    return None
+
+Looking up an item in a list by index is much faster than searching for items using iteration. O(1) vs O(n).
+
+What is the Big-O complexity of the last_work_experience() function, where n is the length of the work_experiences array?
+
+O(1)
+
+Why is index-lookup so much faster than iteration?
+
+the computer can jump straight to the location of an index - an index is like an adress of an item in a list.
+
+
+                Stacks
+
+                
+A stack is a data structure that stores ordered items. It's like a list, but its design is more restrictive. It only allows items to be added or removed from the top of the stack:
+
+It's called a "stack" because it behaves just like a stack of physical items. Imagine a stack of plates: it's easy to take an item off the top of the stack, but you can't really get to the items in the middle or at the bottom without removing the items on top first. You'll often hear a stack referred to as a LIFO (last in, first out) data structure.
+
+Whoever decided to take this simple concept and slap a nasty acronym on it should be forced to program in Prolog for the rest of their days.
+
+Assignment
+In this chapter we'll build a stack from scratch! A stack will be useful at LockedIn when we need undo/redo functionality. For example, a user can add other users to their "connections" list, and then undo the last connection they added. Stacks are a great way to implement undo functionality.
+
+For now, we'll just focus on two methods: push and size. Notice that the Stack class already has a constructor and the underlying List that we'll use to store items.
+
+Complete the push method. It should add an item to the top of the stack. The "top" of the stack is the end of the list in our implementation.
+Complete the size method. It should return the number of items in the stack.
+
+Stack Speed
+You might be wondering, "why would I use a stack instead of a list?". "Isn't this just a list with fewer features?".
+
+And you'd be right! A stack is a list with fewer features, but that's the point. By restricting the ways we can interact with the data, we guarantee that certain operations are blazingly fast. Here are all the operations a typical stack supports, along with their Big O time complexity:
+
+Operation	Big O	Description
+push	O(1)	Add an item to the top of the stack
+pop	O(1)	Remove and return the top item from the stack
+peek	O(1)	Return the top item from the stack without modifying the stack
+size	O(1)	Return the number of items in the stack
+
+t's all O(1)! That means no matter how many items are in the stack, these operations will always take the same amount of time. Stacks are really fast and are usually the best choice when the behavior of a stack is all you need.
+
+Which operation is O(1)?
+all of them
+
+Where can items be added to and removed from a stack?
+top
+

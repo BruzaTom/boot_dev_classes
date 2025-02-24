@@ -1,23 +1,67 @@
 from main import *
 
 run_cases = [
-    (["Software Engineer", "Data Analyst", "Project Manager"], "Project Manager"),
-    (["Intern", "Junior Developer"], "Junior Developer"),
+    (
+        [
+            ("push", {"name": "Alice", "role": "Developer"}),
+            ("push", {"name": "Bob", "title": "CTO"}),
+            ("size", None),
+        ],
+        2,
+    ),
+    (
+        [
+            ("push", {"name": "Charlie", "company": "TechCorp"}),
+            ("push", {"name": "Diana", "skills": "Python"}),
+            ("push", {"name": "Ethan", "role": "Manager"}),
+            ("size", None),
+        ],
+        3,
+    ),
 ]
 
 submit_cases = run_cases + [
-    ([], None),
-    (["CEO"], "CEO"),
-    (["Cashier", "Supervisor", "Manager", "Director"], "Director"),
+    (
+        [
+            ("size", None),
+        ],
+        0,
+    ),
+    (
+        [
+            ("push", {"name": "Frank", "experience": "5 years"}),
+            ("push", {"name": "Grace", "education": "MBA"}),
+            ("push", {"name": "Henry", "location": "New York"}),
+            ("push", {"name": "Ivy", "industry": "Finance"}),
+            ("size", None),
+        ],
+        4,
+    ),
+    (
+        [
+            ("push", {"name": "Jack", "connections": 500}),
+            ("size", None),
+            ("push", {"name": "Kelly", "endorsements": 50}),
+            ("size", None),
+        ],
+        2,
+    ),
 ]
 
 
-def test(input1, expected_output):
+def test(operations, expected_output):
     print("---------------------------------")
-    print(f"Input work experiences: {input1}")
-    print(f"Expected output: {expected_output}")
-    result = last_work_experience(input1)
-    print(f"Actual output: {result}")
+    stack = Stack()
+    result = None
+    for op, value in operations:
+        if op == "push":
+            print(f"Push: {value}")
+            stack.push(value)
+        elif op == "size":
+            result = stack.size()
+
+    print(f"Expecting size: {expected_output}")
+    print(f"Actual size: {result}")
     if result == expected_output:
         print("Pass")
         return True

@@ -1,4 +1,9 @@
-def last_work_experience(work_experiences):
-    if work_experiences == []:
-        return None
-    return work_experiences[-1]
+class Stack:
+    def __init__(self):
+        self.items = []
+
+    def push(self, item):
+        self.items.append(item)
+
+    def size(self):
+        return len(self.items)
