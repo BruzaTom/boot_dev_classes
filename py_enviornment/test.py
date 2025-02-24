@@ -1,103 +1,29 @@
-from main import Stack
+from main import *
 
 run_cases = [
-    (
-        [
-            ("push", {"name": "Alice", "role": "Developer"}),
-            ("push", {"name": "Bob", "role": "Designer"}),
-            ("size", None),
-            ("peek", None),
-            ("pop", None),
-            ("size", None),
-        ],
-        [
-            None,
-            None,
-            2,
-            {"name": "Bob", "role": "Designer"},
-            {"name": "Bob", "role": "Designer"},
-            1,
-        ],
-    ),
-    (
-        [
-            ("push", {"name": "Charlie", "company": "TechCorp"}),
-            ("push", {"name": "David", "skills": ["Python", "JavaScript"]}),
-            ("pop", None),
-            ("pop", None),
-            ("pop", None),
-        ],
-        [
-            None,
-            None,
-            {"name": "David", "skills": ["Python", "JavaScript"]},
-            {"name": "Charlie", "company": "TechCorp"},
-            None,
-        ],
-    ),
+    ("(", False),
+    ("()", True),
+    ("(())", True),
 ]
 
 submit_cases = run_cases + [
-    (
-        [
-            ("push", {"name": "Eve", "role": "Manager", "years": 5}),
-            ("peek", None),
-            ("push", {"name": "Frank", "role": "DevOps"}),
-            ("size", None),
-            ("pop", None),
-            ("pop", None),
-            ("pop", None),
-        ],
-        [
-            None,
-            {"name": "Eve", "role": "Manager", "years": 5},
-            None,
-            2,
-            {"name": "Frank", "role": "DevOps"},
-            {"name": "Eve", "role": "Manager", "years": 5},
-            None,
-        ],
-    ),
+    ("()()", True),
+    ("(()))", False),
+    ("((())())", True),
+    ("(()(()", False),
+    (")(", False),
+    (")()(()", False),
+    ("())(()", False),
 ]
 
 
-def visualize_stack(stack):
-    if not stack:
-        return "- (empty)"
-    return "\n".join(
-        [f"    - {item['name']}: {list(item.values())[1]}" for item in reversed(stack)]
-    )
-
-
-def test(operations, expected_outputs):
+def test(input1, expected_output):
     print("---------------------------------")
-    stack = Stack()
-    actual_outputs = []
-
-    for i, (op, value) in enumerate(operations):
-        print(f"Operation {i + 1}:")
-        if op == "push":
-            print(f"  Push: {value}")
-            actual_outputs.append(stack.push(value))
-        elif op == "pop":
-            result = stack.pop()
-            print(f"  Pop: {result}")
-            actual_outputs.append(result)
-        elif op == "peek":
-            result = stack.peek()
-            print(f"  Peek: {result}")
-            actual_outputs.append(result)
-        elif op == "size":
-            result = stack.size()
-            print(f"  Size: {result}")
-            actual_outputs.append(result)
-
-        print(f"  Stack:\n{visualize_stack(stack.items)}")
-        print()
-
-    print(f"Expected outputs: {expected_outputs}")
-    print(f"Actual outputs: {actual_outputs}")
-    if actual_outputs == expected_outputs:
+    print(f"Input: {input1}")
+    print(f"Expecting: {expected_output}")
+    result = is_balanced(input1)
+    print(f"Actual: {result}")
+    if result == expected_output:
         print("Pass")
         return True
     print("Fail")

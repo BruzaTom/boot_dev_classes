@@ -1,19 +1,26 @@
-class Stack:
-    def __init__(self):
-        self.items = []
+from stack import Stack
 
-    def push(self, item):
-        self.items.append(item)
 
-    def size(self):
-        return len(self.items)
+def is_balanced(input_str):
+    stack = Stack()
+    for char in input_str:
+        if char == "(":
+            stack.push(char)
+        elif char == ")":
+            if stack.pop() is None:
+                return False
+    return stack.peek() is None
 
-    def peek(self):
-        if self.items == []:
-            return None
-        return self.items[-1]
-
-    def pop(self):
-        if self.items == []:
-            return None
-        return self.items.pop()
+def no_stack_is_balanced(input_str):
+    op = 0
+    cp = 0
+    for char in input_str:
+        if char == "(":
+            op += 1
+        if char == ")":
+            cp += 1
+            if cp > op:
+                return False
+    if cp == op:
+        return True
+    return False

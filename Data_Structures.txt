@@ -132,3 +132,47 @@ all of them
 Where can items be added to and removed from a stack?
 top
 
+          Stack Review
+
+
+All supported operations are O(1) by themselves. However, some tasks, like getting to an item at the bottom of the stack have a higher time complexity because they require multiple pop operations.
+Stack operations are limited: no searching, no sorting, no random access
+Stacks, like all abstract data types, can store items of any type. What makes it a stack is the behavior of the operations, not the type of data it stores.
+Stacks are often used in the real world for:
+Function call management
+Undo/redo functionality
+Expression evaluation
+Browser history
+
+What can be stored in a stack?
+any things
+
+If you want to get to an item at the bottom of a stack, what is the Big-O to retrieve that item?
+O(n) because all other items need to be popped first
+
+            Using a Stack
+
+
+LockedIn supports a basic scripting language. It allows technically savvy HR managers to write scripts that can automate repetitive tasks on the platform. The language makes use of parentheses to group operations together, and we need to be able to check if the parentheses in a script are balanced.
+
+Balanced Parentheses
+Parentheses are balanced when each parenthesis has a corresponding parenthesis, and the pairs of parentheses are properly nested. For example:
+
+()
+()()
+((()))
+(()(()))
+
+Unbalanced Parentheses
+
+(
+())
+(()()
+(()))
+
+Assignment
+Complete the is_balanced function.
+
+It takes a string as input and returns True if the parentheses in the string are balanced, and False otherwise. Use an instance of the provided Stack class in stack.py to keep track of the parentheses.
+
+Note: You only need to consider the characters ( and ) for this challenge.
