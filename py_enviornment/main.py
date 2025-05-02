@@ -1,26 +1,45 @@
-from stack import Stack
+class Queue:# my answer
+    def __init__(self):
+        self.items = []
 
+    def push(self, item):
+        self.items.insert(0, item)
 
-def is_balanced(input_str):
-    stack = Stack()
-    for char in input_str:
-        if char == "(":
-            stack.push(char)
-        elif char == ")":
-            if stack.pop() is None:
-                return False
-    return stack.peek() is None
+    def pop(self):
+        if len(self.items) > 0:
+            return self.items.pop()
+        else:
+            return None
 
-def no_stack_is_balanced(input_str):
-    op = 0
-    cp = 0
-    for char in input_str:
-        if char == "(":
-            op += 1
-        if char == ")":
-            cp += 1
-            if cp > op:
-                return False
-    if cp == op:
-        return True
-    return False
+    def peek(self):
+        if len(self.items) > 0:
+            return self.items[-1]
+        else:
+            return None
+
+    def size(self):
+        return len(self.items)
+    
+class solution_Queue:# solution answer
+    def __init__(self):
+        self.items = []
+
+    def push(self, item):
+        self.items.insert(0, item)
+
+    def pop(self):
+        if len(self.items) == 0:
+            return None
+        temp = self.items[-1]
+        del self.items[-1]
+        return temp
+
+    def peek(self):
+        if len(self.items) == 0:
+            return None
+        return self.items[-1]
+
+    def size(self):
+        return len(self.items)
+
+    
