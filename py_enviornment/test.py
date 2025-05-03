@@ -1,76 +1,44 @@
-from main import Queue
+from main import *
 
 run_cases = [
-    (
-        [("push", "Rand"), ("push", "Mat"), ("peek", None), ("pop", None)],
-        ["Rand", "Rand"],
-    ),
-    (
-        [
-            ("push", "Egwene"),
-            ("push", "Nynaeve"),
-            ("size", None),
-            ("pop", None),
-            ("size", None),
-        ],
-        [2, "Egwene", 1],
-    ),
+    [("Ted", "join"), (["Ted"], "No match found")],
+    [("Barney", "join"), (["Barney", "Ted"], "No match found")],
+    [("Marshall", "join"), (["Marshall", "Barney", "Ted"], "No match found")],
+    [("Lily", "join"), (["Lily", "Marshall"], "Ted matched Barney!")],
+    [("Robin", "join"), (["Robin", "Lily", "Marshall"], "No match found")],
+    [("Carl", "join"), (["Carl", "Robin"], "Marshall matched Lily!")],
+    [("Carl", "leave"), (["Robin"], "No match found")],
+    [("Robin", "leave"), ([], "No match found")],
 ]
 
 submit_cases = run_cases + [
-    ([("pop", None), ("peek", None), ("size", None)], [None, None, 0]),
-    (
-        [
-            ("push", "Perrin"),
-            ("push", "Moiraine"),
-            ("push", "Lan"),
-            ("pop", None),
-            ("pop", None),
-            ("peek", None),
-        ],
-        ["Perrin", "Moiraine", "Lan"],
-    ),
-    (
-        [("push", "Thom"), ("pop", None), ("push", "Loial"), ("peek", None)],
-        ["Thom", "Loial"],
-    ),
+    [("Ranjit", "join"), (["Ranjit"], "No match found")],
+    [("Ranjit", "leave"), ([], "No match found")],
+    [("Victoria", "join"), (["Victoria"], "No match found")],
+    [("Quinn", "join"), (["Quinn", "Victoria"], "No match found")],
+    [("Zoey", "join"), (["Zoey", "Quinn", "Victoria"], "No match found")],
+    [("Stella", "join"), (["Stella", "Zoey"], "Victoria matched Quinn!")],
 ]
 
 
-def visualize_queue(queue):
-    if not queue.items:
-        return "Queue is empty"
-    return "\n".join([f"- {item}" for item in reversed(queue.items)])
-
-
-def test(operations, expected_outputs):
+def test(queue, user, expected_state):
     print("---------------------------------")
-    queue = Queue()
-    outputs = []
-    for op, value in operations:
-        if op == "push":
-            queue.push(value)
-            print(f"Push: {value}")
-        elif op == "pop":
-            result = queue.pop()
-            outputs.append(result)
-            print(f"Pop: {result}")
-        elif op == "peek":
-            result = queue.peek()
-            outputs.append(result)
-            print(f"Peek: {result}")
-        elif op == "size":
-            result = queue.size()
-            outputs.append(result)
-            print(f"Size: {result}")
-
-        print("\nQueue state:")
-        print(visualize_queue(queue))
-        print()
-
-    print(f"Expected: {expected_outputs}")
-    print(f"Actual: {outputs}")
-    if outputs == expected_outputs:
+    print(f"Queue: {queue}")
+    name = user[0]
+    action = user[1]
+    if action == "leave":
+        print(f"{name} left the queue.")
+    if action == "join":
+        print(f"{name} joined the queue.")
+    print(f"Expecting Queue: {expected_state[0]}")
+    print(f"Expecting Return: {expected_state[1]}")
+    try:
+        result = matchmake(queue, user)
+    except Exception as e:
+        result = f"Error: {e}"
+    print(f"Actual Queue: {queue}")
+    print(f"Actual Return: {result}")
+    if result == expected_state[1] and queue.items == expected_state[0]:
         print("Pass")
         return True
     print("Fail")
@@ -80,9 +48,10 @@ def test(operations, expected_outputs):
 def main():
     passed = 0
     failed = 0
+    queue = Queue()
     skipped = len(submit_cases) - len(test_cases)
     for test_case in test_cases:
-        correct = test(*test_case)
+        correct = test(queue, *test_case)
         if correct:
             passed += 1
         else:
