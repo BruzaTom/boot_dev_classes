@@ -1293,4 +1293,14 @@ git clone https://github.com/USERNAME/bookbot
 If all goes well, you'll now have a new bookbot directory in your current working directory. You can check by running the "list" command:
 
 
+			how to change the name of last commit
+
+
+git commit --amend -m "Your correct commit message"
+
+This will update the most recent commit with your corrected message. If you've already pushed the commit, you'll need to force-push the update:
+
+git push --force
+
+Just a heads-up—force-pushing can overwrite history, so be sure that no one else has pulled your previous commit before doing this!
 			
