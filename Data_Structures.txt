@@ -275,3 +275,31 @@ Lastly, check if the queue has at least 4 users in it. If so, pop the first 2 us
 Where user1 is the first user popped and user2 is the second user popped.
 
 If there were less than 4 users in the queue, return the following string: "No match found"
+
+
+                Linked Lists
+
+
+Remember how the push method on our Queue is O(n) instead of O(1)?
+
+def push(self, item):
+    # everything in self.items has to shift
+    # up a position, which takes O(n) time
+    self.items.insert(0, item)
+
+Let's fix that.
+
+To build a faster queue, we'll use a Linked List instead of a regular List (array) under the hood. A linked list is where elements are not stored next to each other in memory, instead, each item references the next in a chain.
+
+        Nodes
+
+Our nodes will be represented by a simple class with two fields:
+
+val - The raw string value that the node holds (e.g. 'Carla', 'James', etc)
+next - A reference to the next node in the list
+
+Assignment
+Let's lock-in and make LockedIn faster!
+
+Complete the Node's constructor. Set its val field to the provided value and its next field to None.
+Complete the Node's set_next method. It should set the next field to the provided node.
