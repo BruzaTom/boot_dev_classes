@@ -1,31 +1,29 @@
 from main import *
 
+# Updated test cases with character names from "The Hateful Eight"
 run_cases = [
-    ("Anton Chigurh", ["Llewelyn Moss", "Anton Chigurh"]),
-    ("Carson Wells", ["Llewelyn Moss", "Anton Chigurh", "Carson Wells"]),
-    ("Ed Tom Bell", ["Llewelyn Moss", "Anton Chigurh", "Carson Wells", "Ed Tom Bell"]),
+    ("John Ruth", ["Major Marquis Warren", "John Ruth"]),
+    ("Daisy Domergue", ["Major Marquis Warren", "John Ruth", "Daisy Domergue"]),
+    (
+        "Chris Mannix",
+        ["Major Marquis Warren", "John Ruth", "Daisy Domergue", "Chris Mannix"],
+    ),
 ]
 
 submit_cases = run_cases + [
     (
-        "Carla Jean Moss",
-        [
-            "Llewelyn Moss",
-            "Anton Chigurh",
-            "Carson Wells",
-            "Ed Tom Bell",
-            "Carla Jean Moss",
-        ],
+        "Bob",
+        ["Major Marquis Warren", "John Ruth", "Daisy Domergue", "Chris Mannix", "Bob"],
     ),
     (
-        "Wendell",
+        "Oswaldo Mobray",
         [
-            "Llewelyn Moss",
-            "Anton Chigurh",
-            "Carson Wells",
-            "Ed Tom Bell",
-            "Carla Jean Moss",
-            "Wendell",
+            "Major Marquis Warren",
+            "John Ruth",
+            "Daisy Domergue",
+            "Chris Mannix",
+            "Bob",
+            "Oswaldo Mobray",
         ],
     ),
 ]
@@ -33,7 +31,7 @@ submit_cases = run_cases + [
 
 def test(linked_list, input, expected_state):
     print("---------------------------------")
-    print(f"Linked List: {linked_list_to_str(linked_list)}")
+    print(f"Linked List: {linked_list}")
     print(f"Set Next: {input}")
     print(f"Expecting: {expected_state}")
     node = Node(input)
@@ -51,36 +49,26 @@ def test(linked_list, input, expected_state):
     return False
 
 
-def linked_list_to_list(node):
+def linked_list_to_list(linked_list):
     result = []
-    current = node
-    while current:
-        result.append(current.val)
-        current = current.next
+    for node in linked_list:
+        result.append(node.val)
+
     return result
 
 
-def get_last_node(node):
-    current = node
+def get_last_node(linked_list):
+    current = linked_list.head
     while hasattr(current, "next") and current.next:
         current = current.next
     return current
 
 
-def linked_list_to_str(node):
-    current = node
-    linked_list_str = ""
-    while current and hasattr(current, "val"):
-        linked_list_str += current.val + " -> "
-        current = current.next
-
-    return linked_list_str
-
-
 def main():
     passed = 0
     failed = 0
-    linked_list = Node("Llewelyn Moss")
+    linked_list = LinkedList()
+    linked_list.head = Node("Major Marquis Warren")
     skipped = len(submit_cases) - len(test_cases)
     for test_case in test_cases:
         correct = test(linked_list, *test_case)
