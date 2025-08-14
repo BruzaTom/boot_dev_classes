@@ -1,0 +1,67 @@
+Linked List while Loop Cheat Sheet
+----------------------------------
+
+1. Traverse and Print
+---------------------
+node = head
+while node:
+    print(node.val)
+    node = node.next
+
+Use when you just want to walk through the list and see the values.
+
+2. Count Nodes
+--------------
+count = 0
+node = head
+while node:
+    count += 1
+    node = node.next
+
+Use to get the length of the list manually.
+
+3. Find a Value
+---------------
+target = 42
+node = head
+while node:
+    if node.val == target:
+        print("Found it!")
+        break
+    node = node.next
+
+Stops early if the value is found.
+
+4. Delete a Node (by value)
+---------------------------
+dummy = Node(0)
+dummy.next = head
+prev = dummy
+curr = head
+
+while curr:
+    if curr.val == target:
+        prev.next = curr.next
+        break
+    prev = curr
+    curr = curr.next
+
+head = dummy.next  # update head in case first node was deleted
+
+Handles edge cases like deleting the head node.
+
+5. Reverse a Linked List
+------------------------
+prev = None
+curr = head
+
+while curr:
+    next_node = curr.next
+    curr.next = prev
+    prev = curr
+    curr = next_node
+
+head = prev  # new head after reversal
+
+Classic in-place reversal—super useful in interviews.
+
