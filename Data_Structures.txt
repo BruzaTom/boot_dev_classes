@@ -425,3 +425,15 @@ Complete the add_to_tail method. It adds a new node to the end of the list and r
         Update your "last" node reference to the current node
     Once you've iterated over the entire list, your "last" reference should be the last node in the list (the "tail"). Set the next field of the "last" node to the new node.
 
+
+              Add to Head
+
+
+For added flexibility, let's allow users to add items to the front of our linked list as well.
+Assignment
+
+Implement the add_to_head method. It should add a new node to the front of the list and return nothing.
+
+    Set the "next" field of the given node to the current head node.
+    Update the head reference to the given node.
+
