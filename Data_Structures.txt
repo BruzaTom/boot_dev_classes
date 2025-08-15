@@ -456,3 +456,24 @@ LockedIn's queue was working just fine on small datasets, but appending items on
         Update the tail reference to new node
     The constructor should set self.tail to None.
 
+
+              Remove from Head
+
+We're one method away from having a fully functioning O(1) Queue! We just need a way to remove the first element from the linked list in constant time. When we're finished, our LinkedList will fulfill the basic requirements of a Queue:
+
+    add_to_tail: Constant time insert
+    remove_from_head: Constant time pop
+
+Let's rename the LinkedList class to LLQueue and remove the add_to_head functionality because Queues don't allow inserting into the wrong end.
+
+We've also flipped the arrows in the printed representation to reflect the change.
+
+Assignment
+
+Complete the remove_from_head method. It should remove the first node from the list (the head) and return it.
+
+    If the list is empty, just return None.
+    The head should now point to the next node in the list (if there is one).
+    The tail should be None if the list is now empty
+    The old head's Node should no longer point to anything
+
