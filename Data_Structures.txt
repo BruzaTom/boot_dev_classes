@@ -437,3 +437,22 @@ Implement the add_to_head method. It should add a new node to the front of the l
     Set the "next" field of the given node to the current head node.
     Update the head reference to the given node.
 
+
+              Linked List Queue
+
+
+To use our Linked List as a fast queue (O(1) pushes and pops) we need our add_to_tail function to be O(1). Currently, it iterates over the entire list before appending an item. We can fix this by keeping track of the last item with a new data member: tail.
+
+Note: It's common in algorithms to make this kind of trade-off. By using a little extra memory (keeping track of tail), we can make our operations faster. Sometimes you might need to go the other way, and use more computation time to save memory.
+
+Assignment
+
+LockedIn's queue was working just fine on small datasets, but appending items once the list has 100,000+ items has started to take a toll on our servers. Implement these changes to speed up our Linked List's inserts to O(1):
+
+    add_to_head should set the tail reference to the given node if the list is empty.
+    add_to_tail should:
+        Set the head and tail to the given node if the list is empty
+        Instead of iterating to find the last node, use the tail reference to append the new node
+        Update the tail reference to new node
+    The constructor should set self.tail to None.
+
