@@ -477,3 +477,25 @@ Complete the remove_from_head method. It should remove the first node from the l
     The tail should be None if the list is now empty
     The old head's Node should no longer point to anything
 
+
+              Linked List Queue Quiz
+
+Let's recap a few key points about linked lists and queues:
+
+    The problem with our array (normal Python list) implementation of a queue was that it had O(n) push operations.
+    The linked list implementation of a queue has O(1) push operations.
+    Linked lists are usually a worse choice than standard arrays because:
+        They are less performant due to more memory overhead
+        They are more complex to work with, debug, and reason about
+        They have no random access (indexing to a specific element)
+    Doubly linked lists are a better choice than arrays in very specific circumstances because they have O(1) insertions and deletions at both ends of the list.
+
+Question:
+A Queue made with a linked list instead of an array...
+Answer:
+...can have O(1) pushes and pops
+
+Question:
+A Queue that uses an array doesn't have O(1) pushes and pops because...
+Answer:
+When elements are added or removed from the first index of the array, all other elements must be shifted, resulting in O(n) time complexity
