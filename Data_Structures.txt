@@ -499,3 +499,71 @@ Question:
 A Queue that uses an array doesn't have O(1) pushes and pops because...
 Answer:
 When elements are added or removed from the first index of the array, all other elements must be shifted, resulting in O(n) time complexity
+
+
+              Trees
+
+Trees are a widely used data structure that simulate a hierarchical... well... tree structure. That said, they're typically drawn upside down - the "root" node is at the top, and the "leaves" are at the bottom.
+
+[see images/tree.png]
+
+Trees are kind of like linked lists in the sense that the root node simply holds references to its child nodes, which in turn hold references to their children, but Tree's nodes can have multiple children instead of just one. A generic tree structure has the following rules:
+
+    Each node has a value and may have a list of "children"
+    Children can only have a single "parent"
+
+
+Linked List
+
+node -> node -> node
+
+
+Tree
+
+Drawn from left to right in this case:
+
+            > node
+      > node
+            > node
+            > node
+> node
+            > node
+            > node
+            > node
+      > node
+            > node
+
+Question:
+Multiple nodes in a tree can have the same value
+Answer:
+sure why not?
+
+Question:
+Parent nodes can have ____ child(ren), and children can have ____ parent(s)
+Answer:
+multiple, one
+
+              Binary Trees
+
+Trees aren't particularly useful data structures unless they're ordered in some way. One of the most common types of ordered tree is a Binary Search Tree or BST. A BST has some additional constraints:
+
+    Instead of an unbounded list of children, each node has at most 2 children
+    The left child's value must be less than its parent's value
+    The right child's value must be greater than its parent's value
+    No two nodes in the BST can have the same value
+
+By ordering the tree like this, we'll be able to add, remove, find, and update nodes much more quickly.
+
+[see videos/what-are-binary-trees.mp4]
+
+Question:
+Nodes in a binary tree can have at most ____ child node(s)
+Answer:
+2
+
+Queston:
+Binary search trees, as opposed to generic trees, must be ____
+Answer:
+ordered left child < parent < right child
+
+
