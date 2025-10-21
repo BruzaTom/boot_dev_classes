@@ -567,3 +567,46 @@ Answer:
 ordered left child < parent < right child
 
 
+              Insert Nodes
+
+
+The building blocks of a BST are Nodes. In our implementation, we will only use a single class, the BSTNode class. Any BSTNode is technically also a full Binary Search Tree, with itself as the root node (its not aware of any potential parents). All our methods that traverse the tree will do so recursively... have fun! /s
+
+Our LockedIn BSTNode
+
+Throughout this chapter we'll be building a binary search tree to power LockedIn's custom database. LockedIn's management doesn't trust so called "open-source"... so here we are. One of the primary features of databases is the ability to look up records by a single key, and binary search trees are the most common way to implement these fast lookups.
+
+Each node in our BST will represent a LockedIn user. A BSTNode has three properties:
+
+    value: The value of the node, a User object in our case (see user.py). You'll notice that Users have a name and an ID. Comparison operators are already implemented for you on the class, so you should be able to compare User objects with ==, <, and > directly. The ID is the value that we'll use to determine the order of the nodes in the tree.
+    left: The left child of the node, another BSTNode or None
+    right: The right child of the node, another BSTNode or None
+
+Assignment
+
+Complete the insert method of the BSTNode class. It takes a value as User class as input and adds it to a new node if the value doesn't already exist in the tree.
+
+    If the node doesn't have a value yet, just use the given value and be done
+    If the node's value is equal to the given value, just be done, no duplicates allowed
+    If the given value is less than the node's value and the node doesn't have a left child, create a new left child node with the given value
+    If the given value is less than the node's value and the node does have a left child, recursively call insert on that left child with the given value
+    Since we already checked if the given value is equal to or less than the node, the value must be greater than the node. Handle whether or not the node already has a right child
+
+Tip
+
+I'd highly recommend using pencil/paper or some kind of drawing tool to visualize the tree as you go through the assignments in this chapter.
+
+
+        Insert review
+
+
+Inserting into a binary search tree (like most of its operations) is very fast. Picture the algorithm that you just wrote in your head: how many comparisons does it take to find the right spot for a new node?
+
+It only requires one comparison for each level of the tree, making it O(log(n))! (At least in a balanced tree, we'll talk about this later).
+
+Order log(n) is very fast - it's practically as good as O(1) in most cases. If our tree has 1,000,000 nodes, we only need to make 20 comparisons to find the right spot for a new node. If our tree is 2x larger (2,000,000 nodes), we only need to make one more comparison per insert, 21 total.
+
+What is the average Big O complexity of the .insert method?
+O(log(n))
+
+
