@@ -631,4 +631,58 @@ Tips
     The get_max function does the same for the right children.
 
 
+        Delete
+
+
+We also need a way to remove users from our BST if a user decides to delete their account.
+Assignment
+
+Implement the recursive delete method. It takes a value as an input and deletes the node with that value if it exists. Each call returns the new root of the tree (or subtree) after the deletion.
+
+Notice that in the test suite the delete method is called like this:
+
+bst = bst.delete(character)
+
+    Check if the current node is empty (has no value). If it is, return None. This represents an empty tree or a leaf node where deletion has already occurred.
+    If the value to delete is less than the current node's value:
+        If there's a left child, recursively delete the value from the left subtree and update the left child reference with the result.
+        Return the current node.
+    If the value to delete is greater than the current node's value:
+        If there's a right child, recursively delete the value from the right subtree and update the right child reference with the result.
+        Return the current node.
+    If the value to delete equals the current node's value, we've found the node to delete:
+        If there is no right child, return the left child. This bypasses the current node, effectively deleting it.
+        If there is no left child, return the right child, accomplishing the same thing.
+        If there are both left and right children, we need to find the new "successor": the smallest node in the right subtree, which is the value next largest after the current node's value.
+            Find the smallest node in the right subtree by walking down the current right child's left branches until reaching a node with no left child.
+            Replace the current node's value with this successor's value.
+            Delete the successor node from the right subtree by recursively calling delete, and update the right child reference with the result.
+            Return the current node.
+
+Assignment
+
+Implement the recursive delete method. It takes a value as an input and deletes the node with that value if it exists. Each call returns the new root of the tree (or subtree) after the deletion.
+
+Notice that in the test suite the delete method is called like this:
+
+bst = bst.delete(character)
+
+    Check if the current node is empty (has no value). If it is, return None. This represents an empty tree or a leaf node where deletion has already occurred.
+    If the value to delete is less than the current node's value:
+        If there's a left child, recursively delete the value from the left subtree and update the left child reference with the result.
+        Return the current node.
+    If the value to delete is greater than the current node's value:
+        If there's a right child, recursively delete the value from the right subtree and update the right child reference with the result.
+        Return the current node.
+    If the value to delete equals the current node's value, we've found the node to delete:
+        If there is no right child, return the left child. This bypasses the current node, effectively deleting it.
+        If there is no left child, return the right child, accomplishing the same thing.
+        If there are both left and right children, we need to find the new "successor": the smallest node in the right subtree, which is the value next largest after the current node's value.
+            Find the smallest node in the right subtree by walking down the current right child's left branches until reaching a node with no left child.
+            Replace the current node's value with this successor's value.
+            Delete the successor node from the right subtree by recursively calling delete, and update the right child reference with the result.
+            Return the current node.
+
+
+
 
