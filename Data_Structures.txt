@@ -713,3 +713,59 @@ What is the approximate depth of a tree with 16,000 nodes?
 
 What is the average Big O of the delete method?
 O(log(n))
+
+
+        Preorder Traversal
+
+
+A "preorder" traversal is a way to visit all the nodes in a tree. It's called "preorder" because the current node is visited before its children. This tree:
+
+    > 7
+        > 6
+> 4
+    > 2
+        > 1
+
+Would be traversed in this order:
+
+[4, 2, 1, 7, 6]
+
+Sometimes it's useful (albeit a bit slow) to iterate over all the nodes in the tree. In the case of LockedIn, we've been asked to build a way to create a backup of our database indexes - this traversal will allow us to save all the data in the tree to a file.
+
+Assignment
+
+Implement the recursive preorder method. It returns a list of the values in the order they are visited, and it takes as an argument the ordering of values we have visited so far.
+
+For example, the first call to preorder on an entire tree would be:
+
+# an empty list is passed in the first call
+bst_node.preorder([])
+
+Here are the algorithm's steps:
+
+    Visit the value of the current node by appending its value to the visited array
+    Recursively traverse the left subtree
+    Recursively traverse the right subtree
+    Return the array of visited nodes
+
+# an empty list is passed in the first call
+bst_node.preorder([])
+
+
+Assignment
+
+Implement the recursive preorder method. It returns a list of the values in the order they are visited, and it takes as an argument the ordering of values we have visited so far.
+
+For example, the first call to preorder on an entire tree would be:
+
+# an empty list is passed in the first call
+bst_node.preorder([])
+
+Here are the algorithm's steps:
+
+    Visit the value of the current node by appending its value to the visited array
+    Recursively traverse the left subtree
+    Recursively traverse the right subtree
+    Return the array of visited nodes
+
+

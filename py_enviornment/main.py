@@ -1,30 +1,13 @@
 class BSTNode:
-    def delete(self, val):
-        if self.val == None:
-            return None
-        if val < self.val:
-            if self.left:
-                self.left = self.left.delete(val)
-                return self
-        if val > self.val:
-            if self.right:
-                self.right = self.right.delete(val)
-                return self
-        if val == self.val:
-            if not self.right:
-                return self.left
-            if not self.left:
-                return self.right
-            search = True
-            node = self.right
-            while search:
-                if node.left:
-                    node = node.left
-                else:
-                    self.val = node.val
-                    self.right = self.right.delete(node.val)
-                    return self
-                    
+    def preorder(self, visited):
+        #lst.copy() not needed in this situation, mutation is actually the concept here
+        if self.val:
+            visited.append(self.val)
+        if self.left:
+            self.left.preorder(visited)
+        if self.right:
+            self.right.preorder(visited)
+        return visited
 
     # don't touch below this line
 
@@ -52,16 +35,4 @@ class BSTNode:
             self.right.insert(val)
             return
         self.right = BSTNode(val)
-
-    def get_min(self):
-        current = self
-        while current.left is not None:
-            current = current.left
-        return current.val
-
-    def get_max(self):
-        current = self
-        while current.right is not None:
-            current = current.right
-        return current.val
 
