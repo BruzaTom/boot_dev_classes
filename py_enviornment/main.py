@@ -1,16 +1,14 @@
 class BSTNode:
-    def postorder(self, visited):
-        #again mutation is the idea here
+    def inorder(self, visited):
+        #same idea just append current node val in the middle 
         if visited == None:
-            visited = []#will pass without but adds redundency
+            visited = []#redundancy
         if self.left:
-            self.left.postorder(visited)
+            self.left.inorder(visited)
+        visited.append(self.val)
         if self.right:
-            self.right.postorder(visited)
-        if self.val:
-            visited.append(self.val)
+            self.right.inorder(visited)
         return visited
-
 
     # don't touch below this line
 
