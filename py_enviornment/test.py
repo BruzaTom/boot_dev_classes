@@ -5,11 +5,11 @@ import random
 run_cases = [
     (
         4,
-        [User(7), User(0), User(11), User(8)],
+        [User(0), User(8), User(11), User(7)],
     ),
     (
         6,
-        [User(10), User(5), User(0), User(9), User(16), User(17)],
+        [User(0), User(9), User(5), User(17), User(16), User(10)],
     ),
 ]
 
@@ -17,29 +17,27 @@ submit_cases = run_cases + [
     (
         12,
         [
-            User(34),
-            User(22),
-            User(2),
-            User(19),
-            User(17),
-            User(10),
             User(11),
+            User(10),
             User(18),
-            User(30),
-            User(27),
+            User(17),
+            User(19),
+            User(2),
             User(23),
+            User(27),
             User(33),
+            User(30),
+            User(22),
+            User(34),
         ],
-    ),
-    (
-        0,
-        [],
     ),
 ]
 
 
 def test(num_characters, expected):
-    characters = get_users(num_characters)  # Adjust according to your project structure
+    characters = get_users(
+        num_characters
+    )  # Ensure this reflects your project structure
     bst = BSTNode()
     for character in characters:
         bst.insert(character)
@@ -50,7 +48,7 @@ def test(num_characters, expected):
     print("-------------------------------------\n")
     print(f"Expected: {expected}")
     try:
-        actual = bst.preorder([])
+        actual = bst.postorder([])
         print(f"Actual:   {actual}")
         if expected == actual:
             print("Pass \n")
@@ -85,7 +83,7 @@ def main():
 def print_tree(bst_node):
     lines = []
     format_tree_string(bst_node, lines)
-    print("\n".join(lines))
+    return "\n".join(lines)
 
 
 def format_tree_string(bst_node, lines, level=0):
@@ -100,4 +98,4 @@ if "__RUN__" in globals():
     test_cases = run_cases
 
 main()
- 
+

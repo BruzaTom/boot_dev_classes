@@ -1,13 +1,16 @@
 class BSTNode:
-    def preorder(self, visited):
-        #lst.copy() not needed in this situation, mutation is actually the concept here
+    def postorder(self, visited):
+        #again mutation is the idea here
+        if visited == None:
+            visited = []#will pass without but adds redundency
+        if self.left:
+            self.left.postorder(visited)
+        if self.right:
+            self.right.postorder(visited)
         if self.val:
             visited.append(self.val)
-        if self.left:
-            self.left.preorder(visited)
-        if self.right:
-            self.right.preorder(visited)
         return visited
+
 
     # don't touch below this line
 
