@@ -1,16 +1,16 @@
 class BSTNode:
-    def inorder(self, visited):
-        #same idea just append current node val in the middle 
-        if visited == None:
-            visited = []#redundancy
-        if self.left:
-            self.left.inorder(visited)
-        visited.append(self.val)
-        if self.right:
-            self.right.inorder(visited)
-        return visited
+    def exists(self, val):
+        if self.val == val:
+            return True
+        #dont forget left is less
+        #and right is greater
+        if val < self.val and self.left:
+            return self.left.exists(val)
+        if val > self.val and self.right:
+            return self.right.exists(val)
+        return False
 
-    # don't touch below this line
+        # don't touch below this line
 
     def __init__(self, val=None):
         self.left = None
