@@ -259,3 +259,26 @@ If you want to use a different port, you can change the port the bootdev cli wil
 bootdev config base_url http://localhost:42069
 
 
+          Stop a Container
+
+
+Okay, now you know how to start a new instance of a container from an image... but how do you stop it? There are two primary ways:
+
+    docker stop: This stops the container by issuing a SIGTERM signal to the container. You'll typically want to use docker stop.
+    docker kill: This stops the container by issuing a SIGKILL signal to the container. This is a more forceful way to stop a container, and should be used as a last resort.
+
+Assignment
+
+    Run docker ps again, and copy the container ID.
+    Run docker stop CONTAINER_ID where CONTAINER_ID is the ID of your container
+    Refresh the webpage (it shouldn't work anymore, the server is down!)
+
+Run and submit the CLI tests.
+Assignment
+
+    Run docker ps again, and copy the container ID.
+    Run docker stop CONTAINER_ID where CONTAINER_ID is the ID of your container
+    Refresh the webpage (it shouldn't work anymore, the server is down!)
+
+Run and submit the CLI tests.
+
