@@ -456,3 +456,35 @@ Volumes are often used by applications like Ghost, Grafana, or WordPress to pers
 
 If the post data is stored on the ____'s storage it will persist. If it's stored on the ____'s storage it will not persist.
 volume, container
+
+
+          Delete a Volume
+
+Now that we're done playing with Ghost, let's save the space on our host machine by deleting the volume.
+
+(see videos/docker_volumes.mp4) 
+
+
+Assignment
+
+    Use docker ps -a to see all containers, even those that aren't running.
+    Stop the running Ghost container
+    Remove the ghost container. Use docker --help to find the right command.
+    Remove the ghost-vol volume. Use docker volume --help to find the right command.
+
+Now that it's gone, let's see what happens if we try to start the Ghost container back up and attach it to a volume that doesn't exist.
+
+docker run -d -e NODE_ENV=development -e url=http://localhost:3001 -p 3001:2368 -v ghost-vol:/var/lib/ghost ghost
+
+Navigate to http://localhost:3001/ in your browser, and you should see a fresh CMS. That's weird, why no errors?
+
+Run:
+
+docker volume ls
+
+The ghost-vol is back from the dead!?! It turns out the -v ghost-vol:/var/lib/ghost flag binds to a "ghost-vol" volume if it exists, otherwise, it creates it automatically!
+
+So, we now have a fresh installation. Our post that was on the old volume is gone, but this new volume will persist if we don't delete it.
+
+Run and submit the CLI tests.
+
