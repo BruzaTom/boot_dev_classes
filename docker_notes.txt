@@ -365,3 +365,29 @@ docker volume inspect ghost-vol
 
 Run and submit the CLI tests.
 
+
+          Run Ghost
+
+Cool, we've got a named volume ready to go. Time to run Ghost in Docker.
+Assignment
+
+Docker hosts an official image for Ghost on Docker Hub.
+
+    Pull the Ghost image from Docker Hub:
+
+docker pull ghost
+
+    Run the Ghost image in a new container:
+
+docker run -d -e NODE_ENV=development -e url=http://localhost:3001 -p 3001:2368 -v ghost-vol:/var/lib/ghost ghost
+
+    -d runs the image in detached mode to avoid blocking the terminal.
+    -e NODE_ENV=development sets an environment variable within the container. This tells Ghost to run in "development" mode (rather than "production", for instance)
+    -e url=http://localhost:3001 sets another environment variable, this one tells Ghost that we want to be able to access Ghost via a URL on our host machine.
+    We've used -p before. -p 3001:2368 does some port-forwarding between the container and our host machine.
+    -v ghost-vol:/var/lib/ghost mounts the ghost-vol volume that we created before to the /var/lib/ghost path in the container. Ghost will use the /var/lib/ghost directory to persist stateful data (files) between runs.
+
+    Navigate to http://localhost:3001/ in your browser, you should see your new Ghost CMS!
+
+Run and submit the CLI tests against http://localhost:3001.
+
