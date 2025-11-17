@@ -333,4 +333,35 @@ Run and submit the CLI tests.
 When you're done running the tests, make sure to stop the containers.
 
 
+          Volumes
+
+By default, Docker containers don't retain any state from past containers. For example, if I:
+
+    Start a container from an image
+    Make some changes to the filesystem (like installing a new package) in that container
+    Stop the container
+    Start a new container from the same image
+    The new container does not have the changes I made in step 2.
+
+However, if I restart the stopped container, it will have the changes I made. This is only worth mentioning because sometimes developers think that killing an old container and starting a new one is the same as restarting a process - but that's not true... it's more like resetting the state of the entire machine to the original image.
+
+All this said, Docker does have ways to support "persistent state" through storage volumes. They're basically a filesystem that lives outside of the container, but can be accessed by the container.
+
+Assignment
+
+Ghost is an open-source blogging software, kind of like WordPress. As you can imagine, blogging software that doesn't save your blog posts, would be pretty useless, so we'll install Ghost and use volumes to persist the state our data!
+
+    Create a new empty volume called ghost-vol:
+
+docker volume create ghost-vol
+
+    Make sure it worked:
+
+docker volume ls
+
+    Inspect the volume to see where it is on your local machine:
+
+docker volume inspect ghost-vol
+
+Run and submit the CLI tests.
 
