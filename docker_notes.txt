@@ -98,5 +98,18 @@ docker info
 groups                     # confirm docker group membership
 
 
+          What Is Docker?
+
+
+    Docker makes development efficient and predictable
+
+    Docker takes away repetitive, mundane configuration tasks and is used throughout the development lifecycle for fast, easy and portable application development – desktop and cloud. Docker’s comprehensive end to end platform includes UIs, CLIs, APIs and security that are engineered to work together across the entire application delivery lifecycle.
+
+    -- The Docker team
+
+Put simply: Docker allows us to deploy our applications inside "containers", which are kind of like very lightweight virtual machines. Instead of just shipping an application, we can ship an application and the environment it runs in.
+
+Docker is a way to define and run ____
+both applications and enviornments
 
 
