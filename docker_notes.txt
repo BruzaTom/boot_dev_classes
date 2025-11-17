@@ -267,6 +267,16 @@ Okay, now you know how to start a new instance of a container from an image... b
     docker stop: This stops the container by issuing a SIGTERM signal to the container. You'll typically want to use docker stop.
     docker kill: This stops the container by issuing a SIGKILL signal to the container. This is a more forceful way to stop a container, and should be used as a last resort.
 
+    # Stop all running containers
+    docker stop $(docker ps -q)
+
+    # Alternative using xargs
+    docker ps -q | xargs docker stop
+    
+    #remove all stopped containers
+    docker rm $(docker ps -aq)
+
+
 Assignment
 
     Run docker ps again, and copy the container ID.
@@ -281,4 +291,46 @@ Assignment
     Refresh the webpage (it shouldn't work anymore, the server is down!)
 
 Run and submit the CLI tests.
+
+
+                    Multiple Containers
+
+Running a single container? That's easy. Realtm engineers control entire fleets of containers. Remember, Docker containers are very lightweight. It's normal to run many containers on a single host machine.
+
+Remember, each container is its own isolated environment and process. Even if we start 10 containers from the same image, the image is just the definition of the container (the code and starting environment). Each container is a separate instance of that image.
+
+
+Assignment
+
+    Start five different instances of the docker/getting-started container, each time on a new port:
+
+docker run -d -p 8965:80 docker/getting-started
+docker run -d -p 8966:80 docker/getting-started
+docker run -d -p 8967:80 docker/getting-started
+docker run -d -p 8968:80 docker/getting-started
+docker run -d -p 8969:80 docker/getting-started
+
+We use port 80 within each container because that's the port that the application is binding to inside the container. It's being forwarded to the different ports we specify on the host (our) machine.
+
+We have to use different host ports for different containers because two processes can't bind to the same port on the same operating system.
+
+    Load each webpage in your browser to make sure it works:
+
+    http://localhost:8965
+    http://localhost:8966
+    http://localhost:8967
+    http://localhost:8968
+    http://localhost:8969
+
+Keep in mind, even though they all serve the same page, each is served from its own container!
+
+    Run the ps command to see each running container:
+
+docker ps
+
+Run and submit the CLI tests.
+
+When you're done running the tests, make sure to stop the containers.
+
+
 
