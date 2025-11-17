@@ -1,16 +1,16 @@
 class BSTNode:
-    def exists(self, val):
-        if self.val == val:
-            return True
-        #dont forget left is less
-        #and right is greater
-        if val < self.val and self.left:
-            return self.left.exists(val)
-        if val > self.val and self.right:
-            return self.right.exists(val)
-        return False
+    def height(self):
+        left, right = 0, 0
+        if self.val == None:
+            return 0
+        if self.left:
+            left = self.left.height()
+        if self.right:
+            right = self.right.height()
+        return max(left, right) + 1
 
-        # don't touch below this line
+
+    # don't touch below this line
 
     def __init__(self, val=None):
         self.left = None

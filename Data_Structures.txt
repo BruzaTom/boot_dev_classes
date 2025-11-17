@@ -838,3 +838,33 @@ Complete the exists method.
 
 It should take a value as input and return True if the value exists in the tree, and False if it doesn't. It's a recursive method, as you probably guessed.
 
+
+        Height
+
+
+Our DevOps team has been concerned with the hardware required to run the software using our BST. In an effort to diagnose the issue, they've asked us to write a method that returns the height of the tree. For example, this tree:
+
+    > Elrond#3
+> Elian#2
+    > Astram#1
+
+Has a height of 2 because the longest path from the root node to a leaf node is 2 nodes long.
+Assignment
+
+Complete the height method. It returns the height of the tree rooted at the current node.
+
+    If the node's value is None, return 0.
+    Recursively calculate the height of the left subtree.
+    Recursively calculate the height of the right subtree.
+    Use the max() function to return the maximum of the left and right subtree heights plus 1.
+
+Assignment
+
+Complete the height method. It returns the height of the tree rooted at the current node.
+
+    If the node's value is None, return 0.
+    Recursively calculate the height of the left subtree.
+    Recursively calculate the height of the right subtree.
+    Use the max() function to return the maximum of the left and right subtree heights plus 1.
+
+
