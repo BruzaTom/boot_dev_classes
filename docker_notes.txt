@@ -137,3 +137,32 @@ Run and submit the CLI tests.
 
 The docker login command in the CLI tests should exit without error because you're already logged in.
 
+
+        Containers
+
+
+    A container is a standard unit of software that packages up code and all its dependencies so the application runs quickly and reliably from one computing environment to another.
+
+    -- Docker
+
+We've had virtual machines (like VirtualBox) for a long time. The trouble with virtual machines is that they're slow as h*ck. Booting one up usually takes longer than a physical machine.
+
+Containers, on the other hand, gives us 90% of the benefits of virtual machines, but are super lightweight. Containers boot up in seconds, while virtual machines can take minutes.
+Virtual Machine Architecture
+
+Virtual Machine Architecture
+(see images/vertual_machine_architectures.png)
+
+Container (Docker) Architectures
+(see images/container_architectures.png)
+
+Why Are Containers Lightweight?
+
+Virtual machines virtualize hardware, they emulate what a physical computer does at a low level. Containers virtualize at the operating system level. Isolation between containers that are running on the same machine is still really good. For the most part, each container feels like it has its own operating and filesystem. In reality, a lot of resources are being shared, but they're being shared securely through namespaces.
+
+(see videos/vm_vs_container.mp4)
+
+Which shares an underlying operating system?
+docker containers
+
+
