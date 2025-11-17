@@ -1,0 +1,37 @@
+# Install Docker
+sudo pacman -S docker
+
+# Enable and start the service
+sudo systemctl enable docker
+sudo systemctl start docker
+
+# Add your user to the docker group (replace with your actual username)
+sudo usermod -aG docker tomux
+
+# Log out and back in (or reboot) to apply group change
+
+# Verify access
+docker info
+
+# If permission denied persists:
+groups                     # confirm docker group membership
+
+#had to log in to docker in my terminal by running
+echo "YOUR_TOKEN_OR_PASSWORD" | docker login --username YOUR_USERNAME --password-stdin 
+
+#download the docker desktop gui
+(see images/download_arch_docker_desktop_tar.png)
+
+#install the docker desktop tar file
+sudo pacman -U ~/Downloads/docker-desktop-x86_64.pkg.tar.zst
+
+#if it fails its because u need to remove docker compose if installed
+sudo pacman -R docker-compose
+
+#initialize pass
+gpg --generate-key
+
+#once you get the generated keys
+pass init <that long 23387843ASFDASF type of string>
+
+#should see initialized message

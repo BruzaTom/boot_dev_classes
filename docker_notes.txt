@@ -97,6 +97,27 @@ docker info
 # If permission denied persists:
 groups                     # confirm docker group membership
 
+#had to log in to docker in my terminal by running
+echo "YOUR_TOKEN_OR_PASSWORD" | docker login --username YOUR_USERNAME --password-stdin 
+
+#download the docker desktop gui
+(see images/download_arch_docker_desktop_tar.png)
+
+#install the docker desktop tar file
+sudo pacman -U ~/Downloads/docker-desktop-x86_64.pkg.tar.zst
+
+#if it fails its because u need to remove docker compose if installed
+sudo pacman -R docker-compose
+
+#initialize pass
+gpg --generate-key
+
+#once you get the generated keys
+pass init <that long 23387843ASFDASF type of string>
+
+#should see initialized message
+
+
 
           What Is Docker?
 
@@ -130,8 +151,7 @@ Assignment
     Create a free account on Docker Hub if you don't already have one.
     Open up your Docker Desktop app and click "Sign in". If it worked, you should see "Connected to Hub" at the bottom of the client. Having your local Docker environment connected to a Docker Hub account will make publishing your images much easier.
 
-#had to log in to docker in my terminal by running
-echo "YOUR_TOKEN_OR_PASSWORD" | docker login --username YOUR_USERNAME --password-stdin
+
 
 Run and submit the CLI tests.
 
@@ -165,4 +185,33 @@ Virtual machines virtualize hardware, they emulate what a physical computer does
 Which shares an underlying operating system?
 docker containers
 
+        
+          Images
+
+
+So a "container" is kinda like a lightweight VM, great... so what's an image?
+
+    Image: A read-only definition of a container
+    Container: an instance of a virtualized read-write environment
+
+A container is basically an image that's actively running. In other words, you boot up a container from an image. You can create multiple separate containers all from the same image (it's kinda like the relationship between classes and objects).
+
+(see videos/images_vs_containers.mp4)
+
+
+Assignment
+
+    Docker has a getting started image, go ahead and pull it down onto your local machine:
+
+docker pull docker/getting-started
+
+All this does is copy the image file down on your local machine so you won't have to download it later to be able to use it.
+
+    Use the images command to view all the images you have saved. You should see the docker/getting-started listed:
+
+docker images
+
+    Open the Docker Desktop app. You should also see the image there under the "images" tab.
+
+Run and submit the CLI tests.
 
