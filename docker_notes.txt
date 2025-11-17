@@ -113,3 +113,27 @@ Docker is a way to define and run ____
 both applications and enviornments
 
 
+          Docker Hub
+
+Docker Hub is the official cloud service for storing and sharing Docker images (we'll talk about images later, chill plz).
+
+We'll use Docker Hub in this course, but there are other popular alternatives, and they're usually coupled with cloud service providers. For example,
+
+    AWS ECR
+    GCP Container Registry
+    Azure Container Registry
+
+For most of my career, if my company used AWS to deploy, we used AWS to host our images. If we used GCP to deploy, we hosted images on GCP. I'd usually just use whatever's most convenient and cost effective, the features are very similar between providers.
+
+Assignment
+
+    Create a free account on Docker Hub if you don't already have one.
+    Open up your Docker Desktop app and click "Sign in". If it worked, you should see "Connected to Hub" at the bottom of the client. Having your local Docker environment connected to a Docker Hub account will make publishing your images much easier.
+
+#had to log in to docker in my terminal by running
+echo "YOUR_TOKEN_OR_PASSWORD" | docker login --username YOUR_USERNAME --password-stdin
+
+Run and submit the CLI tests.
+
+The docker login command in the CLI tests should exit without error because you're already logged in.
+
