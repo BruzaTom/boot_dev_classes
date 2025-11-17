@@ -1,0 +1,102 @@
+                                
+
+                                Docker
+
+Docker is the big name in "containerization". The big idea behind Docker and other container technologies is that they allow us to package our programs with an environment and ship the whole thing. Most real world programs don't work in isolation, they need:
+
+    Files from disk
+    Environment variables
+    Installed dependencies
+    Specific permissions
+
+Docker images and containers have become a standard for deploying applications. In this course, you'll learn all about Docker and containerization.
+Boot.dev CLI
+
+Throughout this course, you'll be using the Boot.dev CLI to run our tests (which are just CLI commands) against your local environment. Install it now if you don't already have it. All the instructions and troubleshooting info are on the GitHub page.
+
+Make sure the Boot.dev CLI install worked:
+
+bootdev --version
+
+If you're stuck, reach out in the help forums of the Discord.
+
+Once the bootdev command is working, log in and follow the instructions:
+
+bootdev login
+
+Boot.dev CLI
+
+Throughout this course, you'll be using the Boot.dev CLI to run our tests (which are just CLI commands) against your local environment. Install it now if you don't already have it. All the instructions and troubleshooting info are on the GitHub page.
+
+Make sure the Boot.dev CLI install worked:
+
+bootdev --version
+
+If you're stuck, reach out in the help forums of the Discord.
+
+Once the bootdev command is working, log in and follow the instructions:
+
+bootdev login
+
+
+Run vs. Submit
+
+Lessons have a series of "commands" that run on your local machine, and a series of tests it will check against the results of the command. There are two ways to run these commands: run and submit:
+
+    bootdev run <id>: This will run the commands and show you the results. It's to be used for debugging, but it won't tell you whether or not you've passed the tests explicitly.
+    bootdev run <id> -s: This will run the commands and give you pass/fail feedback. It will also mark the lesson as complete on the website. If you get it wrong however, you'll potentially lose your sharpshooter spree, so be sure to use run first!
+
+You can copy the run/submit commands with the id ready-to-go from the test panel.
+Assignment
+
+Once you have the CLI installed and you're logged in, copy and paste the run command from the right into your terminal and execute it. If it's doing what you'd expect (printing it works on my machine), then run the submit command.
+Assignment
+
+Once you have the CLI installed and you're logged in, copy and paste the run command from the right into your terminal and execute it. If it's doing what you'd expect (printing it works on my machine), then run the submit command.
+
+
+        Install Docker
+
+
+There are a couple of moving parts to keep in mind when it comes to using Docker on your local machine:
+
+    The "Docker server" or "Docker Daemon". This listens to requests from the desktop app and executes them. If this isn't running nothing else will work.
+    The "Docker Desktop" GUI. Starting the GUI should start the server, at least that's how I usually ensure the server is running. The GUI is the visual way to interact with Docker.
+    The Docker CLI. As a developer, most of your work will be interacting with Docker via the CLI. I'd recommend using the GUI to visualize what's going on with Docker, but executing most of your commands through the command line.
+
+Assignment
+
+    Install Docker Desktop (don't worry, we'll mostly use the CLI):
+        Install on macOS
+        Install on Windows (or WSL 2)
+        Install on Linux
+    Run the Docker Desktop app. Make sure that in the bottom-left of the screen there is a green box with a whale icon in it. This indicates that the docker server is running locally and that you are connected to it. Then, make sure you're on Docker Desktop version 4+. At the time of writing, I'm on 4.40.0.
+    Run docker version in your command line to make sure the CLI was installed.
+
+Run and submit the CLI tests.
+
+Tip
+
+You may also want to enable shell completion for Docker.
+
+# Install Docker
+sudo pacman -S docker
+
+# Enable and start the service
+sudo systemctl enable docker
+sudo systemctl start docker
+
+# Add your user to the docker group (replace with your actual username)
+sudo usermod -aG docker tomux
+
+# Log out and back in (or reboot) to apply group change
+
+# Verify access
+docker info
+
+# If permission denied persists:
+groups                     # confirm docker group membership
+
+
+
+

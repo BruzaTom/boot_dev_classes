@@ -33,12 +33,6 @@ class User:
     def __lt__(self, other):
         return isinstance(other, User) and self.id < other.id
 
-    def __le__(self, other):
-        return isinstance(other, User) and self.id <= other.id
-
-    def __ge__(self, other):
-        return isinstance(other, User) and self.id >= other.id
-
     def __gt__(self, other):
         return isinstance(other, User) and self.id > other.id
 

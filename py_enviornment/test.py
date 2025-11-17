@@ -1,34 +1,57 @@
-from main import BSTNode
-from user import get_users
+import random
+from main import *
+from user import *
+from ref import *  # ref module is hidden because it has the solution!
 
 run_cases = [
-    (2, 2),
-    (6, 3),
+    (4),
+    (8),
 ]
 
 submit_cases = run_cases + [
-    (0, 0),
-    (1, 1),
-    (16, 7),
+    (10),
 ]
 
 
-def test(num_users, expected_output):
-    users = get_users(num_users)
-    if not users:
-        root = BSTNode()
-    else:
-        root = BSTNode(users[0])
-        for user in users[1:]:
-            root.insert(user)
+def print_tree(node):
+    lines = []
+    format_tree_string(node.root, lines)
+    print("\n".join(lines))
 
-    print("---------------------------------")
-    print(f"Users: {[str(user) for user in users]}")
-    print_tree(root)
-    print(f"Expecting height: {expected_output}")
-    result = root.height()
-    print(f"Actual height: {result}")
-    if result == expected_output:
+
+def format_tree_string(node, lines, level=0):
+    if node.val is not None:
+        format_tree_string(node.right, lines, level + 1)
+        lines.append(
+            " " * 4 * level
+            + "> "
+            + str(node.val)
+            + " "
+            + ("[red]" if node.red else "[black]")
+        )
+        format_tree_string(node.left, lines, level + 1)
+
+
+def test(num_users):
+    users = get_users(num_users)
+    ref_tree = RBTree()
+    for user in users:
+        ref_implementation(ref_tree, user)
+    print("============ NEW TEST ===============")
+    actual_tree = RBTree()
+    for user in users:
+        print(f"Inserting {user} into tree...")
+        actual_tree.insert(user)
+    print("-------------------------------------")
+    print("Expecting Tree:")
+    print("-------------------------------------")
+    print_tree(ref_tree)
+    print("-------------------------------------")
+    print("Actual Tree:")
+    print("-------------------------------------")
+    print_tree(actual_tree)
+    print("-------------------------------------")
+    if ref_inorder(actual_tree.root, []) == ref_inorder(ref_tree.root, []):
         print("Pass")
         return True
     print("Fail")
@@ -40,7 +63,7 @@ def main():
     failed = 0
     skipped = len(submit_cases) - len(test_cases)
     for test_case in test_cases:
-        correct = test(*test_case)
+        correct = test(test_case)
         if correct:
             passed += 1
         else:
@@ -53,19 +76,6 @@ def main():
         print(f"{passed} passed, {failed} failed, {skipped} skipped")
     else:
         print(f"{passed} passed, {failed} failed")
-
-
-def print_tree(bst_node):
-    lines = []
-    format_tree_string(bst_node, lines)
-    print("\n".join(lines))
-
-
-def format_tree_string(bst_node, lines, level=0):
-    if bst_node is not None:
-        format_tree_string(bst_node.right, lines, level + 1)
-        lines.append(" " * 4 * level + "> " + str(bst_node.val))
-        format_tree_string(bst_node.left, lines, level + 1)
 
 
 test_cases = submit_cases
