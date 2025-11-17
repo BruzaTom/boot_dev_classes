@@ -391,3 +391,34 @@ docker run -d -e NODE_ENV=development -e url=http://localhost:3001 -p 3001:2368 
 
 Run and submit the CLI tests against http://localhost:3001.
 
+
+          Creating a Website
+
+Let's create a new website using Ghost!
+Assignment
+
+    Navigate to Ghost's admin panel: http://localhost:3001/ghost/#/setup and create a new website:
+        Title: "My Docker Blog"
+        Name: your name
+        Email: docker@test.com
+        Password: correct horse
+    Create a new post and publish it (pay attention to the letter casing and punctuation):
+        Title: "I Love Docker"
+        Content: "Truly I do."
+    Go back to the homepage to see your post: http://localhost:3001/.
+
+Run and submit the CLI tests against http://localhost:3001.
+Assignment
+
+    Navigate to Ghost's admin panel: http://localhost:3001/ghost/#/setup and create a new website:
+        Title: "My Docker Blog"
+        Name: your name
+        Email: docker@test.com
+        Password: correct horse
+    Create a new post and publish it (pay attention to the letter casing and punctuation):
+        Title: "I Love Docker"
+        Content: "Truly I do."
+    Go back to the homepage to see your post: http://localhost:3001/.
+
+Run and submit the CLI tests against http://localhost:3001.
+
