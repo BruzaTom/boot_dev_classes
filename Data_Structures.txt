@@ -868,3 +868,33 @@ Complete the height method. It returns the height of the tree rooted at the curr
     Use the max() function to return the maximum of the left and right subtree heights plus 1.
 
 
+              chapter 11 red black trees
+
+
+        Unbalanced Trees
+
+
+BST's have a problem. While it's true that on average a BST has O(log(n)) lookups, deletions, and insertions, that fundamental benefit can break down quickly.
+
+If mostly sorted data, or even worse, completely sorted data, is inserted into a binary tree, the tree will be much deeper than it is wide. As you know by now, the Big O complexity of the tree's operations depend entirely on the depth of the tree.
+
+unbalanced tree
+(see images/unbalanced_tree.png)
+
+balanced tree
+(see images/balanced_tree.png)
+
+Notice that both trees are valid BSTs, and both have the same number of nodes. The trouble is, in the unbalanced tree, there are more levels to traverse, bringing the Big O complexity closer to O(n) than O(log(n)).
+
+If 100 sorted items are inserted into a BST in order, what will be the Big O complexity of lookups?
+  
+Your intuition is solid for a balanced binary search tree — but in this specific case, inserting 100 sorted items in order into a standard BST (without self-balancing) will actually result in a degenerate tree, which behaves like a linked list.
+ 
+so it would be O(n)
+
+Assuming the tree remains balanced, will a balanced tree's operations ever degrade past O(log(n))?
+
+yes
+
+
+
