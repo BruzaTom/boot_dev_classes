@@ -422,3 +422,27 @@ Assignment
 
 Run and submit the CLI tests against http://localhost:3001.
 
+
+          Persist
+
+Let's make sure our volume is working by starting a new container. If it's working, our new container will still serve the post we created because it will load it from the volume.
+
+Assignment
+
+    Get your container ID:
+
+docker ps
+
+    Stop and remove the container with the rm command:
+
+docker stop CONTAINER_ID
+docker rm CONTAINER_ID
+
+    Start a new container from the same image and same volume:
+
+docker run -d -e NODE_ENV=development -e url=http://localhost:3001 -p 3001:2368 -v ghost-vol:/var/lib/ghost ghost
+
+Refresh your webpage and see if your site is still there. If it is, your volume is working as intended!
+
+Run and submit the CLI tests.
+
