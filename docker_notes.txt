@@ -215,3 +215,47 @@ docker images
 
 Run and submit the CLI tests.
 
+
+          Run a Container
+
+
+Now that you've downloaded the getting started image, let's run it inside a new container. The docker run command starts a new container from an image. Let's break down the syntax:
+
+# this is just an example, don't run this
+docker run -d -p hostport:containerport namespace/name:tag
+
+    -d: Run in detached mode (doesn't block your terminal)
+    -p: Publish a container's port to the host (forwarding)
+    hostport: The port on your local machine
+    containerport: The port inside the container
+    namespace/name: The name of the image (usually in the format username/repo)
+    tag: The version of the image (often latest)
+
+
+Assignment
+
+    Use the run command to start a new container from the "getting started" image:
+
+docker run -d -p 8965:80 docker/getting-started:latest
+
+    You should see the container running in the "Containers" tab of Docker Desktop. Run this on the command line to see the running containers:
+
+docker ps
+
+On one of the columns you should see this:
+
+PORTS
+0.0.0.0:8965->80/tcp
+
+This is saying that port 8965 on your local "host" machine is being forwarded to port 80 on the running container. Port 80 is conventionally used for HTTP web traffic. Navigate to http://localhost:8965 and you should see a webpage served from the container!
+
+Run and submit the CLI tests against your "getting started" container on http://localhost:8965.
+
+Tip
+
+If you want to use a different port, you can change the port the bootdev cli will use like this:
+
+# if you want 42069
+bootdev config base_url http://localhost:42069
+
+
