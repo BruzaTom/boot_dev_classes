@@ -488,3 +488,14 @@ So, we now have a fresh installation. Our post that was on the old volume is gon
 
 Run and submit the CLI tests.
 
+
+          Clean Up
+
+Before we move on, let's clean up all the resources we've been playing with.
+Assignment
+
+    Use docker ps -a to find all your containers, then remove them.
+    Use docker volume ls to find all your volumes, then remove them.
+
+Run and submit the CLI tests.
+
