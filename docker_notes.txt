@@ -499,3 +499,20 @@ Assignment
 
 Run and submit the CLI tests.
 
+
+          Help
+
+Like most CLI applications, docker has a help menu, either of these will work:
+
+    docker --help
+    docker help
+
+(see videos/docker_help.mp4)
+
+Assignment
+
+Run docker help. It should spit out a giant help menu. As you can see there are a lot of commands... don't worry, we'll just focus on the most relevant ones in this course.
+
+What's the description of the 'docker build' command?
+Build an image from a Dockerfile
+
